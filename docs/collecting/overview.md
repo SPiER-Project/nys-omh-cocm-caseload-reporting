@@ -27,6 +27,9 @@ sources.
 | Date of birth | **EHR or practice management** | Metric 9 | — |
 | BHCM FTE | **The program lead**, attested | Metric 11 | [BHCM FTE](../guide/concepts/bhcm-fte.md#where-the-data-lives) |
 
+**Asking for the data.** Most of these facts are in someone else's system. Ready-to-send
+requests for each report, with the exact columns, are in [asking for the data](requests.md).
+
 ## Pick your route
 
 All three routes produce the same facts. Most sites end up mixing them: the registry

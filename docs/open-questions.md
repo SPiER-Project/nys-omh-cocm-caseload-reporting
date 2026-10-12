@@ -33,6 +33,21 @@ about:
   severity bands against Spitzer et al. (2006).
 - The qualifying-visit code list, including the telehealth codes.
 
+## To review with Virna Little
+
+- **Should the billing codes that stand in for enrollment include G0568 and G0569?**
+  The [CY 2026 Physician Fee Schedule final rule](https://www.federalregister.gov/documents/2025/11/05/2025-19787/medicare-and-medicaid-programs-cy-2026-payment-policies-under-the-physician-fee-schedule-and-other)
+  (90 FR 49266, November 5, 2025) created them from January 1, 2026 as add-ons to
+  Medicare's advanced primary care management (APCM) codes G0556–G0558. G0568 is based
+  on 99492 (the first month of CoCM) and G0569 on 99493 (a later month). They have no
+  time thresholds, and the APCM base code must be billed by the same practitioner in the
+  same month. A practice billing APCM can use them in place of 99492 and 99493, so a
+  site inferring enrollment from Medicare claims would miss those months without them.
+  The rule's regulatory text (§ 425.400(c)(1)(x)(B)) labels G0568 and G0569 as general
+  behavioral health integration and G0570 as CoCM, the reverse of the rule's preamble
+  and CMS's [Behavioral Health Integration Services](https://www.cms.gov/files/document/mln909432-behavioral-health-integration-services.pdf)
+  booklet. The guide follows the preamble and the booklet.
+
 ## The tooling
 
 | ID | Question | Notes |

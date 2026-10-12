@@ -139,7 +139,7 @@ one to measure.
 structured program-enrollment record in the EHR) until discharged. A referral is not an
 enrollment, and neither is verbal consent with nothing recorded. A site with no
 enrollment record may infer enrollment from CoCM billing codes
-(<!--rule:what-counts-as-enrolled.cocm_billing_codes-->99492, 99493, 99494, T2022, G2214<!--/rule-->), but must disclose that it did.
+(<!--rule:what-counts-as-enrolled.cocm_billing_codes-->99492, 99493, 99494, T2022, G2214, G0512<!--/rule-->), but must disclose that it did.
 
 **Why.** Counting from referral inflates enrollment; counting only billed months
 undercounts it, because an enrolled patient can go a month unbilled. T2022 is on the list
@@ -156,7 +156,10 @@ same four codes instead of G0512 (CMS,
 [Federally Qualified Health Center](https://www.cms.gov/files/document/mln006397-federally-qualified-health-center.pdf),
 MLN006397, March 2026, and
 [Rural Health Clinics](https://www.cms.gov/files/document/mln006398-information-rural-health-clinics.pdf),
-MLN006398, January 2026).
+MLN006398, January 2026). G0512 stays on the list for the months before that. The list
+leaves out G0568 and G0569, which a practice billing Medicare's advanced primary care
+management can use in place of 99492 and 99493 from 2026; see
+[open questions](../open-questions.md#to-review-with-virna-little).
 
 **Replaces.** D-02, D-02a.
 

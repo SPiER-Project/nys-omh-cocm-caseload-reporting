@@ -26,6 +26,7 @@ browser](https://spier-project.github.io/nys-omh-cocm-caseload-reporting/); the 
 
 | If you are… | Read |
 |---|---|
+| **New to the NYS program** | [About the NYS Collaborative Care Medicaid Program](docs/guide/about-the-program.md): what it is, how it began, what it asks of practices, with sources |
 | A **CoCM program lead** | [Start here](docs/guide/start-here.md), then the [metric pages](docs/guide/start-here.md#the-metrics). Each one has a "What the program should do" section |
 | A **report writer or analyst** | [Collecting the data](docs/collecting/overview.md) for your route, then the metric pages' "Where the data lives" sections |
 | Checking a **number you've already reported** | The [example caseload](docs/guide/example-caseload.md), which works all eight CoCM metrics through ten patients |

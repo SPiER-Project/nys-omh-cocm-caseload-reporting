@@ -234,6 +234,21 @@ class WebEntryPointTests(unittest.TestCase):
         self.assertEqual(values["5"], "7 of 8, 87.5%")
         self.assertEqual(values["4"], "18.7 weeks")
 
+    def test_reasons_name_scales_as_sites_know_them(self):
+        import json
+        from calculator.web import run
+        directory = os.path.join(ROOT, "tests", "fixtures", "example-caseload")
+        texts = {}
+        for path in glob.glob(os.path.join(directory, "*.csv")):
+            with open(path, newline="") as f:
+                texts[os.path.splitext(os.path.basename(path))[0]] = f.read()
+        results = json.loads(run(json.dumps(texts), RULES_TEXT, "2025-03"))
+        reasons = [r["reason"] for rows in results["fell_out"].values() for r in rows]
+        self.assertIn("GAD-7 went from 16 to 12, not enough to count as improved", reasons)
+        self.assertIn("PHQ-9 is 8 this month; remission needs under 5", reasons)
+        for reason in reasons:
+            self.assertNotRegex(reason, r"\b(phq9|gad7|pcl5)\b")
+
     def test_reports_bad_input_as_an_error(self):
         import json
         from calculator.web import run
@@ -268,7 +283,7 @@ class SummaryTests(unittest.TestCase):
         self.assertIn('<td class="num result">87.5%</td><td class="num">7</td>'
                       '<td class="num">8</td>', page)
         self.assertIn("<li>Enrollment sources: registry</li>", page)
-        self.assertIn("still need approval", page)
+        self.assertIn("Provisional:", page)
 
     def test_leaves_out_every_patient_id(self):
         import csv

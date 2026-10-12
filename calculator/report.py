@@ -17,14 +17,15 @@ NAMES = {
     "m10": "Depression screening yield",
     "m11": "BHCM staffing",
 }
-NO_VALUE = "no value (nobody to measure)"
+NO_VALUE = "no patients to count this month"
+NO_DISCHARGES = "nobody was discharged this month"
 
 
 def value(m, r):
     if "count" in r:
         return str(r["count"])
     if m == "m4":
-        return f"{r['weeks']} weeks" if r["weeks"] is not None else NO_VALUE
+        return f"{r['weeks']} weeks" if r["weeks"] is not None else NO_DISCHARGES
     if m == "m11":
         return f"{r['fte']} FTE" if r["fte"] is not None else "not attested"
     if r["percent"] is None:
@@ -60,7 +61,7 @@ def summary(results):
     width = max(len(n) for n in NAMES.values())
     for m, name in NAMES.items():
         lines.append(f"  {m[1:]:>2}. {name:<{width}}  {value(m, results['metrics'][m])}")
-    for title, key in (("Disclosures", "disclosures"), ("Warnings", "warnings")):
+    for title, key in (("What to tell OMH", "disclosures"), ("Before you report", "warnings")):
         if results[key]:
             lines += ["", f"{title}:"] + [f"  - {x}" for x in results[key]]
     if checks:
@@ -69,7 +70,7 @@ def summary(results):
             lines.append(f"  {issue['level'].upper():7} {issue['table']}: {issue['message']}"
                          + describe_rows(issue))
     if results["fell_out"]:
-        lines += ["", "Who fell out of each numerator (keep this at the site):"]
+        lines += ["", "Patients not counted, and why (keep this at your site):"]
         for m, rows in results["fell_out"].items():
             lines.append(f"  {m[1:]}. {NAMES[m]}")
             lines += [f"     {r['patient_id']}: {r['reason']}" for r in rows]
@@ -89,10 +90,10 @@ def cells(m, r):
     if "count" in r:
         return str(r["count"]), "", ""
     if m == "m4":
-        return (f"{r['weeks']} weeks" if r["weeks"] is not None else "No value"), "", ""
+        return (f"{r['weeks']} weeks" if r["weeks"] is not None else NO_DISCHARGES.capitalize()), "", ""
     if m == "m11":
         return (f"{r['fte']} FTE" if r["fte"] is not None else "Not attested"), "", ""
-    result = f"{r['percent']}%" if r["percent"] is not None else "No value"
+    result = f"{r['percent']}%" if r["percent"] is not None else NO_VALUE.capitalize()
     return result, str(r["numerator"]), str(r["denominator"])
 
 
@@ -128,8 +129,8 @@ PAGES = {
 
 def summary_html(results, made=None):
     """A one-page summary to print, keep or share: the eleven numbers, the data check, and
-    what to tell OMH. It leaves out every patient id: the list of who fell out of each
-    number stays in the full results. `made` is the date it was made, as text."""
+    what to tell OMH. It leaves out every patient id: the list of patients each rate didn't
+    count stays in the full results. `made` is the date it was made, as text."""
     e = html.escape
     month = month_name(results["reporting_month"])
     meta = [f"Reporting month: {e(month)}"]
@@ -168,20 +169,19 @@ def summary_html(results, made=None):
                    f'<td class="num result">{e(result)}</td><td class="num">{e(numerator)}</td>'
                    f'<td class="num">{e(denominator)}</td></tr>')
     out += ["</tbody>", "</table>"]
-    if any(cells(m, results["metrics"][m])[0] == "No value" for m in NAMES):
-        out.append('<p class="meta">No value: nobody was in the denominator this month.</p>')
 
     if results["warnings"]:
         out += ["<h2>Before you report</h2>", "<ul>"]
         out += [f"<li>{e(w)}</li>" for w in results["warnings"]]
         out.append("</ul>")
-    out += ["<h2>Disclosures for OMH</h2>", "<ul>"]
+    out += ["<h2>What to tell OMH</h2>",
+            "<p>How these numbers were counted. Include these notes with your report.</p>", "<ul>"]
     out += [f"<li>{e(d)}</li>" for d in results["disclosures"]] or ["<li>None</li>"]
     out.append("</ul>")
 
     out += ["<footer>",
-            "<p>This summary has no patient-level data. The list of who fell out of each "
-            "number is in the full results; keep that at your site.</p>",
+            "<p>This summary has no patient-level data. The list of patients each rate didn't "
+            "count, and why, is in the full results; keep that at your site.</p>",
             f'<p>Counted with the <a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/">'
             f'CoCM caseload calculator</a>, following an <a href="{GUIDE}">opinionated guide</a> '
             "to OMH's caseload metrics. It is an independent project, not an OMH product.</p>",

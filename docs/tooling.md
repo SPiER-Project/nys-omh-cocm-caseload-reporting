@@ -14,8 +14,8 @@ worked examples. The other ways in are options for discussion.
   calls set. The calculator takes its settings from it, so changing a call there changes
   the tool and the docs together.
 - **The calculator:** reads the eight tables and the rules file, and returns the eleven
-  numbers in the REDCap form's shape. It also returns a patient-level list of who fell out of each numerator
-  and why; that list stays at the site.
+  numbers in the REDCap form's shape. It also returns a patient-level list of the patients each rate didn't
+  count, and why; that list stays at the site.
 - **Ways in:** the [workbook](collecting/workbook.md), registry mappings, EHR report
   recipes, and FHIR. Each fills some or all of the tables.
 
@@ -32,7 +32,7 @@ Add `--json results.json` to also write the full results. The output includes:
 - the eleven numbers;
 - the disclosures for NYS;
 - warnings, such as a run before the 15th or calls still needing approval;
-- for each metric, the patients who fell out of the numerator and why. This list
+- for each rate, the patients it didn't count, and why. This list
   identifies patients by pseudonymous id and stays at the site.
 
 Add `--summary summary.html` for a one-page summary to print or share: the eleven numbers

@@ -94,7 +94,7 @@ halves never join. Use the **MRN** as `patient_id` in every source. Don't use a
 registry's internal id, which the EHR never sees.
 
 Inside the site, the MRN can stay as it is: the calculator runs at the site, and its list
-of who fell out of each numerator is easier to act on with MRNs. **Before tables leave
+of patients each rate didn't count is easier to act on with MRNs. **Before tables leave
 the site** (to a vendor, a consultant, or anyone helping with the reporting), replace
 each MRN with its pseudonym:
 
@@ -174,5 +174,5 @@ When a site fills a gap with a substitute, it says so in its submission:
 | During the month | Document contacts, scales and case reviews as they happen; log outreach attempts |
 | Last week of the month | Review the caseload for anyone near <!--rule:inactivity-discharge.days-->90<!--/rule--> days without a clinical contact |
 | Month end to the <!--rule:when-to-run-the-report.earliest_run_day-->15<!--/rule-->th | Late notes and charges close. Don't run the report yet |
-| On or after the <!--rule:when-to-run-the-report.earliest_run_day-->15<!--/rule-->th | Run the extracts; calculate the metrics; review the patients who fell out of each numerator |
+| On or after the <!--rule:when-to-run-the-report.earliest_run_day-->15<!--/rule-->th | Run the extracts; calculate the metrics; review the patients each rate didn't count |
 | Before the NYS deadline | Submit the eleven numbers and the disclosures |

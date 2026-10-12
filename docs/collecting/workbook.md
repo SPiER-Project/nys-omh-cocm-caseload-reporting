@@ -83,5 +83,5 @@ columns always match what the calculator reads.
   re-engaged or discharged.
 - Does every Medicaid managed care plan in the coverage report appear in the payer
   mapping?
-- Read the calculator's list of who fell out of each numerator. The patients on it
+- Read the calculator's list of patients each rate didn't count, and why. The patients on it
   should be the ones the team would expect.

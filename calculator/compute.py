@@ -74,6 +74,10 @@ def calculate(tables, settings, month):
     s = settings
     first, last = month_bounds(month)
 
+    def name(form):
+        """A scale's display name for the reasons a site reads, such as PHQ-9."""
+        return s.scale_names.get(form) or s.scale_names.get(threshold_key(form)) or form
+
     # Normalize instruments: the PHQ-A counts as a PHQ-9 (phq-a-counts-as-phq-9).
     scores = []
     for r in tables["scale_result"]:
@@ -149,8 +153,9 @@ def calculate(tables, settings, month):
                         for r in mine)
         facts["active_treatment"] = has_contact and has_scale
         if not has_contact or not has_scale:
-            missing = [w for w, ok in (("clinical contact", has_contact), ("scale", has_scale)) if not ok]
-            facts["_m5_reason"] = "no " + " or ".join(missing) + " this month"
+            missing = [w for w, ok in (("clinical contact", has_contact), ("symptom scale", has_scale))
+                       if not ok]
+            facts["_m5_reason"] = "no " + " and no ".join(missing) + " this month"
 
         # Primary scale, baseline and outcomes, form by form (primary-scale, baseline,
         # paired-forms, elevated-baseline, current-score-for-improvement, remission-*).
@@ -169,7 +174,7 @@ def calculate(tables, settings, month):
             b = base["total_score"]
             elevated = key in s.elevated and b >= s.elevated[key]
             if not elevated:
-                notes.append(f"{form} baseline {b} isn't elevated")
+                notes.append(f"{name(form)} baseline of {b} isn't elevated")
                 continue
             elevated_any = True
             later = series[series.index(base) + 1:]
@@ -187,29 +192,30 @@ def calculate(tables, settings, month):
                     ok = ok or b - cur >= crit["points_better"]
                 improved_any = improved_any or ok
                 if not ok:
-                    notes.append(f"{form} is {cur} against a baseline of {b}")
+                    notes.append(f"{name(form)} went from {b} to {cur}, not enough to count as improved")
             else:
-                notes.append(f"no {form} score since the baseline")
+                notes.append(f"no {name(form)} score since the baseline")
             # Remission: the last score dated this month, below the threshold.
             this_month = [r for r in series if r["administered_date"] >= first]
             rule = s.remission.get(key, {})
             if not this_month:
-                remission_notes.append(f"no {form} score this month")
+                remission_notes.append(f"no {name(form)} score this month")
             elif "below" in rule:
                 score = this_month[-1]["total_score"]
                 remission_any = remission_any or score < rule["below"]
                 if score >= rule["below"]:
-                    remission_notes.append(f"{form} is {score}; remission is below {rule['below']}")
+                    remission_notes.append(f"{name(form)} is {score} this month; remission needs "
+                                           f"under {rule['below']}")
             elif "symptom_count_below" in rule:
                 n = this_month[-1].get("vanderbilt_symptom_count")
                 remission_any = remission_any or (n is not None and n < rule["symptom_count_below"])
-                remission_notes.append(f"{form} symptom count is {n}")
+                remission_notes.append(f"{name(form)} symptom count is {n}")
             else:
-                remission_notes.append(f"no remission threshold set for {form}")
+                remission_notes.append(f"no remission threshold set for {name(form)}")
         facts["elevated_baseline"] = elevated_any
         facts["improved"] = improved_any if (seventy and elevated_any) else None
         facts["in_remission"] = remission_any
-        facts["_outcome_notes"] = notes or [f"no {e['primary_scale']} scores since enrollment"]
+        facts["_outcome_notes"] = notes or [f"no {name(e['primary_scale'])} scores since enrollment"]
         facts["_remission_notes"] = remission_notes or facts["_outcome_notes"]
 
         # Psychiatric case review in the window ending at month end (psychiatric-case-review).
@@ -235,7 +241,7 @@ def calculate(tables, settings, month):
         if not f["active_treatment"]:
             fell_out["m5"].append((p, f["_m5_reason"]))
         if not f["in_remission"]:
-            reason = ("no elevated baseline" if not f["elevated_baseline"]
+            reason = ("baseline wasn't elevated, so remission doesn't apply" if not f["elevated_baseline"]
                       else "; ".join(f["_remission_notes"]))
             fell_out["m7"].append((p, reason))
     for p in m6_den:
@@ -244,7 +250,8 @@ def calculate(tables, settings, month):
     for p in m8_den:
         if p not in m8_num:
             last_review = patients[p]["_last_review"]
-            fell_out["m8"].append((p, f"last review {last_review}, outside the window"
+            fell_out["m8"].append((p, f"last psychiatric case review was {last_review}, more than "
+                                      f"{s.review_window_days} days before the month ended"
                                    if last_review else "no psychiatric case review"))
 
     metrics = {
@@ -331,8 +338,9 @@ def calculate(tables, settings, month):
                         "late documentation may be missing")
     unapproved = [k for k, v in s.calls.items() if v["approval"] == "needed"]
     if unapproved:
-        warnings.append(f"Provisional: {len(unapproved)} of {len(s.calls)} calls these results "
-                        "follow still need approval")
+        which = ("none of them has been approved yet" if len(unapproved) == len(s.calls)
+                 else f"{len(unapproved)} of its {len(s.calls)} still need approval")
+        warnings.append(f"Provisional: these numbers follow the guide's counting rules, and {which}")
 
     return {
         "reporting_month": month,

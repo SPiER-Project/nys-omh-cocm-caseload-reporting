@@ -8,6 +8,8 @@ question it replaces. Every call still needs approval.
 
 | Question | Notes |
 |---|---|
+| Does the quarterly REDCap report want each month's numbers, or one number per quarter? | The guide counts each month. If OMH wants each month, a quarter is three monthly reports. If it wants one number per quarter, new enrollments and durations combine across months, but enrollment counts and rates need a quarter definition (unique patients, not three months added up). |
+| Practices enrolling ADHD patients must also report a Vanderbilt completion rate. How is it defined? | It's in OMH's eligible diagnosis list, not the eleven metrics, so the guide doesn't count it yet. |
 | What are the REDCap form's fields and the submission deadline? | The deadline may override the [15-day run lag](reference/our-calls.md#when-to-run-the-report). The calculator's output should match the form exactly. (Q-T5) |
 | Does NYS want patient-level data, or only the eleven numbers? | Assumed: only the numbers. The patient-level detail stays at the site. (Q-T4) |
 | Does NYS already use a remission definition at any site? | If so, it replaces our [remission thresholds](reference/our-calls.md#remission-thresholds). |

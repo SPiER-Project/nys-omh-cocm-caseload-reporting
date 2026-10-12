@@ -11,7 +11,7 @@ reporting workbook, or FHIR resources: .json Bundles or .ndjson from a bulk expo
 files or in a directory. Several inputs are combined, so the CoCM half can come from the
 workbook and the EHR half from FHIR. A missing table is treated as empty. The rules come from rules/calls.toml unless --rules says
 otherwise. Results print as a summary; --json also writes everything, including the
-patient-level list of who fell out of each numerator. That list identifies patients by
+list of patients each rate didn't count, and why. That list identifies patients by
 their pseudonymous id; keep it at the site.
 """
 

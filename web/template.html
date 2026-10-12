@@ -239,11 +239,15 @@
         <tbody id="metrics"></tbody>
       </table>
       <div id="warnings" class="panel warn" hidden><strong>Before you report</strong><ul></ul></div>
-      <h3>Disclosures for OMH</h3>
+      <h3>What to tell OMH</h3>
+      <p class="small muted">How these numbers were counted. Include these notes with your report.</p>
       <ul id="disclosures"></ul>
-      <h3>Who fell out of each number</h3>
-      <p class="small muted">For checking the results against what the team knows. This list
-        names patients by the ids in your files; keep it at your site.</p>
+      <h3>Patients not counted, and why</h3>
+      <p class="small muted">Each rate counts some of your patients and not others. These are the
+        patients each rate didn't count, with the reason, so your team can check them against
+        what they know. If a reason looks wrong, the data behind it probably is: fix it in your
+        files and calculate again. This list names patients by the ids in your files, so keep
+        it at your site. It isn't part of what you report.</p>
       <div id="fellout"></div>
       <div class="actions">
         <button id="download-summary">Download the summary</button>
@@ -251,6 +255,11 @@
         <button id="download-tables" class="secondary">Download the tables</button>
         <button id="download-crosswalk" class="secondary" hidden>Download the crosswalk</button>
       </div>
+      <ul class="small muted">
+        <li><strong>Summary:</strong> the numbers and what to tell OMH, with no patient ids. Use it to report.</li>
+        <li><strong>Full results:</strong> everything above, including the patients not counted, as a data file (JSON).</li>
+        <li><strong>Tables:</strong> your data as the calculator read it, as CSV files.</li>
+      </ul>
       <p class="status" id="download-note"></p>
     </div>
   </section>
@@ -485,21 +494,27 @@ function calculateWith(data, month) {
     const d = document.createElement("details");
     d.className = "fell";
     const s = document.createElement("summary");
-    s.textContent = names[m] + " (" + rows.length + ")";
+    s.textContent = names[m] + ": " + rows.length + " not counted";
     const t = document.createElement("table");
+    const head = document.createElement("tr");
+    for (const label of ["Patient", "Why not counted"]) {
+      head.append(Object.assign(document.createElement("th"), {scope: "col", textContent: label}));
+    }
+    t.append(Object.assign(document.createElement("thead"), {}), document.createElement("tbody"));
+    t.tHead.append(head);
     for (const r of rows) {
       const tr = document.createElement("tr");
       const id = document.createElement("td");
       id.className = "ids";
       id.textContent = r.patient_id;
       const why = document.createElement("td");
-      why.textContent = r.reason;
+      why.textContent = r.reason.charAt(0).toUpperCase() + r.reason.slice(1);
       tr.append(id, why);
-      t.append(tr);
+      t.tBodies[0].append(tr);
     }
     d.append(s, t);
     return d;
-  }) : [Object.assign(document.createElement("p"), {textContent: "Nobody."})]));
+  }) : [Object.assign(document.createElement("p"), {textContent: "Every patient was counted."})]));
   $("results").scrollIntoView({behavior: "smooth", block: "start"});
 }
 
@@ -539,7 +554,7 @@ $("download-summary").addEventListener("click", () => {
 $("download").addEventListener("click", () => {
   download("cocm-results-" + lastResults.reporting_month + ".json",
            new Blob([JSON.stringify(lastResults, null, 2)], {type: "application/json"}));
-  $("download-note").textContent = "The full results include who fell out of each number, by patient id. Keep them at your site.";
+  $("download-note").textContent = "The full results name the patients each rate didn't count, by patient id. Keep them at your site.";
 });
 $("download-tables").addEventListener("click", () => {
   const bytes = Uint8Array.from(atob(web.zip_tables(JSON.stringify(texts))), c => c.charCodeAt(0));

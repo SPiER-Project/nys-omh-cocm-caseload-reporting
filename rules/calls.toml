@@ -59,7 +59,7 @@ group = "Enrollment and discharge"
 firmness = "our-call"
 status = "adopted"
 approval = "needed"
-cocm_billing_codes = ["99492", "99493", "99494", "G2214"]
+cocm_billing_codes = ["99492", "99493", "99494", "T2022", "G2214"]
 
 [calls.enrollment-date]
 title = "Enrollment date"

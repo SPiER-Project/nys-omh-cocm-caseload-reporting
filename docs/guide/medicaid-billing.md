@@ -133,6 +133,7 @@ Patients enrolled in a health home can also receive Collaborative Care.
 |---|---|---|
 | Medicaid Collaborative Care Program Billing Guidance (OMH and DOH) | Updated June 2025 | [Linked from the AIMS Center's NYS page](https://aims.uw.edu/nyscc/medicaid/) |
 | Billing Guidance: Summary of Updates (rates) | Effective September 1, 2025 | [OMH, hosted by the AIMS Center](https://aims.uw.edu/nyscc/wp-content/uploads/2025/06/Updates-Medicaid-Collaborative-Care-Program-Eff.-9.1.25.docx) |
+| Collaborative Care statewide rate file (rate codes, and procedure codes T2022, 99492, 99493 and 99494 for practitioner claims) | Rates effective April 1, 2026; file updated June 2026 | [OMH Medicaid reimbursement rates](https://omh.ny.gov/omhweb/medicaid_reimbursement/excel/collaborative-care-rates.xlsx) |
 | Eligible diagnosis code list | 2024 | [Linked from the AIMS Center's NYS page](https://aims.uw.edu/nyscc/medicaid/) |
 | NYS Medicaid Collaborative Care Provider Certification Overview | August 2025 | [OMH, hosted by the AIMS Center](https://aims.uw.edu/nyscc/wp-content/uploads/2025/11/NYS-CCMP-Provider-Certification-Overview-8.22.25.pdf) |
 | eMedNY: submitting claims over 90 days old | — | [eMedNY](https://www.emedny.org/HIPAA/QuickRefDocs/FOD-7001_Sub_Claims_Over_90_days_Old.pdf) |

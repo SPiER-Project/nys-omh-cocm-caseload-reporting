@@ -139,10 +139,16 @@ one to measure.
 structured program-enrollment record in the EHR) until discharged. A referral is not an
 enrollment, and neither is verbal consent with nothing recorded. A site with no
 enrollment record may infer enrollment from CoCM billing codes
-(<!--rule:what-counts-as-enrolled.cocm_billing_codes-->99492, 99493, 99494, G2214<!--/rule-->), but must disclose that it did.
+(<!--rule:what-counts-as-enrolled.cocm_billing_codes-->99492, 99493, 99494, T2022, G2214<!--/rule-->), but must disclose that it did.
 
 **Why.** Counting from referral inflates enrollment; counting only billed months
-undercounts it, because an enrolled patient can go a month unbilled.
+undercounts it, because an enrolled patient can go a month unbilled. T2022 is on the list
+because it is a NYS Medicaid code for the monthly payment: OMH's
+[Collaborative Care statewide rate file](https://omh.ny.gov/omhweb/medicaid_reimbursement/excel/collaborative-care-rates.xlsx)
+(rates effective April 1, 2026; file updated June 2026) lists T2022, 99492 and 99493 as the
+procedure codes for the Collaborative Care monthly case payment on practitioner claims.
+The [Medicaid billing guidance](../guide/medicaid-billing.md) uses T2022 for a month below
+the 70- or 60-minute thresholds, so leaving it off would miss those months.
 
 **Replaces.** D-02, D-02a.
 

@@ -33,7 +33,9 @@ about:
   severity bands against Spitzer et al. (2006).
 - The qualifying-visit code list, including the telehealth codes.
 - The CoCM billing codes used to infer enrollment when there's no enrollment record,
-  including any codes FQHCs and rural health clinics bill for CoCM instead.
+  including any codes FQHCs and rural health clinics bill for CoCM instead. The NYS
+  Medicaid codes (T2022, 99492, 99493, 99494) are checked against OMH's rate file; the
+  Medicare code G2214 isn't checked yet.
 
 ## The tooling
 

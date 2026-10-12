@@ -40,6 +40,9 @@ patients.
 
 ## Getting the data
 
+[Asking for the data](../collecting/requests.md) has ready-to-send requests for the
+people who hold it: billing, the EHR team and whoever keeps the registry.
+
 [Collecting the data](../collecting/overview.md) says where each fact lives in a clinic's
 systems, and gives three routes for getting it out:
 - a spreadsheet registry;

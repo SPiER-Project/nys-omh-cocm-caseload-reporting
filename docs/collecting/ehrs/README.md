@@ -11,7 +11,8 @@ results.
 The columns match the [data contract](../../reference/data-contract.md). Start from the
 [CSV templates](https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-templates.zip): one file per table, with the column
 headings the calculator expects. The calculator page checks each file and lists any rows
-it can't use.
+it can't use. [Asking for the data](../requests.md) has ready-to-send requests for each
+report.
 
 ## Reports every site needs
 

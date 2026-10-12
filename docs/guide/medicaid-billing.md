@@ -58,12 +58,16 @@ month that meets them is a month of active treatment.
 
 The code depends on the care team's total Collaborative Care time in the month:
 
-| Code | When | Rate (from September 1, 2025) |
-|---|---|---|
-| 99492 | The first month of care, with at least 70 minutes | $172.97 |
-| 99493 | Any later month, with at least 60 minutes | $172.97 |
-| T2022 | A month below those minutes. There's no minimum time for T2022 | $172.97 |
-| 99494 | An add-on for at least 30 minutes beyond the 70 or 60 (90 minutes or more in total). One per patient per month, and never with T2022 | $86.48 |
+| Code | When | Rate from April 1, 2026 | Hospital clinics |
+|---|---|---|---|
+| 99492 | The first month of care, with at least 70 minutes | $177.64 | $189.18 |
+| 99493 | Any later month, with at least 60 minutes | $177.64 | $189.18 |
+| T2022 | A month below those minutes. There's no minimum time for T2022 | $177.64 | $189.18 |
+| 99494 | An add-on for at least 30 minutes beyond the 70 or 60 (90 minutes or more in total). One per patient per month, and never with T2022 | $88.81 | $94.59 |
+
+OMH's rate file marks the April 2026 rates "Pending DOB Approval". From September 1, 2025
+to March 31, 2026 the rates were $172.97 and $86.48, and $184.21 and $92.10 in hospital
+clinics.
 
 ## How to claim
 
@@ -133,7 +137,7 @@ Patients enrolled in a health home can also receive Collaborative Care.
 |---|---|---|
 | Medicaid Collaborative Care Program Billing Guidance (OMH and DOH) | Updated June 2025 | [Linked from the AIMS Center's NYS page](https://aims.uw.edu/nyscc/medicaid/) |
 | Billing Guidance: Summary of Updates (rates) | Effective September 1, 2025 | [OMH, hosted by the AIMS Center](https://aims.uw.edu/nyscc/wp-content/uploads/2025/06/Updates-Medicaid-Collaborative-Care-Program-Eff.-9.1.25.docx) |
-| Collaborative Care statewide rate file (rate codes, and procedure codes T2022, 99492, 99493 and 99494 for practitioner claims) | Rates effective April 1, 2026; file updated June 2026 | [OMH Medicaid reimbursement rates](https://omh.ny.gov/omhweb/medicaid_reimbursement/excel/collaborative-care-rates.xlsx) |
+| Collaborative Care statewide rate file (rates for freestanding clinics, hospital clinics and practitioner claims; rate codes; procedure codes T2022, 99492, 99493 and 99494) | Rates effective April 1, 2026; file updated June 2026 | [OMH Medicaid reimbursement rates](https://omh.ny.gov/omhweb/medicaid_reimbursement/excel/collaborative-care-rates.xlsx) |
 | Eligible diagnosis code list | 2024 | [Linked from the AIMS Center's NYS page](https://aims.uw.edu/nyscc/medicaid/) |
 | NYS Medicaid Collaborative Care Provider Certification Overview | August 2025 | [OMH, hosted by the AIMS Center](https://aims.uw.edu/nyscc/wp-content/uploads/2025/11/NYS-CCMP-Provider-Certification-Overview-8.22.25.pdf) |
 | eMedNY: submitting claims over 90 days old | — | [eMedNY](https://www.emedny.org/HIPAA/QuickRefDocs/FOD-7001_Sub_Claims_Over_90_days_Old.pdf) |

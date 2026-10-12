@@ -28,7 +28,7 @@ EHR. *Our call: [what counts as enrolled](../../reference/our-calls.md#what-coun
 - A referral is not an enrollment. Neither is a warm handoff or verbal consent with
   nothing recorded.
 - A site with no enrollment record at all may infer enrollment from CoCM billing
-  (<!--rule:what-counts-as-enrolled.cocm_billing_codes-->99492, 99493, 99494, G2214<!--/rule-->), and must say so in its submission. Billing undercounts: an
+  (<!--rule:what-counts-as-enrolled.cocm_billing_codes-->99492, 99493, 99494, T2022, G2214<!--/rule-->), and must say so in its submission. Billing undercounts: an
   enrolled patient can go a month without a billable service.
 
 ### Enrollment date

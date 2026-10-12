@@ -246,6 +246,7 @@
         names patients by the ids in your files; keep it at your site.</p>
       <div id="fellout"></div>
       <div class="actions">
+        <button id="download-summary">Download the summary</button>
         <button id="download" class="secondary">Download the full results</button>
         <button id="download-tables" class="secondary">Download the tables</button>
         <button id="download-crosswalk" class="secondary" hidden>Download the crosswalk</button>
@@ -526,9 +527,19 @@ $("example").addEventListener("click", () => {
   $("month").value = "2025-03";
   calculateWith(texts, "2025-03");
 });
+$("download-summary").addEventListener("click", () => {
+  const today = new Date();
+  const made = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, "0") + "-" +
+               String(today.getDate()).padStart(2, "0");
+  download("cocm-summary-" + lastResults.reporting_month + ".html",
+           new Blob([web.summary(JSON.stringify(lastResults), made)], {type: "text/html"}));
+  $("download-note").textContent = "The summary has the eleven numbers and the disclosures, and no " +
+    "patient ids. Open it in a browser to print it or save it as a PDF.";
+});
 $("download").addEventListener("click", () => {
   download("cocm-results-" + lastResults.reporting_month + ".json",
            new Blob([JSON.stringify(lastResults, null, 2)], {type: "application/json"}));
+  $("download-note").textContent = "The full results include who fell out of each number, by patient id. Keep them at your site.";
 });
 $("download-tables").addEventListener("click", () => {
   const bytes = Uint8Array.from(atob(web.zip_tables(JSON.stringify(texts))), c => c.charCodeAt(0));

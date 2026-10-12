@@ -336,6 +336,7 @@ def calculate(tables, settings, month):
 
     return {
         "reporting_month": month,
+        "site_id": site.get("site_id") or None,
         "metrics": metrics,
         "patients": {p: {k: v for k, v in f.items() if not k.startswith("_")}
                      for p, f in patients.items()},

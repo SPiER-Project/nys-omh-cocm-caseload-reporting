@@ -10,6 +10,7 @@ calculation lives in JavaScript:
     new_key() -> key text
     pseudonymize(texts_json, key_text) -> {"texts": ..., "crosswalk": [[id, pseudonym]]} JSON
     zip_tables(texts_json) -> base64 of a zip with one CSV per table
+    summary(results_json, made) -> the one-page HTML summary, with no patient-level data
 
 texts_json is {"patient": csv text, ...}. The input is checked first (checks.py); the
 result is the calculator's results, the data check under "checks", and under "rows" each
@@ -27,7 +28,7 @@ from .data import combine, read_rules, read_tables
 from .fhir import read_fhir
 from .pseudonym import new_key as _new_key
 from .pseudonym import pseudonymize as _pseudonymize
-from .report import NAMES, value
+from .report import NAMES, summary_html, value
 from .xlsx import read_workbook
 
 
@@ -88,3 +89,8 @@ def zip_tables(texts_json):
         for table, text in json.loads(texts_json).items():
             z.writestr(f"{table}.csv", text)
     return base64.b64encode(buf.getvalue()).decode()
+
+
+def summary(results_json, made=""):
+    """The one-page HTML summary of results from run(), for the page to offer as a download."""
+    return summary_html(json.loads(results_json), made or None)

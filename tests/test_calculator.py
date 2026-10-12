@@ -242,5 +242,54 @@ class WebEntryPointTests(unittest.TestCase):
         self.assertIn("error", json.loads(run("not json", RULES_TEXT, "2025-03")))
 
 
+class SummaryTests(unittest.TestCase):
+    """The one-page summary a site can print or share."""
+
+    def setUp(self):
+        import json
+        from calculator.web import run
+        directory = os.path.join(ROOT, "tests", "fixtures", "example-caseload")
+        texts = {}
+        for path in glob.glob(os.path.join(directory, "*.csv")):
+            with open(path, newline="") as f:
+                texts[os.path.splitext(os.path.basename(path))[0]] = f.read()
+        self.texts = texts
+        self.results = run(json.dumps(texts), RULES_TEXT, "2025-03")
+
+    def test_has_every_metric_and_the_disclosures(self):
+        from calculator.report import NAMES
+        from calculator.web import summary
+        page = summary(self.results, "2025-04-20")
+        for name in NAMES.values():
+            self.assertIn(name, page)
+        self.assertIn("March 2025", page)
+        self.assertIn("Site: EXAMPLE", page)
+        self.assertIn("Made 2025-04-20", page)
+        self.assertIn('<td class="num result">87.5%</td><td class="num">7</td>'
+                      '<td class="num">8</td>', page)
+        self.assertIn("<li>Enrollment sources: registry</li>", page)
+        self.assertIn("still need approval", page)
+
+    def test_leaves_out_every_patient_id(self):
+        import csv
+        import io
+        import re
+        from calculator.web import summary
+        page = summary(self.results)
+        ids = {row["patient_id"] for row in csv.DictReader(io.StringIO(self.texts["patient"]))}
+        self.assertTrue(ids)
+        for patient in ids:
+            self.assertIsNone(re.search(rf"\b{re.escape(patient)}\b", page), patient)
+
+    def test_escapes_what_the_site_wrote(self):
+        import json
+        from calculator.web import summary
+        results = json.loads(self.results)
+        results["disclosures"] = ["<script>alert(1)</script>"]
+        page = summary(json.dumps(results))
+        self.assertNotIn("<script>", page)
+        self.assertIn("&lt;script&gt;", page)
+
+
 if __name__ == "__main__":
     unittest.main()

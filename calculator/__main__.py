@@ -2,6 +2,7 @@
 
     python3 -m calculator DATA_DIR --month 2025-03
     python3 -m calculator DATA_DIR --month 2025-03 --json results.json
+    python3 -m calculator DATA_DIR --month 2025-03 --summary summary.html
     python3 -m calculator workbook.xlsx --month 2025-03
     python3 -m calculator workbook.xlsx ehr-export/ --month 2025-03
 
@@ -18,13 +19,14 @@ import argparse
 import json
 import os
 import sys
+from datetime import date
 
 from . import calculate, read_rules, read_tables
 from .checks import check
 from .data import combine
 from .inputs import read_inputs
 from .pseudonym import pseudonymize
-from .report import summary
+from .report import summary, summary_html
 
 DEFAULT_RULES = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                              "rules", "calls.toml")
@@ -41,6 +43,9 @@ def main(argv=None):
     parser.add_argument("--month", required=True, help="reporting month, YYYY-MM")
     parser.add_argument("--rules", default=DEFAULT_RULES, help="rules file (default: %(default)s)")
     parser.add_argument("--json", help="also write the full results to this file")
+    parser.add_argument("--summary", metavar="HTML_FILE",
+                        help="also write a one-page summary to print or share, with no "
+                             "patient-level data")
     parser.add_argument("--pseudonym-key", metavar="KEY_FILE",
                         help="replace patient ids with pseudonyms made with this key first, so "
                              "the results name no MRNs (see python3 -m calculator.pseudonymize)")
@@ -77,6 +82,9 @@ def main(argv=None):
         with open(args.json, "w") as f:
             json.dump(results, f, indent=2, default=str)
             f.write("\n")
+    if args.summary:
+        with open(args.summary, "w") as f:
+            f.write(summary_html(results, date.today().isoformat()))
     return 0
 
 

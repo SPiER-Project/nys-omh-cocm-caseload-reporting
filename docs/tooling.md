@@ -35,6 +35,11 @@ Add `--json results.json` to also write the full results. The output includes:
 - for each metric, the patients who fell out of the numerator and why. This list
   identifies patients by pseudonymous id and stays at the site.
 
+Add `--summary summary.html` for a one-page summary to print or share: the eleven numbers
+with their numerators and denominators, the data check, the warnings and the
+disclosures. It has no patient-level data. The browser page offers the same summary as
+its first download.
+
 **How it's built.** It uses the Python standard library only. The core works on text in
 memory, not files, so the same code can run in a browser through Pyodide: a site could
 drop its CSVs into a web page, and nothing would leave its machine. Each step of the

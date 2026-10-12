@@ -10,7 +10,8 @@ where turning them into numbers takes a practical decision, the guide makes a ca
 says why.
 
 New to the program itself? [About the NYS Collaborative Care Medicaid Program](about-the-program.md)
-covers what it is, how it began and what it asks of practices.
+covers what it is, how it began and what it asks of practices, and
+[NYS Medicaid billing](medicaid-billing.md) covers how certified practices bill for it.
 
 ## The metrics
 

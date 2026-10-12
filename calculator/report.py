@@ -15,7 +15,7 @@ NAMES = {
     "m8": "Psychiatric consultation rate",
     "m9": "Depression screening rate",
     "m10": "Depression screening yield",
-    "m11": "BHCM staffing",
+    "m11": "Care manager staffing (BHCM FTE)",
 }
 NO_VALUE = "no patients to count this month"
 NO_DISCHARGES = "nobody was discharged this month"

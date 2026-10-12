@@ -67,7 +67,13 @@
   /* Opening */
   .privacy { border-left: 4px solid var(--spruce); padding: .1rem 0 .1rem 1rem; margin: 1.25rem 0; }
   .program { background: var(--mist); border-radius: 12px; padding: 1.25rem 1.25rem .5rem; margin: 2rem 0 2.5rem; }
-  .program h2 { font-size: 1.15rem; }
+  .intro-note { margin: 1rem 0 2rem; }
+  .program h2 { font-size: 1.15rem; display: inline; }
+  .program > summary { cursor: pointer; margin-bottom: .75rem; }
+  .program:not([open]) { padding-bottom: 1.25rem; }
+  .program:not([open]) > summary { margin-bottom: 0; }
+  table.needs { margin: .25rem 0 1rem; }
+  table.needs td:first-child { font-weight: 700; width: 38%; }
 
   /* The three steps: a real sequence, so numbered */
   ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 0; }
@@ -149,50 +155,47 @@
       <button id="example" class="secondary" disabled>See it work with example data</button>
     </div>
     <p class="status" id="status" role="status" aria-live="polite">Loading the calculator…</p>
+    <p class="small muted intro-note">For practices in New York's Collaborative Care Medicaid Program. An
+      independent project, not an OMH product. <a href="#about">About the program</a>.</p>
   </header>
 
-  <section class="program" aria-labelledby="program-title">
-    <h2 id="program-title">The NYS Collaborative Care Medicaid Program</h2>
-    <p>Collaborative Care treats depression, anxiety and other common conditions in primary
-      care. A behavioral health care manager leads each patient's care alongside their
-      primary care provider, a psychiatric consultant reviews the caseload every week, and
-      the team tracks everyone in a registry with regular symptom scales such as the PHQ-9.</p>
-    <p>New York's Office of Mental Health began paying for it through Medicaid in 2015, the
-      first state to do so. More than 430 primary care practices now take part. Approved
-      practices report caseload numbers to OMH each quarter: enrollment, contact,
-      improvement and remission, psychiatric case review, and depression screening. This
-      page counts them.</p>
-    <p class="small muted">This calculator is an independent project, not an OMH product.
-      Questions about the program go to OMH at NYSCollaborativeCare@omh.ny.gov.
-      <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/about-the-program.md">More about the program</a>, and
-      <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/medicaid-billing.md">how Medicaid billing works</a>.</p>
-  </section>
 
   <ol class="steps">
     <li>
       <h2>Gather your data</h2>
-      <p>The calculator reads eight tables: patients, coverage, CoCM enrollments, contacts,
-        symptom scales, case reviews, practice visits, and a few program facts. Most sites
-        fill in the workbook. Sites that pull reports from their systems use the CSV
-        templates.</p>
+      <p>Most of the work is asking other people for records. The first month takes the
+        longest, so allow a few weeks; after that, it's the same requests every month.</p>
+      <table class="needs">
+        <thead><tr><th scope="col">Ask</th><th scope="col">For</th></tr></thead>
+        <tbody>
+          <tr><td>Whoever keeps your CoCM registry</td><td>Enrollments and discharges, contacts, symptom scales, and the psychiatric consultant's case reviews</td></tr>
+          <tr><td>Billing or practice management</td><td>Patients' insurance, and every visit in the month</td></tr>
+          <tr><td>Your EHR team</td><td>Patients' dates of birth, and PHQ-2 and PHQ-9 results across the practice</td></tr>
+          <tr><td>The program lead</td><td>Care manager staffing (BHCM FTE) and a few program facts</td></tr>
+        </tbody>
+      </table>
       <ul class="downloads">
-        <li><a href="cocm-workbook.xlsx" download>Reporting workbook</a> for Excel, Google Sheets or Numbers
-          (or the <a href="cocm-workbook-example.xlsx" download>example filled in</a>)</li>
-        <li><a href="cocm-csv-templates.zip" download>CSV templates</a>, one file per table
-          (or the <a href="cocm-csv-example.zip" download>example as CSVs</a>)</li>
-        <li><a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/collecting/requests.md">Ready-to-send requests</a>
-          for billing, your EHR team and whoever keeps the registry</li>
+        <li><a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/collecting/requests.md"><strong>Ready-to-send requests</strong></a>: emails for each
+          of the people above, saying exactly what to send back</li>
+        <li><a href="cocm-workbook.xlsx" download>Reporting workbook</a> for Excel, Google Sheets or Numbers,
+          to put it all in (or the <a href="cocm-workbook-example.xlsx" download>example filled in</a>)</li>
+        <li><a href="cocm-csv-templates.zip" download>CSV templates</a>, one file per table, for sites that
+          pull reports from their systems (or the <a href="cocm-csv-example.zip" download>example as CSVs</a>)</li>
       </ul>
-      <p class="small muted">Use each patient's MRN as their id in every file, so the records join.</p>
+      <p class="small muted">Use each patient's medical record number (MRN) as their id in every
+        file, so the records join. Setting up for the first time? See
+        <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/site-setup.md">site setup</a>.</p>
     </li>
 
     <li>
       <h2>Add your files</h2>
       <details class="option" id="key-panel">
-        <summary>Keep MRNs out of the results (optional)</summary>
-        <p>Load your site's pseudonym key <strong>before adding files</strong>. Each MRN is then
-          replaced with a pseudonym made with the key, the same in every file and every
-          month. You'll need this if the results or tables will leave your site.</p>
+        <summary>Sending files outside your clinic? Replace MRNs first</summary>
+        <p>Only needed if the full results or tables will go to someone outside your clinic,
+          such as a consultant or vendor. The summary never includes MRNs.</p>
+        <p>Load your site's key <strong>before adding files</strong>. Each MRN is then
+          replaced with a code made from the key (a pseudonym), the same in every file and
+          every month. Keep the key at your clinic.</p>
         <div class="actions">
           <label class="button" for="key-file">Use our key file</label>
           <input type="file" id="key-file" accept=".key,.txt" hidden>
@@ -224,8 +227,9 @@
         <input type="month" id="month" required>
         <button id="calculate" disabled>Calculate</button>
       </div>
-      <p class="small muted">Each number is counted for one month. Run it at least two weeks
-        after the month ends, so late notes are in.</p>
+      <p class="small muted">OMH collects these numbers each quarter. Calculate each month of
+        the quarter on its own, and download each month's summary. Run a month at least two
+        weeks after it ends, so late notes are in.</p>
     </li>
   </ol>
 
@@ -263,6 +267,22 @@
       <p class="status" id="download-note"></p>
     </div>
   </section>
+  <details class="program" id="about">
+    <summary><h2>About the NYS Collaborative Care Medicaid Program</h2></summary>
+    <p>Collaborative Care treats depression, anxiety and other common conditions in primary
+      care. A behavioral health care manager leads each patient's care alongside their
+      primary care provider, a psychiatric consultant reviews the caseload every week, and
+      the team tracks everyone in a registry with regular symptom scales such as the PHQ-9.</p>
+    <p>New York's Office of Mental Health began paying for it through Medicaid in 2015, the
+      first state to do so. More than 430 primary care practices now take part. Approved
+      practices report caseload numbers to OMH each quarter: enrollment, contact,
+      improvement and remission, psychiatric case review, and depression screening. This
+      page counts them.</p>
+    <p class="small muted">This calculator is an independent project, not an OMH product.
+      Questions about the program go to OMH at NYSCollaborativeCare@omh.ny.gov.
+      <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/about-the-program.md">More about the program</a>, and
+      <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/medicaid-billing.md">how Medicaid billing works</a>.</p>
+  </details>
 </main>
 
 <script type="application/json" id="calculator-sources">__CALCULATOR_SOURCES__</script>
@@ -282,7 +302,7 @@ const TRAY = {
   scale_result: ["Symptom scales", "PHQ-9, GAD-7 and others, from the registry and the EHR"],
   psych_review: ["Case reviews", "The psychiatric consultant's reviews, from the registry"],
   practice_visit: ["Practice visits", "Every visit in the month, from billing"],
-  site_month: ["Program facts", "BHCM FTE and settings, from the program lead"],
+  site_month: ["Program facts", "Care manager staffing (BHCM FTE) and settings, from the program lead"],
 };
 const json = id => JSON.parse(document.getElementById(id).textContent);
 const $ = id => document.getElementById(id);
@@ -518,6 +538,7 @@ function calculateWith(data, month) {
   $("results").scrollIntoView({behavior: "smooth", block: "start"});
 }
 
+document.querySelectorAll('a[href="#about"]').forEach(a => a.addEventListener("click", () => { $("about").open = true; }));
 $("files").addEventListener("change", e => addFiles(e.target.files));
 const drop = $("drop");
 drop.addEventListener("dragover", e => { e.preventDefault(); drop.classList.add("over"); });

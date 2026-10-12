@@ -57,12 +57,14 @@ each week about enrolled patients.
 
 ## How it's paid
 
-As of September 2025:
+As of April 2026:
 - Collaborative Care is billed monthly, directly to fee-for-service Medicaid. It's
   carved out of Medicaid managed care, so this applies to managed care members too.
-- The monthly base rate (procedure codes T2022, 99492 and 99493) is $172.97.
-- One add-on per month (99494, rate code 5261) pays $86.48 when the team spends at least
-  30 minutes beyond the base requirement.
+- The monthly base rate (procedure codes T2022, 99492 and 99493) is
+  $177.64, or $189.18 in hospital clinics. OMH marks these rates as pending approval; see
+  [Medicaid billing](medicaid-billing.md#which-code).
+- One add-on per month (99494, rate code 5261) pays $88.81, or $94.59 in hospital clinics,
+  when the team spends at least 30 minutes beyond the base requirement.
 - A patient can receive up to 24 months of Collaborative Care, not necessarily in a row.
   The limit resets after six months without a service.
 - The earlier rule that withheld part of each payment until a patient improved

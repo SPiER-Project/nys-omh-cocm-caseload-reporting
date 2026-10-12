@@ -237,7 +237,9 @@ class WebEntryPointTests(unittest.TestCase):
     def test_reports_bad_input_as_an_error(self):
         import json
         from calculator.web import run
-        self.assertIn("error", json.loads(run(json.dumps({"visits": ""}), RULES_TEXT, "2025-03")))
+        got = json.loads(run(json.dumps({"visits": ""}), RULES_TEXT, "2025-03"))
+        self.assertIn("visits", [c["table"] for c in got["checks"]])  # reported, not fatal
+        self.assertIn("error", json.loads(run("not json", RULES_TEXT, "2025-03")))
 
 
 if __name__ == "__main__":

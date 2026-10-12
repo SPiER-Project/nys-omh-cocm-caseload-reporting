@@ -51,6 +51,22 @@ class TemplateTests(unittest.TestCase):
                 self.assertEqual(f.read(), content, "run python3 scripts/build_workbook.py")
 
 
+class CsvTemplateTests(unittest.TestCase):
+    def test_templates_have_every_contract_table_and_column(self):
+        z = zipfile.ZipFile(io.BytesIO(build_workbook.csv_zip()))
+        self.assertIn("README.txt", z.namelist())
+        for name, _, columns in contract.tables():
+            with self.subTest(table=name):
+                self.assertEqual(z.read(f"{name}.csv").decode(),
+                                 ",".join(c["name"] for c in columns) + "\n")
+
+    def test_example_zip_is_the_fixture(self):
+        z = zipfile.ZipFile(io.BytesIO(build_workbook.csv_zip(build_workbook.example_data())))
+        for path in glob.glob(os.path.join(FIXTURE, "*.csv")):
+            with self.subTest(table=path), open(path, newline="") as f:
+                self.assertEqual(z.read(os.path.basename(path)).decode(), f.read())
+
+
 def excel_style_workbook():
     """A workbook saved the way Excel saves: shared strings, dates as serial numbers,
     booleans as boolean cells, a typed US-style date, and cells out of order."""

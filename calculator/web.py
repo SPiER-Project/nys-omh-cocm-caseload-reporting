@@ -11,9 +11,9 @@ calculation lives in JavaScript:
     pseudonymize(texts_json, key_text) -> {"texts": ..., "crosswalk": [[id, pseudonym]]} JSON
     zip_tables(texts_json) -> base64 of a zip with one CSV per table
 
-texts_json is {"patient": csv text, ...}. The result is the calculator's results plus,
-under "rows", each metric's display text, or {"error": message} if the input couldn't be
-read.
+texts_json is {"patient": csv text, ...}. The input is checked first (checks.py); the
+result is the calculator's results, the data check under "checks", and under "rows" each
+metric's display text, or {"error": message} if the input couldn't be read at all.
 """
 
 import base64
@@ -21,6 +21,7 @@ import io
 import json
 import zipfile
 
+from .checks import check
 from .compute import calculate
 from .data import combine, read_rules, read_tables
 from .fhir import read_fhir
@@ -33,7 +34,10 @@ from .xlsx import read_workbook
 def run(texts_json, rules_text, month):
     try:
         texts = json.loads(texts_json)
-        results = calculate(read_tables(texts), read_rules(rules_text), month)
+        settings = read_rules(rules_text)
+        clean, issues = check(texts, settings, month)
+        results = calculate(read_tables(clean), settings, month)
+        results["checks"] = issues
     except (ValueError, KeyError, TypeError) as e:
         return json.dumps({"error": str(e)})
     results["rows"] = [{"metric": m[1:], "name": name, "value": value(m, results["metrics"][m])}

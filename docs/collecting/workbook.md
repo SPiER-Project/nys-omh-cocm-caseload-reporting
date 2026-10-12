@@ -15,6 +15,10 @@ The page calculates the eleven metrics in the browser; the workbook is never upl
 
 They open in Excel, Google Sheets, Numbers and LibreOffice.
 
+Producing the data from a registry export or an EHR report instead? The same tables come
+as CSVs: [CSV templates](https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-templates.zip), one file per table with its
+headings, and the [example as CSVs](https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-example.zip).
+
 ## What's in it
 
 - **Instructions:** how to fill it in.

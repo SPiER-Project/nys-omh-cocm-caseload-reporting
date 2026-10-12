@@ -80,11 +80,11 @@ browser](https://spier-project.github.io/nys-omh-cocm-caseload-reporting/); the 
 python3 scripts/rules.py sync
 ```
 
-- **Then rebuild what's generated from the rules and the contract:** the browser page
-  and the workbooks. CI says if either is stale.
+- **Then rebuild what's generated from the rules and the contract:** the calculator's
+  copy of the contract, the workbooks and CSV templates, and the browser page. CI says if either is stale.
 
 ```bash
-python3 scripts/build_web.py && python3 scripts/build_workbook.py
+python3 scripts/build_schema.py && python3 scripts/build_workbook.py && python3 scripts/build_web.py
 ```
 
 - **Change wording in the docs as usual**, but don't edit text between

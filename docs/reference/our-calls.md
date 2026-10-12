@@ -149,6 +149,14 @@ because it is a NYS Medicaid code for the monthly payment: OMH's
 procedure codes for the Collaborative Care monthly case payment on practitioner claims.
 The [Medicaid billing guidance](../guide/medicaid-billing.md) uses T2022 for a month below
 the 70- or 60-minute thresholds, so leaving it off would miss those months.
+G2214 is Medicare's code for the first 30 minutes of psychiatric CoCM in a month, beside
+99492–99494 (CMS, [Behavioral Health Integration Services](https://www.cms.gov/files/document/mln909432-behavioral-health-integration-services.pdf),
+MLN909432, January 2026). From January 1, 2026, FQHCs and rural health clinics bill the
+same four codes instead of G0512 (CMS,
+[Federally Qualified Health Center](https://www.cms.gov/files/document/mln006397-federally-qualified-health-center.pdf),
+MLN006397, March 2026, and
+[Rural Health Clinics](https://www.cms.gov/files/document/mln006398-information-rural-health-clinics.pdf),
+MLN006398, January 2026).
 
 **Replaces.** D-02, D-02a.
 

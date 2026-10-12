@@ -9,6 +9,9 @@ approach to the [NYS reporting guidelines](../reference/nys-source/nys-omh-cocm-
 where turning them into numbers takes a practical decision, the guide makes a call and
 says why.
 
+New to the program itself? [About the NYS Collaborative Care Medicaid Program](about-the-program.md)
+covers what it is, how it began and what it asks of practices.
+
 ## The metrics
 
 | # | Metric | Population |

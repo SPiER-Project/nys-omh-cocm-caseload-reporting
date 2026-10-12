@@ -17,158 +17,236 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CoCM caseload calculator</title>
+<meta name="description" content="Count the Collaborative Care caseload metrics New York's Office of Mental Health asks for, from your own records, in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
   :root {
-    --bg: #ffffff; --fg: #1d2330; --muted: #5b6475; --line: #d9dde5; --panel: #f5f7fa;
-    --accent: #2f5fb3; --accent-fg: #ffffff; --warn-bg: #fff4dc; --warn-fg: #6b4a00;
-    --ok: #1f7a3d; --error-bg: #fde8e8; --error-fg: #8a1c1c;
+    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --mist: #eef3f2; --line: #cfdad7;
+    --spruce: #1f6f5c; --spruce-ink: #ffffff; --spruce-soft: #dcebe6;
+    --amber: #8a5300; --amber-soft: #fbf0dc; --brick: #9c3424; --brick-soft: #f8e4e0;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #12151b; --fg: #e6e9ef; --muted: #a1a9b8; --line: #2c323d; --panel: #1a1f27;
-      --accent: #7aa2ec; --accent-fg: #0d1117; --warn-bg: #3a2f12; --warn-fg: #f2d38a;
-      --ok: #6cc98a; --error-bg: #3d1a1a; --error-fg: #f3b0b0;
+      --paper: #121a1f; --ink: #e3ebee; --muted: #9db0b8; --mist: #1a252b; --line: #2e3d44;
+      --spruce: #6fc4ab; --spruce-ink: #0c1a16; --spruce-soft: #18342c;
+      --amber: #f0c374; --amber-soft: #33270f; --brick: #f2a596; --brick-soft: #3a1c17;
     }
   }
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0; background: var(--bg); color: var(--fg);
-    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 17px/1.55 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
-  main { max-width: 52rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
-  h1 { font-size: 1.75rem; margin: 0 0 .25rem; }
-  h2 { font-size: 1.15rem; margin: 2rem 0 .75rem; }
-  p, li { color: var(--fg); }
-  .lede { color: var(--muted); margin-top: 0; }
-  .note { background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
-          padding: .75rem 1rem; }
-  .status { font-size: .95rem; color: var(--muted); min-height: 1.5em; }
-  .status.ready { color: var(--ok); }
-  label { font-weight: 600; display: block; margin-bottom: .35rem; }
-  input[type=month] { font: inherit; padding: .4rem .5rem; border: 1px solid var(--line);
-                      border-radius: 6px; background: var(--bg); color: var(--fg); }
-  label.button { display: inline-block; font: inherit; font-weight: 400; margin: 0; padding: .55rem 1rem;
-                 border-radius: 6px; border: 1px solid var(--accent); color: var(--accent); cursor: pointer; }
-  .drop { border: 2px dashed var(--line); border-radius: 10px; padding: 1.5rem; text-align: center;
-          background: var(--panel); }
-  .drop.over { border-color: var(--accent); }
-  .drop input { display: block; margin: .75rem auto 0; max-width: 100%; }
-  .tables { list-style: none; padding: 0; margin: .75rem 0 0;
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .25rem .75rem; }
-  .tables li { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
-  .tables .have { color: var(--ok); }
-  .tables .missing { color: var(--muted); }
-  .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
-  button { font: inherit; padding: .55rem 1rem; border-radius: 6px; border: 1px solid var(--accent);
-           background: var(--accent); color: var(--accent-fg); cursor: pointer; }
-  button.secondary { background: transparent; color: var(--accent); }
-  button:disabled { opacity: .5; cursor: not-allowed; }
-  table { width: 100%; border-collapse: collapse; }
-  th, td { text-align: left; padding: .45rem .5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-  th { color: var(--muted); font-weight: 600; font-size: .9rem; }
-  td.num { width: 2.5rem; color: var(--muted); }
-  .warn { background: var(--warn-bg); color: var(--warn-fg); border-radius: 8px; padding: .75rem 1rem; }
-  .warn ul, .note ul { margin: .25rem 0 0; padding-left: 1.25rem; }
-  .checks-ok { color: var(--ok); }
-  .checks summary { font-weight: 600; }
-  .checks .level { font-weight: 600; margin-right: .35rem; }
-  .checks .error-item .level { color: var(--error-fg); }
-  .checks .warning-item .level { color: var(--warn-fg); }
-  .checks li { margin-bottom: .35rem; }
-  .checks .rows { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
-  .error { background: var(--error-bg); color: var(--error-fg); border-radius: 8px; padding: .75rem 1rem; }
-  details { border: 1px solid var(--line); border-radius: 8px; padding: .5rem .75rem; margin-bottom: .5rem; }
-  details.options { margin-top: .75rem; }
-  details.options input { font: inherit; padding: .4rem .5rem; border: 1px solid var(--line);
-                          border-radius: 6px; background: var(--bg); color: var(--fg); max-width: 100%; }
-  summary { cursor: pointer; font-weight: 600; }
-  .ids { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  main { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1rem 5rem; }
+  h1 { font-size: 2.25rem; line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 .75rem; }
+  h2 { font-size: 1.3rem; line-height: 1.25; margin: 0 0 .6rem; }
+  h3 { font-size: 1.05rem; margin: 1.5rem 0 .5rem; }
+  p { margin: 0 0 .9rem; }
+  a { color: var(--spruce); text-underline-offset: .15em; }
+  :focus-visible { outline: 3px solid var(--spruce); outline-offset: 2px; border-radius: 4px; }
+  .lede { font-size: 1.15rem; margin-bottom: 1rem; }
+  .muted, .status { color: var(--muted); }
+  .small { font-size: .92rem; }
+  .status { min-height: 1.5em; font-size: .95rem; margin: .5rem 0 0; }
+  .status.ready { color: var(--spruce); }
   [hidden] { display: none !important; }
-  a { color: var(--accent); }
+
+  /* Buttons */
+  button, label.button {
+    display: inline-block; font: inherit; font-weight: 700; padding: .6rem 1.1rem; margin: 0;
+    border-radius: 8px; border: 2px solid var(--spruce); background: var(--spruce);
+    color: var(--spruce-ink); cursor: pointer; line-height: 1.3;
+  }
+  button.secondary, label.button { background: transparent; color: var(--spruce); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  .actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin: 1rem 0 0; }
+
+  /* Opening */
+  .privacy { border-left: 4px solid var(--spruce); padding: .1rem 0 .1rem 1rem; margin: 1.25rem 0; }
+  .program { background: var(--mist); border-radius: 12px; padding: 1.25rem 1.25rem .5rem; margin: 2rem 0 2.5rem; }
+  .program h2 { font-size: 1.15rem; }
+
+  /* The three steps: a real sequence, so numbered */
+  ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 0; }
+  ol.steps > li { counter-increment: step; position: relative; padding: 0 0 2.25rem 3.25rem; }
+  ol.steps > li::before {
+    content: counter(step); position: absolute; left: 0; top: -.2rem;
+    font-size: 2rem; font-weight: 700; line-height: 1; color: var(--spruce);
+  }
+  ol.steps > li:not(:last-child)::after {
+    content: ""; position: absolute; left: .6rem; top: 2.4rem; bottom: .6rem;
+    border-left: 2px solid var(--line);
+  }
+  .downloads { list-style: none; padding: 0; margin: 0 0 1rem; }
+  .downloads li { padding: .45rem 0; border-bottom: 1px solid var(--line); }
+  .downloads li:first-child { border-top: 1px solid var(--line); }
+
+  /* Data tray: the eight tables, filling in as files arrive */
+  .drop { border: 2px dashed var(--line); border-radius: 12px; padding: 1.25rem; text-align: center; margin: 1rem 0; }
+  .drop.over { border-color: var(--spruce); background: var(--spruce-soft); }
+  .drop input { display: block; margin: .6rem auto 0; max-width: 100%; font: inherit; font-size: .95rem; }
+  .tray { list-style: none; padding: 0; margin: 0; }
+  .tray li { display: grid; grid-template-columns: 1.4rem 1fr auto; gap: .1rem .6rem; align-items: baseline;
+             padding: .55rem 0; border-bottom: 1px solid var(--line); }
+  .tray li:first-child { border-top: 1px solid var(--line); }
+  .tray .mark { width: .85rem; height: .85rem; border-radius: 50%; border: 2px solid var(--muted); align-self: center; }
+  .tray .have .mark { background: var(--spruce); border-color: var(--spruce); }
+  .tray .name { font-weight: 700; }
+  .tray .what { grid-column: 2; font-size: .92rem; color: var(--muted); }
+  .tray .state { grid-row: 1; grid-column: 3; font-size: .92rem; color: var(--muted); text-align: right; }
+  .tray .have .state { color: var(--spruce); font-weight: 700; }
+
+  details.option { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: .6rem 0; margin: 1rem 0; }
+  details.option + details.option { border-top: 0; margin-top: -1rem; }
+  details.option > summary { cursor: pointer; font-weight: 700; }
+  details.option[open] > summary { margin-bottom: .6rem; }
+  label.field { display: block; font-weight: 700; margin-bottom: .35rem; }
+  input[type=month], input[type=text] { font: inherit; padding: .45rem .6rem; border: 2px solid var(--line);
+    border-radius: 8px; background: var(--paper); color: var(--ink); max-width: 100%; }
+
+  /* Results */
+  #results { border-top: 3px solid var(--ink); padding-top: 1.5rem; margin-top: 1rem; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: .5rem .5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 700; font-size: .92rem; }
+  td.num { width: 2.5rem; color: var(--muted); }
+  #metrics td:last-child { font-weight: 700; }
+  .panel { border-radius: 10px; padding: .8rem 1rem; margin: 1rem 0; }
+  .warn { background: var(--amber-soft); color: var(--amber); }
+  .error { background: var(--brick-soft); color: var(--brick); }
+  .warn ul { margin: .25rem 0 0; padding-left: 1.25rem; }
+  .checks-ok { color: var(--spruce); font-weight: 700; }
+  details.checks { border-radius: 10px; padding: .8rem 1rem; margin: 0 0 1.25rem; }
+  details.checks summary { font-weight: 700; cursor: pointer; }
+  details.checks ul { padding-left: 1.1rem; margin: .5rem 0 0; }
+  .checks li { margin-bottom: .4rem; }
+  .checks .level { font-weight: 700; margin-right: .4rem; }
+  .checks .rows { color: var(--muted); font-size: .92rem; }
+  details.fell { border-bottom: 1px solid var(--line); padding: .5rem 0; }
+  details.fell summary { cursor: pointer; font-weight: 700; }
+  .ids { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  @media (max-width: 34rem) {
+    h1 { font-size: 1.85rem; }
+    ol.steps > li { padding-left: 2.5rem; }
+    ol.steps > li::before { font-size: 1.6rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
 </style>
 </head>
 <body>
 <main>
-  <h1>CoCM caseload calculator</h1>
-  <p class="lede">The eleven monthly Collaborative Care metrics for the New York State Office
-    of Mental Health, calculated the way the
-    <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting">reporting guide</a>
-    describes.</p>
+  <header>
+    <h1>CoCM caseload calculator</h1>
+    <p class="lede">Count the Collaborative Care caseload numbers New York's Office of Mental
+      Health asks for, from your own records, the way the
+      <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting">reporting guide</a> describes.</p>
+    <p class="privacy"><strong>Your files stay on this computer.</strong> The calculation runs
+      inside this page. Nothing you add is uploaded or sent anywhere.</p>
+    <div class="actions">
+      <button id="example" class="secondary" disabled>See it work with example data</button>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite">Loading the calculator…</p>
+  </header>
 
-  <p class="note"><strong>Your files stay on this computer.</strong> The calculation runs
-    inside this page. The files you add are read by your browser and are never uploaded
-    or sent anywhere. The page downloads the calculation engine the first time it opens.</p>
+  <section class="program" aria-labelledby="program-title">
+    <h2 id="program-title">The NYS Collaborative Care Medicaid Program</h2>
+    <p>Collaborative Care treats depression, anxiety and other common conditions in primary
+      care. A behavioral health care manager leads each patient's care alongside their
+      primary care provider, a psychiatric consultant reviews the caseload every week, and
+      the team tracks everyone in a registry with regular symptom scales such as the PHQ-9.</p>
+    <p>New York's Office of Mental Health began paying for it through Medicaid in 2015, the
+      first state to do so. More than 430 primary care practices now take part. Approved
+      practices report caseload numbers to OMH each quarter: enrollment, contact,
+      improvement and remission, psychiatric case review, and depression screening. This
+      page counts them.</p>
+    <p class="small muted">This calculator is an independent project, not an OMH product.
+      Questions about the program go to OMH at NYSCollaborativeCare@omh.ny.gov.
+      <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/about-the-program.md">More about the program, with sources</a>.</p>
+  </section>
 
-  <p class="status" id="status" role="status" aria-live="polite">Loading the calculator…</p>
+  <ol class="steps">
+    <li>
+      <h2>Gather your data</h2>
+      <p>The calculator reads eight tables: patients, coverage, CoCM enrollments, contacts,
+        symptom scales, case reviews, practice visits, and a few program facts. Most sites
+        fill in the workbook. Sites that pull reports from their systems use the CSV
+        templates.</p>
+      <ul class="downloads">
+        <li><a href="cocm-workbook.xlsx" download>Reporting workbook</a> for Excel, Google Sheets or Numbers
+          (or the <a href="cocm-workbook-example.xlsx" download>example filled in</a>)</li>
+        <li><a href="cocm-csv-templates.zip" download>CSV templates</a>, one file per table
+          (or the <a href="cocm-csv-example.zip" download>example as CSVs</a>)</li>
+        <li><a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/collecting/requests.md">Ready-to-send requests</a>
+          for billing, your EHR team and whoever keeps the registry</li>
+      </ul>
+      <p class="small muted">Use each patient's MRN as their id in every file, so the records join.</p>
+    </li>
 
-  <h2>1. Reporting month</h2>
-  <label for="month">Month to report</label>
-  <input type="month" id="month" required>
+    <li>
+      <h2>Add your files</h2>
+      <details class="option" id="key-panel">
+        <summary>Keep MRNs out of the results (optional)</summary>
+        <p>Load your site's pseudonym key <strong>before adding files</strong>. Each MRN is then
+          replaced with a pseudonym made with the key, the same in every file and every
+          month. You'll need this if the results or tables will leave your site.</p>
+        <div class="actions">
+          <label class="button" for="key-file">Use our key file</label>
+          <input type="file" id="key-file" accept=".key,.txt" hidden>
+          <button id="new-key" class="secondary" disabled>Create a new key</button>
+        </div>
+        <p class="status" id="key-status">No key loaded: patient ids are used as they are.</p>
+      </details>
+      <div class="drop" id="drop">
+        <span>Drag the workbook or CSV files here, or choose them</span>
+        <input type="file" id="files" accept=".xlsx,.csv,text/csv,.json,.ndjson" multiple aria-label="Choose the workbook, CSV files or FHIR files">
+      </div>
+      <ul class="tray" id="tables" aria-label="Tables added so far"></ul>
+      <p class="status" id="ignored"></p>
+      <details class="option">
+        <summary>Adding a FHIR export from your EHR</summary>
+        <p>A FHIR export (<code>.json</code> or <code>.ndjson</code>) fills in patients, coverage,
+          practice visits and PHQ results. Add it like any other file. By default each FHIR
+          patient is known by its FHIR id; to match the MRNs in your workbook, give the system
+          of the Patient.identifier that holds the MRN.</p>
+        <label class="field" for="fhir-id">MRN identifier system</label>
+        <input type="text" id="fhir-id" placeholder="for example urn:oid:2.16.840.1…" size="40">
+      </details>
+    </li>
 
-  <h2>2. Patient ids (optional)</h2>
-  <p>To keep MRNs out of the results, load your site's pseudonym key <em>before</em>
-    adding files. Each patient id is then replaced with a pseudonym made from it with the
-    key, so the same MRN gets the same pseudonym from every file and every month. Patient
-    ids should be MRNs, so the registry and the EHR agree.</p>
-  <div class="actions">
-    <label class="button secondary" for="key-file">Use our key file</label>
-    <input type="file" id="key-file" accept=".key,.txt" hidden>
-    <button id="new-key" class="secondary" disabled>Create a new key</button>
-  </div>
-  <p class="status" id="key-status">No key: patient ids are used as they are.</p>
+    <li>
+      <h2>Calculate</h2>
+      <label class="field" for="month">Month to count</label>
+      <div class="actions" style="margin-top:0">
+        <input type="month" id="month" required>
+        <button id="calculate" disabled>Calculate</button>
+      </div>
+      <p class="small muted">Each number is counted for one month. Run it at least two weeks
+        after the month ends, so late notes are in.</p>
+    </li>
+  </ol>
 
-  <h2>3. Your data</h2>
-  <p>Add the <strong>reporting workbook</strong>, or one CSV file per table in the
-    <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/reference/data-contract.md">data contract's</a>
-    shape, named after the table (for example <code>patient.csv</code>). Sites with a FHIR
-    export from their EHR can add it too (<code>.json</code> or <code>.ndjson</code>): it
-    fills in patients, coverage, visits and PHQ results. Everything you add is combined. A
-    table you don't add is treated as empty.</p>
-  <p>No workbook yet? Download the <a href="cocm-workbook.xlsx" download>blank workbook</a>,
-    or an <a href="cocm-workbook-example.xlsx" download>example filled with invented patients</a>.
-    It opens in Excel, Google Sheets, Numbers or LibreOffice. Producing CSVs from your
-    systems instead? Download the <a href="cocm-csv-templates.zip" download>CSV templates</a>
-    (one file per table, with its headings) or the
-    <a href="cocm-csv-example.zip" download>example as CSVs</a>.</p>
-  <div class="drop" id="drop">
-    <span>Drag the workbook or CSV files here, or choose them:</span>
-    <input type="file" id="files" accept=".xlsx,.csv,text/csv,.json,.ndjson" multiple aria-label="Choose the workbook, CSV files or FHIR files">
-  </div>
-  <details class="options">
-    <summary>FHIR options</summary>
-    <label for="fhir-id">Patient identifier system (optional)</label>
-    <input type="text" id="fhir-id" placeholder="for example urn:oid:… or https://…" size="40">
-    <p class="status">By default a FHIR patient is known by its FHIR id. If your workbook or
-      registry uses another id, give the system of the matching Patient.identifier here so
-      the two join.</p>
-  </details>
-  <ul class="tables" id="tables"></ul>
-  <p class="status" id="ignored"></p>
-
-  <div class="actions">
-    <button id="calculate" disabled>Calculate</button>
-    <button id="example" class="secondary" disabled>Try it with the example caseload</button>
-  </div>
-
-  <section id="results" hidden>
+  <section id="results" hidden aria-live="polite">
     <h2>Results for <span id="results-month"></span></h2>
-    <div id="error" class="error" hidden></div>
+    <div id="error" class="panel error" hidden></div>
     <div id="output">
       <div id="checks"></div>
       <table>
         <thead><tr><th scope="col">#</th><th scope="col">Metric</th><th scope="col">Result</th></tr></thead>
         <tbody id="metrics"></tbody>
       </table>
-      <div id="warnings" class="warn" hidden><strong>Warnings</strong><ul></ul></div>
-      <h2>Disclosures for NYS</h2>
+      <div id="warnings" class="panel warn" hidden><strong>Before you report</strong><ul></ul></div>
+      <h3>Disclosures for OMH</h3>
       <ul id="disclosures"></ul>
-      <h2>Who fell out of each numerator</h2>
-      <p>For checking the numbers. Patients are listed by the pseudonymous id in your files.
-        This list is for your site only; don't send it to NYS.</p>
+      <h3>Who fell out of each number</h3>
+      <p class="small muted">For checking the results against what the team knows. This list
+        names patients by the ids in your files; keep it at your site.</p>
       <div id="fellout"></div>
       <div class="actions">
-        <button id="download" class="secondary">Download the full results (JSON)</button>
-        <button id="download-tables" class="secondary">Download the tables (CSV, zip)</button>
+        <button id="download" class="secondary">Download the full results</button>
+        <button id="download-tables" class="secondary">Download the tables</button>
         <button id="download-crosswalk" class="secondary" hidden>Download the crosswalk</button>
       </div>
       <p class="status" id="download-note"></p>
@@ -184,6 +262,17 @@
 "use strict";
 const TABLES = ["patient", "coverage", "cocm_episode", "contact", "scale_result",
                 "psych_review", "practice_visit", "site_month"];
+// How the tray names each table, and where its facts usually come from.
+const TRAY = {
+  patient: ["Patients", "MRN and date of birth, from the EHR or billing"],
+  coverage: ["Coverage", "Insurance with its dates, from billing"],
+  cocm_episode: ["CoCM enrollments", "Enrollment and discharge, from the registry"],
+  contact: ["Contacts", "Sessions and outreach attempts, from the registry"],
+  scale_result: ["Symptom scales", "PHQ-9, GAD-7 and others, from the registry and the EHR"],
+  psych_review: ["Case reviews", "The psychiatric consultant's reviews, from the registry"],
+  practice_visit: ["Practice visits", "Every visit in the month, from billing"],
+  site_month: ["Program facts", "BHCM FTE and settings, from the program lead"],
+};
 const json = id => JSON.parse(document.getElementById(id).textContent);
 const $ = id => document.getElementById(id);
 let texts = {};
@@ -217,7 +306,7 @@ function showChecks(checks) {
   }
   const errors = checks.filter(c => c.level === "error").length;
   const d = document.createElement("details");
-  d.className = "checks " + (errors ? "error" : "warn");
+  d.className = "checks panel " + (errors ? "error" : "warn");
   d.open = errors > 0;
   const s = document.createElement("summary");
   const looks = checks.length - errors;
@@ -279,9 +368,15 @@ function previousMonth() {
 function showTables() {
   $("tables").replaceChildren(...TABLES.map(t => {
     const li = document.createElement("li");
-    const have = t in texts;
-    li.className = have ? "have" : "missing";
-    li.textContent = (have ? "✓ " : "– ") + t;
+    const rows = t in texts ? Math.max(texts[t].trim().split("\n").length - 1, 0) : null;
+    li.className = rows === null ? "missing" : rows === 0 ? "empty" : "have";
+    const mark = Object.assign(document.createElement("span"), {className: "mark"});
+    mark.setAttribute("aria-hidden", "true");
+    const name = Object.assign(document.createElement("span"), {className: "name", textContent: TRAY[t][0]});
+    const state = Object.assign(document.createElement("span"), {className: "state",
+      textContent: rows === null ? "Not added" : rows === 0 ? "Empty" : rows + (rows === 1 ? " row" : " rows")});
+    const what = Object.assign(document.createElement("span"), {className: "what", textContent: TRAY[t][1]});
+    li.append(mark, name, state, what);
     return li;
   }));
 }
@@ -352,7 +447,8 @@ async function start() {
 function calculateWith(data, month) {
   const results = JSON.parse(run(JSON.stringify(data), json("rules"), month));
   $("results").hidden = false;
-  $("results-month").textContent = month;
+  const [y, m] = month.split("-").map(Number);
+  $("results-month").textContent = new Date(y, m - 1, 1).toLocaleString("en-US", {month: "long", year: "numeric"});
   $("error").hidden = !results.error;
   $("output").hidden = !!results.error;
   if (results.error) {
@@ -385,6 +481,7 @@ function calculateWith(data, month) {
   const groups = Object.entries(results.fell_out);
   $("fellout").replaceChildren(...(groups.length ? groups.map(([m, rows]) => {
     const d = document.createElement("details");
+    d.className = "fell";
     const s = document.createElement("summary");
     s.textContent = names[m] + " (" + rows.length + ")";
     const t = document.createElement("table");
@@ -415,7 +512,7 @@ drop.addEventListener("drop", e => {
 });
 $("calculate").addEventListener("click", () => {
   if (!Object.keys(texts).length) {
-    setStatus("Add at least one CSV file first.");
+    setStatus("Add your files first, or see it work with example data.");
     return;
   }
   calculateWith(texts, $("month").value);
@@ -424,7 +521,7 @@ $("example").addEventListener("click", () => {
   texts = json("example-caseload");  // the example is shown with its own ids
   fromExample = true;
   showTables();
-  $("ignored").textContent = "Loaded the guide's example caseload (invented patients).";
+  $("ignored").textContent = "Showing the guide's example: ten invented patients, counted for March 2025. Add your own files to start over.";
   $("month").value = "2025-03";
   calculateWith(texts, "2025-03");
 });

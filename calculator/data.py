@@ -130,6 +130,7 @@ class Settings:
     screening_lookback_months: int
     initial_lookback_days: int
     phq_a_counts_as: str
+    score_ranges: dict
     yield_positive_at_or_above: int
     calls: dict = field(default_factory=dict)  # slug -> {title, status, approval}
 
@@ -175,6 +176,7 @@ def read_rules(text):
         screening_lookback_months=c["what-counts-as-screened"]["lookback_months"],
         initial_lookback_days=c["initial-phq-9"]["lookback_days"],
         phq_a_counts_as=c["phq-a-counts-as-phq-9"]["counts_as"],
+        score_ranges={k: tuple(v) for k, v in r.get("score_ranges", {}).items()},
         yield_positive_at_or_above=r["nys"]["screening_yield_positive_at_or_above"],
         calls={k: {"title": v["title"], "status": v["status"], "approval": v["approval"]}
                for k, v in c.items()},

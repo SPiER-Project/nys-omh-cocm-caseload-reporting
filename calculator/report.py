@@ -32,14 +32,38 @@ def value(m, r):
     return text
 
 
+def describe_rows(issue):
+    """ ' — 3 rows (C1, C7, C9)', or '' when the issue isn't about particular rows."""
+    if not issue["examples"]:
+        return ""
+    more = ", …" if issue["count"] > len(issue["examples"]) else ""
+    count = f" — {issue['count']} rows" if issue["count"] > 1 else ""
+    return f"{count} ({', '.join(issue['examples'])}{more})"
+
+
 def summary(results):
     lines = [f"CoCM caseload metrics for {results['reporting_month']}", ""]
+    checks = results.get("checks", [])
+    if checks:
+        errors = sum(1 for i in checks if i["level"] == "error")
+        looks = len(checks) - errors
+        parts = ([f"{errors} problem{'s' if errors != 1 else ''} that left rows out"] if errors else []) \
+            + ([f"{looks} thing{'s' if looks != 1 else ''} to look at"] if looks else [])
+        lines.append(f"Data check: {', '.join(parts)}. Details at the end.")
+        lines.append("")
+    else:
+        lines += ["Data check: no problems found.", ""]
     width = max(len(n) for n in NAMES.values())
     for m, name in NAMES.items():
         lines.append(f"  {m[1:]:>2}. {name:<{width}}  {value(m, results['metrics'][m])}")
     for title, key in (("Disclosures", "disclosures"), ("Warnings", "warnings")):
         if results[key]:
             lines += ["", f"{title}:"] + [f"  - {x}" for x in results[key]]
+    if checks:
+        lines += ["", "Data check:"]
+        for issue in checks:
+            lines.append(f"  {issue['level'].upper():7} {issue['table']}: {issue['message']}"
+                         + describe_rows(issue))
     if results["fell_out"]:
         lines += ["", "Who fell out of each numerator (keep this at the site):"]
         for m, rows in results["fell_out"].items():

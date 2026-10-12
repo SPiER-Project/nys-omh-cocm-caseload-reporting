@@ -362,6 +362,20 @@ smfq_child = { points_better = 8 }
 smfq_parent = { points_better = 6 }
 vanderbilt = { fraction_of_baseline = 0.5 }
 
+# The total-score range of each instrument (see docs/reference/instruments.md). The data
+# check flags a score outside it. The Vanderbilt has no single total, so it isn't listed.
+[score_ranges]
+phq2 = [0, 6]
+phq9 = [0, 27]
+phq_a = [0, 27]
+gad7 = [0, 21]
+pcl5 = [0, 80]
+scared_child = [0, 82]
+scared_parent = [0, 82]
+smfq_child = [0, 26]
+smfq_parent = [0, 26]
+psc17 = [0, 34]
+
 # Display names for the scale keys used above.
 [scales]
 phq9 = "PHQ-9"

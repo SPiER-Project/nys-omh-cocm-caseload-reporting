@@ -20,6 +20,7 @@ import os
 import sys
 
 from . import calculate, read_rules, read_tables
+from .checks import check
 from .data import combine
 from .inputs import read_inputs
 from .pseudonym import pseudonymize
@@ -64,7 +65,9 @@ def main(argv=None):
         parser.error("no data-contract tables or FHIR resources in " + ", ".join(args.data))
 
     try:
-        results = calculate(read_tables(texts), settings, args.month)
+        clean, issues = check(texts, settings, args.month)
+        results = calculate(read_tables(clean), settings, args.month)
+        results["checks"] = issues
     except (ValueError, KeyError) as e:
         print(f"error: {e}", file=sys.stderr)
         return 1

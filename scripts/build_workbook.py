@@ -3,10 +3,12 @@
     python3 scripts/build_workbook.py           write the workbooks into web/
     python3 scripts/build_workbook.py --check   exit non-zero if they're out of date
 
-Writes two Excel workbooks, published with the browser calculator:
+Writes two Excel workbooks and two zips of CSVs, published with the browser calculator:
 
     web/cocm-workbook.xlsx           the blank template
     web/cocm-workbook-example.xlsx   the same, filled with the guide's example caseload
+    web/cocm-csv-templates.zip       one CSV per table, headings only, for report writers
+    web/cocm-csv-example.zip         the example caseload as CSVs
 
 Each has an Instructions tab, one tab per data-contract table with a dropdown for every
 allowed value, date and number checks and a tooltip on each column, and a Columns tab
@@ -308,10 +310,51 @@ def example_data():
     return data
 
 
+def csv_text(columns, rows):
+    buf = io.StringIO()
+    writer = csv.DictWriter(buf, fieldnames=[c["name"] for c in columns], extrasaction="ignore",
+                            lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(rows)
+    return buf.getvalue()
+
+
+def csv_readme(example):
+    lines = [
+        "CoCM caseload reporting: " + ("example data" if example else "CSV templates"),
+        "",
+        ("The guide's example caseload (ten invented patients, March 2025) as one CSV per "
+         "table." if example else
+         "One CSV per table of the data contract, with the column headings in the first row."),
+        "Fill them in (or produce them from your systems) and add them to the calculator page:",
+        PAGE,
+        "",
+        "- Keep the file names and the column headings as they are.",
+        "- Dates are YYYY-MM-DD. true or false for yes/no columns. Billing codes are separated "
+        "by ;",
+        "- A table you don't need can be left with just its heading row.",
+        "- What each column holds, and the values it allows:",
+        "  " + GUIDE + "/blob/main/docs/reference/data-contract.md",
+        "",
+        "Patient ids should be MRNs, the same in every file. Load your site's pseudonym key on",
+        "the calculator page before adding files if the results or tables will leave your site.",
+    ]
+    return "\n".join(lines) + "\n"
+
+
+def csv_zip(data=None):
+    parts = [("README.txt", csv_readme(data is not None))]
+    for name, _, columns in contract.tables():
+        parts.append((f"{name}.csv", csv_text(columns, (data or {}).get(name, []))))
+    return zip_bytes(parts)
+
+
 def outputs():
     return {
         os.path.join(OUT, "cocm-workbook.xlsx"): workbook(),
         os.path.join(OUT, "cocm-workbook-example.xlsx"): workbook(example_data()),
+        os.path.join(OUT, "cocm-csv-templates.zip"): csv_zip(),
+        os.path.join(OUT, "cocm-csv-example.zip"): csv_zip(example_data()),
     }
 
 

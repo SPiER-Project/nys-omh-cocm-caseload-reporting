@@ -51,6 +51,12 @@
   table { border-collapse: collapse; width: 100%; font-size: .95rem; }
   th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
   th { color: var(--muted); font-size: .9rem; }
+  details.dev { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+                margin: 2.2rem 0 1rem; padding: .6rem 0; }
+  details.dev > summary { cursor: pointer; }
+  details.dev > summary h2 { display: inline; font-size: 1.1rem; margin: 0; }
+  details.dev > summary span { display: block; color: var(--muted); font-size: .9rem; margin: .2rem 0 0 1.1rem; }
+  details.dev[open] > summary { margin-bottom: .8rem; }
   footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
            color: var(--muted); font-size: .9rem; }
   footer a { color: var(--muted); }
@@ -61,6 +67,7 @@
 <header class="site"><nav aria-label="Site">
 <a class="home" href="../../../index.html">CoCM caseload calculator</a>
 <a href="../start-here.html">Start here</a>
+<a href="../metrics/at-a-glance.html">The metrics</a>
 <a href="../../collecting/requests.html">Asking for the data</a>
 <a href="../site-setup.html">Site setup</a>
 <a href="../about-the-program.html">About the program</a>
@@ -106,11 +113,13 @@
 <tr><td>Restating last month whenever late notes arrive</td><td>Submitted numbers never settle, and month-to-month trends can't be compared</td></tr>
 </tbody>
 </table></div>
-<h2 id="for-automation">For automation</h2>
+<details class="dev" id="for-automation">
+<summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
 <ul>
 <li><a href="../../reference/data-contract.html#t8-site_month--one-row-per-submission"><code>site_month.extract_run_date</code></a>: the calculator warns if it is earlier than the 15th of the following month.</li>
 <li>Every date column in the data contract is a local date, not a timestamp. Extraction converts to local time.</li>
 </ul>
+</details>
 </main>
 <footer>
 <p>An opinionated guide to the NYS Office of Mental Health's Collaborative Care caseload

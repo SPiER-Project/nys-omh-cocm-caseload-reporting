@@ -15,6 +15,9 @@ covers what it is, how it began and what it asks of practices, and
 
 ## The metrics
 
+[The eleven metrics at a glance](metrics/at-a-glance.md) says what each one counts, in a
+sentence. Each metric's own page has the full rule.
+
 | # | Metric | Population |
 |---|---|---|
 | 1 | [Total enrollment](metrics/01-total-enrollment.md) | CoCM, all payers |

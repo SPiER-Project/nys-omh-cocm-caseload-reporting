@@ -32,6 +32,7 @@ REPO = "https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting"
 NAV = [  # (label, page under docs/)
     ("Calculator", None),
     ("Start here", "guide/start-here.md"),
+    ("The metrics", "guide/metrics/at-a-glance.md"),
     ("Asking for the data", "collecting/requests.md"),
     ("Site setup", "guide/site-setup.md"),
     ("About the program", "guide/about-the-program.md"),
@@ -295,11 +296,31 @@ STYLE = """
   table { border-collapse: collapse; width: 100%; font-size: .95rem; }
   th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
   th { color: var(--muted); font-size: .9rem; }
+  details.dev { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+                margin: 2.2rem 0 1rem; padding: .6rem 0; }
+  details.dev > summary { cursor: pointer; }
+  details.dev > summary h2 { display: inline; font-size: 1.1rem; margin: 0; }
+  details.dev > summary span { display: block; color: var(--muted); font-size: .9rem; margin: .2rem 0 0 1.1rem; }
+  details.dev[open] > summary { margin-bottom: .8rem; }
   footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
            color: var(--muted); font-size: .9rem; }
   footer a { color: var(--muted); }
   @media (max-width: 34rem) { h1 { font-size: 1.6rem; } }
 """
+
+
+def collapse_automation(body):
+    """Fold a "For automation" section, which is for developers, so clinic readers can
+    skip it. It runs to the next h2 or the end of the page."""
+    m = re.search(r'<h2 id="(for-automation[\w-]*)">For automation</h2>\n?', body)
+    if not m:
+        return body
+    end = body.find("\n<h2 ", m.end())
+    end = len(body) if end == -1 else end
+    return (body[:m.start()]
+            + f'<details class="dev" id="{m.group(1)}">\n<summary><h2>For automation</h2> '
+            '<span>For developers building their own report. Not needed to report.</span></summary>\n'
+            + body[m.end():end] + "\n</details>" + body[end:])
 
 
 def render(page, links):
@@ -308,7 +329,7 @@ def render(page, links):
     text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
     lines = text.split("\n")
     title = next((l[2:].strip() for l in lines if l.startswith("# ")), page)
-    body = Page(page, links).blocks(lines)
+    body = collapse_automation(Page(page, links).blocks(lines))
     here = os.path.dirname(html_path(page)) or "."
     up = os.path.relpath(OUTPUT, os.path.join(OUTPUT, here))
     nav = []

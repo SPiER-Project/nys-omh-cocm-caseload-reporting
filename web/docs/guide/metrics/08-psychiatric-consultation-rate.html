@@ -51,6 +51,12 @@
   table { border-collapse: collapse; width: 100%; font-size: .95rem; }
   th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
   th { color: var(--muted); font-size: .9rem; }
+  details.dev { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+                margin: 2.2rem 0 1rem; padding: .6rem 0; }
+  details.dev > summary { cursor: pointer; }
+  details.dev > summary h2 { display: inline; font-size: 1.1rem; margin: 0; }
+  details.dev > summary span { display: block; color: var(--muted); font-size: .9rem; margin: .2rem 0 0 1.1rem; }
+  details.dev[open] > summary { margin-bottom: .8rem; }
   footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
            color: var(--muted); font-size: .9rem; }
   footer a { color: var(--muted); }
@@ -61,6 +67,7 @@
 <header class="site"><nav aria-label="Site">
 <a class="home" href="../../../index.html">CoCM caseload calculator</a>
 <a href="../start-here.html">Start here</a>
+<a href="at-a-glance.html">The metrics</a>
 <a href="../../collecting/requests.html">Asking for the data</a>
 <a href="../site-setup.html">Site setup</a>
 <a href="../about-the-program.html">About the program</a>
@@ -101,8 +108,10 @@
 <tr><td>Including patients without an elevated baseline in the denominator</td><td>The denominator includes patients who can never improve under Appendix A</td></tr>
 </tbody>
 </table></div>
-<h2 id="for-automation">For automation</h2>
+<details class="dev" id="for-automation">
+<summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
 <p>Reads everything <a href="06-improvement-rate.html">metric 6</a> reads, plus <a href="../../reference/data-contract.html#t6-psych_review--one-row-per-patient-discussed"><code>psych_review</code></a> (<code>review_date</code>, <code>recommendation_documented = true</code>).</p>
+</details>
 </main>
 <footer>
 <p>An opinionated guide to the NYS Office of Mental Health's Collaborative Care caseload

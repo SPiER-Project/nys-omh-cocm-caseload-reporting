@@ -27,7 +27,7 @@
 <main id="main">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../requests.html">Getting the data</a></li><li><a href="../ehrs/index.html">Systems</a></li></ol></nav>
 <h1 id="mapping-a-prototype-cocm-registry--data-contract">Mapping: a prototype CoCM registry → data contract</h1>
-<p>This page maps the data model of a prototype CoCM registry (Next.js + Prisma + PostgreSQL) to the <a href="../../reference/data-contract.html">data contract</a>. It is the first registry mapping (the <a href="../overview.html#2-a-registry-product-plus-an-ehr-report">registry route</a>), and also a worked example of what a mapping has to settle. Where it applies a rule from the guide, it links to the page that sets the rule.</p>
+<p>This page maps the data model of a prototype CoCM registry (Next.js + Prisma + PostgreSQL) to the <a href="../../reference/data-contract.html">data contract</a>. It is the first registry mapping (the <a href="../overview.html#2-a-registry-product-plus-an-ehr-report">registry route</a>), and also a worked example of what a mapping has to decide. Where it applies a rule from the guide, it links to the page that sets the rule.</p>
 <p><strong>Mapped against:</strong> the registry's Prisma schema as of 2026-03. No export code exists yet.</p>
 <h2 id="summary">Summary</h2>
 <p>The registry covers the CoCM half of the contract (T3–T6), with one gap in each table. It has nothing for the EHR half: coverage (T2) and practice visits (T7) must come from the practice-management system, which is the two-source pattern every site will have.</p>
@@ -57,7 +57,7 @@
 <thead><tr><th scope="col">Contract</th><th scope="col">Registry</th><th scope="col">Notes</th></tr></thead>
 <tbody>
 <tr><td><code>episode_id</code>, <code>patient_id</code></td><td><code>id</code>, <code>patientId</code></td><td></td></tr>
-<tr><td><code>enrollment_date</code></td><td><code>startDate</code></td><td>Entered by the user at enrollment. Nothing says it is the initial assessment date rather than the referral date (<a href="../../guide/concepts/enrollment-and-discharge.html#enrollment-date">enrollment date</a>)</td></tr>
+<tr><td><code>enrollment_date</code></td><td><code>startDate</code></td><td>Entered by the user at enrollment. Nothing in the schema says whether it is the initial assessment date or the referral date (<a href="../../guide/concepts/enrollment-and-discharge.html#enrollment-date">enrollment date</a>)</td></tr>
 <tr><td><code>enrollment_source</code></td><td><code>registry</code></td><td>Constant</td></tr>
 <tr><td><code>primary_condition</code></td><td>the <code>diagnoses</code> entry with <code>isPrimary</code>, by ICD-10 range</td><td>F32, F33 → <code>depression</code>; F41 → <code>anxiety</code>; F43.1 → <code>ptsd</code>; F90 → <code>adhd</code>; else <code>other</code>. <strong>Gap:</strong> the schema allows zero or several primary entries; both are extraction errors</td></tr>
 <tr><td><code>primary_scale</code></td><td>—</td><td><strong>Gap.</strong> Derived from <code>primary_condition</code> by the <a href="../../guide/concepts/scales-and-outcomes.html#primary-scale">default mapping</a>, and disclosed. The registry stores only PHQ-9 and GAD-7, so PTSD and ADHD episodes have no scale</td></tr>
@@ -77,7 +77,7 @@
 </tbody>
 </table></div>
 <h2 id="t4-contact--patientcontact">T4 <code>contact</code> ← <code>PatientContact</code></h2>
-<p>The weakest mapping.</p>
+<p>This is the weakest mapping.</p>
 <div class="table"><table>
 <thead><tr><th scope="col">Contract</th><th scope="col">Registry</th><th scope="col">Notes</th></tr></thead>
 <tbody>
@@ -91,19 +91,19 @@
 <p><strong>Use the stricter rule for <code>treatment</code>.</strong> A reached contact counts as treatment only if a <code>ClinicalNote</code> of type <code>PROGRESS</code> or <code>PHONE</code> exists for that patient on the same day. That is the "corroborating documentation" NYS asks for in a <a href="../../guide/concepts/contacts-and-reviews.html#clinical-contact">clinical contact</a>. Notes carry only <code>createdAt</code> (entry time), so a note written the next morning misses; widen the match to the next calendar day if that's common at the site. Disclose the rule used.</p>
 <p>Without the note check, every reached call, including scheduling calls, counts as treatment, and metric 5 is overstated.</p>
 <h2 id="t5-scale_result--assessmentscore">T5 <code>scale_result</code> ← <code>AssessmentScore</code></h2>
-<p>The cleanest mapping.</p>
+<p>This is the cleanest mapping.</p>
 <div class="table"><table>
 <thead><tr><th scope="col">Contract</th><th scope="col">Registry</th><th scope="col">Notes</th></tr></thead>
 <tbody>
 <tr><td><code>result_id</code>, <code>patient_id</code></td><td><code>id</code>, <code>patientId</code></td><td></td></tr>
-<tr><td><code>administered_date</code></td><td><code>administeredAt</code></td><td>Stored in UTC. <strong>Convert to the site's time zone before taking the date</strong> (<a href="../../guide/concepts/reporting-month.html#the-rule">reporting month</a>), or an evening score on the last day of the month lands in the next month</td></tr>
+<tr><td><code>administered_date</code></td><td><code>administeredAt</code></td><td>Stored in UTC. <strong>Convert to the site's time zone before taking the date</strong> (<a href="../../guide/concepts/reporting-month.html#the-rule">reporting month</a>), or an evening score on the last day of the month falls in the next month</td></tr>
 <tr><td><code>instrument</code></td><td><code>instrumentType</code></td><td><code>PHQ9</code> → <code>phq9</code>, <code>GAD7</code> → <code>gad7</code>, <code>PHQ2</code> → <code>phq2</code>. <code>GAD2</code> and <code>CSSRS</code> are not NYS instruments and are not extracted</td></tr>
 <tr><td><code>total_score</code></td><td><code>totalScore</code></td><td></td></tr>
 <tr><td><code>administered_by_role</code></td><td><code>performer.role</code></td><td><code>BHCM</code> → <code>bhcm</code>, <code>PCP</code> → <code>medical_provider</code>, else <code>other</code>. The performer is whoever "administered or entered" it, so this is weak evidence</td></tr>
 <tr><td><code>loinc</code></td><td><code>loincCode</code></td><td>Check the GAD-7 code: the registry's documentation gives <code>69737-5</code>, which is the GAD-7 panel. The total score is <code>70274-6</code> (<a href="../../reference/instruments.html#loinc-codes">instruments</a>)</td></tr>
 </tbody>
 </table></div>
-<p>A score dated before the episode's <code>startDate</code> is a screening score entered into the episode. Extract it anyway: its date alone keeps it from being the <a href="../../guide/concepts/scales-and-outcomes.html#baseline">baseline</a>, and it may count for <a href="../../guide/concepts/screening.html#screening-or-monitoring">screening</a>.</p>
+<p>A score dated before the episode's <code>startDate</code> is a screening score entered into the episode. Extract it anyway: its date alone rules it out as the <a href="../../guide/concepts/scales-and-outcomes.html#baseline">baseline</a>, and it may count for <a href="../../guide/concepts/screening.html#screening-or-monitoring">screening</a>.</p>
 <h2 id="t6-psych_review--consultation">T6 <code>psych_review</code> ← <code>Consultation</code></h2>
 <div class="table"><table>
 <thead><tr><th scope="col">Contract</th><th scope="col">Registry</th><th scope="col">Notes</th></tr></thead>

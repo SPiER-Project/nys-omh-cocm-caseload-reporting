@@ -27,14 +27,14 @@
 <main id="main">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="requests.html">Getting the data</a></li></ol></nav>
 <h1 id="the-workbook-route">The workbook route</h1>
-<p>For sites whose CoCM registry is a spreadsheet, or that have no report writer. The site fills in the reporting workbook each month, from its registry spreadsheet and two or three standard reports, then adds the workbook to the <a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/">calculator page</a>. The page calculates the eleven metrics in the browser; the workbook is never uploaded.</p>
+<p>This route is for sites whose CoCM registry is a spreadsheet, or that have no report writer. The site fills in the reporting workbook each month, from its registry spreadsheet and two or three standard reports, then adds the workbook to the <a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/">calculator page</a>. The page calculates the eleven metrics in the browser; the workbook is never uploaded.</p>
 <h2 id="download">Download</h2>
 <ul>
 <li><a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-workbook.xlsx">Blank workbook</a></li>
 <li><a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-workbook-example.xlsx">Example workbook</a>, filled with the guide's <a href="../guide/example-caseload.html">example caseload</a>. Add it to the calculator page to see how the numbers come out.</li>
 </ul>
 <p>They open in Excel, Google Sheets, Numbers and LibreOffice.</p>
-<p>Producing the data from a registry export or an EHR report instead? The same tables come as CSVs: <a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-templates.zip">CSV templates</a>, one file per table with its headings, and the <a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-example.zip">example as CSVs</a>.</p>
+<p>If you're producing the data from a registry export or an EHR report instead, the same tables are available as CSVs: <a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-templates.zip">CSV templates</a>, one file per table with its headings, and the <a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-example.zip">example as CSVs</a>.</p>
 <h2 id="whats-in-it">What's in it</h2>
 <ul>
 <li><strong>Instructions:</strong> how to fill it in.</li>
@@ -57,7 +57,7 @@
 <li>one <code>scale_result</code> row per completed, scored scale;</li>
 <li>one <code>psych_review</code> row per patient discussed.</li>
 </ul>
-<p>Tick columns ("contacted this month") don't carry enough to calculate the metrics; the dates and the kind of contact matter.</p></li>
+<p>A tick column such as "contacted this month" isn't enough to calculate the metrics, which need the date and kind of each contact.</p></li>
 <li><p><strong>Add each month's rows; don't start over.</strong> The calculator looks back as far as it needs: to each episode's enrollment for contacts and scales, and 13 months for practice-wide PHQs. Keep one workbook going, and add the new month's facts to it.</p></li>
 <li><p><strong>Fill in one <code>site_month</code> row</strong> for the month being reported: BHCM FTE, the screening age floor, and how contacts were judged to be treatment.</p></li>
 </ul>

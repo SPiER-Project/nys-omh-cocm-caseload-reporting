@@ -1,7 +1,7 @@
 # The workbook route
 
-For sites whose CoCM registry is a spreadsheet, or that have no report writer. The site
-fills in the reporting workbook each month, from its registry spreadsheet and two or
+This route is for sites whose CoCM registry is a spreadsheet, or that have no report
+writer. The site fills in the reporting workbook each month, from its registry spreadsheet and two or
 three standard reports, then adds the workbook to the
 [calculator page](https://spier-project.github.io/nys-omh-cocm-caseload-reporting/).
 The page calculates the eleven metrics in the browser; the workbook is never uploaded.
@@ -15,8 +15,8 @@ The page calculates the eleven metrics in the browser; the workbook is never upl
 
 They open in Excel, Google Sheets, Numbers and LibreOffice.
 
-Producing the data from a registry export or an EHR report instead? The same tables come
-as CSVs: [CSV templates](https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-templates.zip), one file per table with its
+If you're producing the data from a registry export or an EHR report instead, the same
+tables are available as CSVs: [CSV templates](https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-templates.zip), one file per table with its
 headings, and the [example as CSVs](https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-example.zip).
 
 ## What's in it
@@ -44,8 +44,8 @@ columns always match what the calculator reads.
   - one `scale_result` row per completed, scored scale;
   - one `psych_review` row per patient discussed.
 
-  Tick columns ("contacted this month") don't carry enough to calculate the metrics; the
-  dates and the kind of contact matter.
+  A tick column such as "contacted this month" isn't enough to calculate the metrics,
+  which need the date and kind of each contact.
 - **Add each month's rows; don't start over.** The calculator looks back as far as it
   needs: to each episode's enrollment for contacts and scales, and
   <!--rule:extraction.phq_history_months-->13<!--/rule--> months for practice-wide PHQs.

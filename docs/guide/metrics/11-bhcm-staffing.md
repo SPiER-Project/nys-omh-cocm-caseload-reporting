@@ -28,7 +28,7 @@ The [BHCM FTE](../concepts/bhcm-fte.md#worked-example) page adds up three BHCMs 
 
 ## Where the data lives
 
-Staffing or HR records, or the program lead's own record. Registry time logs can be a
+Use staffing or HR records, or the program lead's own record. Registry time logs can be a
 cross-check, but they aren't scheduled effort.
 
 ## Common mistakes
@@ -41,5 +41,5 @@ cross-check, but they aren't scheduled effort.
 
 ## For automation
 
-[`site_month.bhcm_fte`](../../reference/data-contract.md#t8-site_month--one-row-per-submission),
-typed in by the program lead.
+The calculator reads [`site_month.bhcm_fte`](../../reference/data-contract.md#t8-site_month--one-row-per-submission),
+which the program lead types in.

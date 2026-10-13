@@ -26,11 +26,11 @@
 </div></header>
 <main id="main">
 <h1 id="our-calls">Our calls</h1>
-<p>Every place this guide interprets the <a href="nys-source/nys-omh-cocm-metrics-2025.html">NYS document</a> or goes beyond it. The guide's pages state these rules inline; this page collects them, with the reasoning, in one place.</p>
+<p>This page lists every place where the guide interprets the <a href="nys-source/nys-omh-cocm-metrics-2025.html">NYS document</a> or goes beyond it. The guide's pages state each rule where it applies; this page collects them in one place, with the reasoning.</p>
 <p>The values each call sets, and every call's status and approval, live in <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/rules/calls.toml"><code>rules/calls.toml</code></a>. The tables and numbers on this page are generated from it; change them there, then run <code>python3 scripts/rules.py sync</code>.</p>
 <p><strong>Firmness</strong></p>
 <ul>
-<li><strong>NYS says</strong>: the source document settles it; we only restate it.</li>
+<li><strong>NYS says</strong>: the source document answers the question; we only restate it.</li>
 <li><strong>Our call</strong>: a practical decision the guidelines leave to the site, so we made one. A site that follows the guide should follow the call, and disclose it if NYS asks.</li>
 <li><strong>Needs clinical sign-off</strong>: our call, but a clinical judgement a reporting team shouldn't make alone. Treat the value as provisional.</li>
 </ul>
@@ -104,7 +104,7 @@
 <h3 id="rounding">Rounding</h3>
 <p><strong>Call.</strong> Report percentages and weeks to one decimal place, rounding half up, and calculate from unrounded numbers. For example, 7 of 8 is 87.5%, and 2 of 3 is 66.7%. Report BHCM FTE as attested.</p>
 <p><strong>Why.</strong> NYS doesn't say. Rounding at the last step and to the same precision everywhere means two sites with the same counts report the same rate.</p>
-<p><strong>If NYS rules otherwise.</strong> The REDCap form's field format wins.</p>
+<p><strong>If NYS rules otherwise.</strong> Use the REDCap form's field format.</p>
 <p><strong>Replaces.</strong> Nothing; first raised here.</p>
 <h3 id="empty-denominators">Empty denominators</h3>
 <p><strong>Call.</strong> When a metric's denominator is zero (for example, no Medicaid patient was discharged this month, so there's nothing to average for metric 4), report no value and say why. Don't report 0 or 0%.</p>
@@ -119,7 +119,7 @@
 <h3 id="enrollment-date">Enrollment date</h3>
 <p><strong>Call.</strong> The enrollment date is the date of the initial assessment by the BHCM. If the assessment takes more than one contact, it's the first contact at which a symptom-monitoring scale was given. It is the start date for every metric, not just metric 4.</p>
 <p><strong>NYS says.</strong> Metric 4 counts weeks "between initial assessment to date of discharge."</p>
-<p><strong>Why.</strong> One start date for all metrics. Using the referral date or the date the record was keyed in shortens or lengthens every patient's time in treatment.</p>
+<p><strong>Why.</strong> Every metric should use the same start date. Using the referral date or the date the record was keyed in shortens or lengthens every patient's time in treatment.</p>
 <p><strong>Replaces.</strong> D-03.</p>
 <h3 id="enrolled-this-month">Enrolled this month</h3>
 <p><strong>Call.</strong> A patient is enrolled this month if their enrollment overlaps the month by at least one day: enrolled on or before the last day, and not discharged before the first day.</p>
@@ -148,7 +148,7 @@
 <p><strong>Call.</strong> A patient is a Medicaid patient for the month if they have active New York State Medicaid coverage on the first day of the month, whether fee-for-service or a Medicaid managed care plan, and whether it is their primary or secondary coverage. Dual Medicare–Medicaid patients count. Child Health Plus and the Essential Plan do not. A patient whose coverage changes mid-month keeps their first-of-month status. Use the coverage known at the run date; Medicaid granted retroactively later doesn't restate a submitted month.</p>
 <p><strong>Why.</strong></p>
 <ul>
-<li>First of the month: payer as of the report run date reclassifies patients after the fact.</li>
+<li>First of the month: using the payer as of the report run date would reclassify patients after the fact.</li>
 <li>Primary or secondary: the draft said "primary coverage" and also said dual eligibles count, but for most dual eligibles Medicare is primary. Any active Medicaid coverage resolves the contradiction.</li>
 <li>Child Health Plus and the Essential Plan are separate programs, not Medicaid.</li>
 <li>Managed care plans are listed by plan name (Fidelis, Healthfirst and so on), so map them by plan, not by looking for the word "Medicaid".</li>
@@ -201,7 +201,7 @@
 <p><strong>Why.</strong></p>
 <ul>
 <li>PHQ-9 and GAD-7: 10 mirrors Appendix A's "score below 10" improvement criterion, so a patient can't qualify as improved at baseline.</li>
-<li>PCL-5, SCARED and PSC-17: each threshold is the instrument's published screening cutoff, and it matches the remission threshold the draft proposed. That pairs naturally: elevated is at or above the cutoff, remission is below it.</li>
+<li>PCL-5, SCARED and PSC-17: each threshold is the instrument's published screening cutoff, and it matches the remission threshold the draft proposed. Elevated is then at or above the cutoff, and remission is below it.</li>
 <li>SMFQ: 12 is supported for adolescents seeking help, but the instrument's developers recommend no single cutpoint. It needs a clinician's judgement more than the others.</li>
 <li>The draft promised these thresholds in an appendix that was never written.</li>
 </ul>
@@ -213,7 +213,7 @@
 <h3 id="fifty-percent-improved">Fifty percent improved</h3>
 <p><strong>Call.</strong> "Score 50% improved from baseline" means the current score is at most half the baseline. The boundary counts: a PHQ-9 baseline of 15 is improved at 7.5 or below, which in whole scores is 7 or below.</p>
 <p><strong>NYS says.</strong> "Score 50% improved from baseline", without saying whether exactly 50% counts.</p>
-<p><strong>Why.</strong> "Improved by 50%" reads naturally as "by at least 50%". Stating it stops one site using "less than" and another "at most".</p>
+<p><strong>Why.</strong> "Improved by 50%" reads naturally as "by at least 50%". Stating it prevents one site from using "less than" and another "at most".</p>
 <p><strong>Replaces.</strong> Nothing; first raised here.</p>
 <h3 id="paired-forms">Paired forms</h3>
 <p><strong>Call.</strong> SCARED, SMFQ and the NICHQ Vanderbilt each have more than one form (child and caregiver, or parent and teacher). Each form has its own baseline. A patient meets the criteria if either form does, compared against that same form's baseline. The forms don't have to be completed on the same date.</p>
@@ -313,7 +313,7 @@
 <p><strong>NYS says.</strong> "Patients seen in the practice for any reason this month that meet practice criteria for universal depression screen (Refer to practice workflow)."</p>
 <p><strong>Why.</strong></p>
 <ul>
-<li>NYS leaves the criteria to each practice. Publishing one set means two practices' rates mean the same thing.</li>
+<li>NYS leaves the criteria to each practice. With one published set, two practices' rates measure the same thing.</li>
 <li>Screening happens at medical visits, so lab, nurse and BHCM visits only inflate the denominator.</li>
 <li>12 matches USPSTF adolescent screening.</li>
 <li>The draft defined visits but never said to count each patient once.</li>
@@ -338,7 +338,7 @@
 <li>"First this month" would count a CoCM patient's monthly monitoring PHQ-9 every month.</li>
 <li>365 days lines up with the annual screening in metric 9.</li>
 </ul>
-<p><strong>Consequence.</strong> With this rule and <a href="#what-counts-as-screened">what counts as screened</a>, neither screening metric needs to know whether a PHQ was for screening or monitoring. That distinction now matters only for the <a href="#baseline">baseline</a>, and there the date alone decides it.</p>
+<p><strong>Consequence.</strong> With this rule and <a href="#what-counts-as-screened">what counts as screened</a>, neither screening metric needs to know whether a PHQ was for screening or monitoring. That distinction now matters only for the <a href="#baseline">baseline</a>, and there only the date matters.</p>
 <p><strong>Replaces.</strong> D-10 (for metric 10), R-10, Q-07.</p>
 <h3 id="phq-a-counts-as-phq-9">PHQ-A counts as PHQ-9</h3>
 <p><strong>Call.</strong> The PHQ-9 Modified for Adolescents (PHQ-A) counts as a PHQ-9 for metrics 9 and 10, and as the PHQ-9 when it is an adolescent's primary scale.</p>

@@ -25,18 +25,18 @@ March (12 March), and P2 has Medicaid. P5 enrolled in February.
 
 ## Where the data lives
 
-The episode start date in the registry, or the date of the first BHCM encounter in the
-episode. See [enrollment and discharge](../concepts/enrollment-and-discharge.md#where-the-data-lives).
+Use the episode start date in the registry, or the date of the first BHCM encounter in
+the episode. See [enrollment and discharge](../concepts/enrollment-and-discharge.md#where-the-data-lives).
 
 ## Common mistakes
 
 | Mistake | Effect |
 |---|---|
 | Counting referrals received this month | Overstated, and the patients counted aren't the ones enrolled |
-| Using the date the registry record was created | Patients land in the wrong month |
+| Using the date the registry record was created | Patients are counted in the wrong month |
 | Using the date a diagnosis was added to the problem list | Patients with long-standing diagnoses are dropped |
 
 ## For automation
 
-Reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment)
+The calculator reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment)
 (`enrollment_date`) and [`coverage`](../../reference/data-contract.md#t2-coverage).

@@ -46,7 +46,7 @@ Which requests a site needs depends on its route ([collecting the data](overview
 >   end date if still active)
 > - **plan_name:** the plan as it appears in billing
 >
-> Every period, not just the current one, and secondary coverage too. If mapping plans to
+> Please include every period, not just the current one, and secondary coverage too. If mapping plans to
 > the categories is hard, send the plan names and I'll map them.
 >
 > Please send it as coverage.csv (the template is attached) through [our secure file
@@ -74,7 +74,7 @@ The payer mapping behind `payer_category` is a one-time job; see
 > - **billing_codes:** the CPT and HCPCS codes billed for the visit, separated by ;
 > - **modality:** in_person, video or phone
 >
-> Please include every visit, not only office visits: the calculator works out which
+> Please include every visit, not only office visits. The reporting tool works out which
 > ones count. And please send each patient's date of birth too, as patient.csv with
 > patient_id and birth_date.
 >
@@ -119,7 +119,7 @@ see [reading FHIR](../tooling.md#reading-fhir).
 > records for every patient enrolled at any time in [month and year], and for any
 > enrollment still open, however old.
 >
-> Four lists, each with the MRN as patient_id and dates as YYYY-MM-DD:
+> I need four lists, each with the MRN as patient_id and dates as YYYY-MM-DD:
 > 1. **Enrollments** (cocm_episode.csv): episode id, enrollment date (the date of the
 >    BHCM's initial assessment, not the referral), primary condition, primary scale,
 >    discharge date and reason.
@@ -133,7 +133,7 @@ see [reading FHIR](../tooling.md#reading-fhir).
 >    consultant reviewed in the <!--rule:psychiatric-case-review.window_days-->60<!--/rule--> days ending [last day of the month], one row
 >    per patient, with whether a recommendation was documented.
 >
-> The templates attached list every column and the values each one allows.
+> The attached templates list every column and the values each one allows.
 >
 > Please send them through [our secure file share]. Thank you!
 
@@ -142,7 +142,7 @@ to fill in the [workbook](workbook.md) than to answer this request.
 
 ## Program facts
 
-These aren't a request to anyone else. The program lead fills in one row of
+These don't need a request to anyone. The program lead fills in one row of
 `site_month.csv`, or the `site_month` tab of the workbook:
 - the reporting month;
 - BHCM FTE for the month ([BHCM FTE](../guide/concepts/bhcm-fte.md));

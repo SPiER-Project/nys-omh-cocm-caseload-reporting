@@ -48,22 +48,22 @@
 </tbody>
 </table></div>
 <p><strong>Metric 8: 1 of 2, 50.0%.</strong></p>
-<p>P1, P3, P7 and P9 also had reviews, but they improved, so they aren't in the denominator. P4 had no contact for three months and no review since November. The metric is designed to surface patients like P4.</p>
+<p>P1, P3, P7 and P9 also had reviews, but they improved, so they aren't in the denominator. P4 had no contact for three months and no review since November. The metric is designed to catch patients like P4.</p>
 <h2 id="where-the-data-lives">Where the data lives</h2>
-<p>A consultation or case-review log in the registry, one row per patient discussed; in an EHR, consultant notes, rarely a structured field. See <a href="../concepts/contacts-and-reviews.html#where-the-data-lives">contacts and reviews</a>. This is often the hardest fact to extract from an EHR alone.</p>
+<p>A registry usually has a consultation or case-review log, with one row per patient discussed. In an EHR, reviews are usually in the consultant's notes, and rarely in a structured field. See <a href="../concepts/contacts-and-reviews.html#where-the-data-lives">contacts and reviews</a>. This is often the hardest fact to extract from an EHR alone.</p>
 <h2 id="common-mistakes">Common mistakes</h2>
 <div class="table"><table>
 <thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
 <tbody>
 <tr><td>Counting the consultant's attendance at a caseload meeting as a review of every patient</td><td>Overstated</td></tr>
 <tr><td>Counting a review with no documented recommendation</td><td>Overstated</td></tr>
-<tr><td>Measuring 60 days back from the run date</td><td>Reviews early in the window drop out; understated</td></tr>
+<tr><td>Measuring 60 days back from the run date</td><td>Understated: reviews early in the window are missed</td></tr>
 <tr><td>Including patients without an elevated baseline in the denominator</td><td>The denominator includes patients who can never improve under Appendix A</td></tr>
 </tbody>
 </table></div>
 <details class="dev" id="for-automation">
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
-<p>Reads everything <a href="06-improvement-rate.html">metric 6</a> reads, plus <a href="../../reference/data-contract.html#t6-psych_review--one-row-per-patient-discussed"><code>psych_review</code></a> (<code>review_date</code>, <code>recommendation_documented = true</code>).</p>
+<p>The calculator reads everything <a href="06-improvement-rate.html">metric 6</a> reads, plus <a href="../../reference/data-contract.html#t6-psych_review--one-row-per-patient-discussed"><code>psych_review</code></a> (<code>review_date</code>, <code>recommendation_documented = true</code>).</p>
 </details>
 <nav class="pager" aria-label="Previous and next">
 <a class="prev" rel="prev" href="07-remission-rate.html"><small>Previous</small><strong>7. Remission rate</strong></a>

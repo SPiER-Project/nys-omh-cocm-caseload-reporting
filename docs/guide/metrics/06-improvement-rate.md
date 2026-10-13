@@ -50,8 +50,8 @@ Not in the denominator:
 
 ## Where the data lives
 
-Scores from the registry's scale table, or EHR questionnaires and flowsheets; primary
-diagnosis and scale from the episode. See
+Scores come from the registry's scale table, or from EHR questionnaires and flowsheets.
+The primary diagnosis and scale come from the episode. See
 [scales and outcomes](../concepts/scales-and-outcomes.md#where-the-data-lives).
 
 ## Common mistakes
@@ -66,7 +66,7 @@ diagnosis and scale from the episode. See
 
 ## For automation
 
-Reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment)
+The calculator reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment)
 (`primary_scale`), [`coverage`](../../reference/data-contract.md#t2-coverage), [`contact`](../../reference/data-contract.md#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient) (for
 the inactivity discharge) and
 [`scale_result`](../../reference/data-contract.md#t5-scale_result--one-row-per-completed-scored-administration),

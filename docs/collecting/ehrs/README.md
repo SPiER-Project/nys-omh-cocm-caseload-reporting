@@ -1,8 +1,8 @@
 # EHR reports
 
-What a site's report writer has to produce from the EHR, whatever the EHR. One recipe
-per EHR product will follow as they're written. Until then, this page is the
-specification any EHR's reports should meet.
+This page sets out what a site's report writer has to produce from the EHR, whichever EHR
+the site uses. Recipes for specific EHR products will be added as they're written. Until
+then, this page is the specification any EHR's reports should meet.
 
 Sites with a registry need only the first four reports; EHR-only sites need all eight.
 A site with a FHIR export can skip the first four reports: the calculator
@@ -40,5 +40,5 @@ For each report above:
   types to include;
 - the traps particular to that EHR.
 
-No recipes yet. Which EHRs to write them for first depends on which ones NYS's CoCM
+There are no recipes yet. Which EHRs to write them for first depends on which ones NYS's CoCM
 sites use most ([tooling plan](../../tooling.md)).

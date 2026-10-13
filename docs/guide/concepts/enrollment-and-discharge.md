@@ -1,7 +1,7 @@
 # Enrollment and discharge
 
-Who is enrolled in CoCM, from when, and until when. Every CoCM metric starts here: get
-enrollment wrong and metrics 1 to 8 are all wrong in the same direction.
+This page defines who is enrolled in CoCM, from when, and until when. Every CoCM metric
+depends on enrollment: if it's wrong, metrics 1 to 8 are all wrong in the same direction.
 
 **Used by:** metrics 1 to 8.
 
@@ -28,14 +28,14 @@ EHR. *Our call: [what counts as enrolled](../../reference/our-calls.md#what-coun
 - A referral is not an enrollment. Neither is a warm handoff or verbal consent with
   nothing recorded.
 - A site with no enrollment record at all may infer enrollment from CoCM billing
-  (<!--rule:what-counts-as-enrolled.cocm_billing_codes-->99492, 99493, 99494, T2022, G2214, G0512<!--/rule-->), and must say so in its submission. Billing undercounts: an
-  enrolled patient can go a month without a billable service.
+  (<!--rule:what-counts-as-enrolled.cocm_billing_codes-->99492, 99493, 99494, T2022, G2214, G0512<!--/rule-->), and must say so in its submission. Billing undercounts enrollment,
+  because an enrolled patient can go a month without a billable service.
 
 ### Enrollment date
 
 The enrollment date is **the date of the BHCM's initial assessment**. If the assessment
 takes more than one contact, use the first contact at which a symptom-monitoring scale
-was given. This one date is the start for every metric. *Our call:
+was given. Every metric uses this date as the start of enrollment. *Our call:
 [enrollment date](../../reference/our-calls.md#enrollment-date).*
 
 ### Discharge
@@ -103,8 +103,9 @@ Patient D shows two consequences of the inactivity rule:
   [contact rate](../metrics/05-monthly-contact-rate.md).
 - D's 90 inactive days lengthen average duration.
 
-Both are accurate: the patient was on the caseload and wasn't being reached. The fix is
-operational, not a reporting one: discharge disengaged patients sooner than <!--rule:inactivity-discharge.days-->90<!--/rule--> days where
+Both effects are accurate, because the patient was on the caseload and wasn't being
+reached. To avoid them, change how the program runs rather than how it reports: discharge
+disengaged patients sooner than <!--rule:inactivity-discharge.days-->90<!--/rule--> days where
 the program's protocol allows.
 
 ## What the program should do
@@ -131,7 +132,7 @@ Things to check in a registry:
 - An episode can be closed without an end date. Don't fill the gap from the date the
   record was last updated; that's a documentation date.
 - A cancelled episode may have been a cancelled referral (never enrolled) or a
-  discharge. Only the history shows which.
+  discharge. Only the episode's history can show which.
 
 The [prototype registry mapping](../../collecting/registries/prototype-cocm-registry.md#episode-status)
 works through each of these.

@@ -1,8 +1,8 @@
 # Collecting the data
 
-The [guide](../guide/start-here.md) says what each metric counts. This page says where
-those facts live in a clinic's systems, which route to take to get them out, and what
-every route has to get right.
+The [guide](../guide/start-here.md) explains what each metric counts. This page covers
+where those facts are kept in a clinic's systems, which route to take to get them out,
+and what every route has to get right.
 
 ## Where each fact lives
 
@@ -10,7 +10,7 @@ Almost every site has **at least two sources**:
 - the CoCM registry, or whatever stands in for one;
 - the EHR or practice-management system.
 
-NYS says as much: metrics 9 and 10 are "not tracked in your CoCM registry." Medicaid
+NYS notes that the data for metrics 9 and 10 is "not tracked in your CoCM registry." Medicaid
 status usually isn't in the registry either, so every Medicaid metric needs both
 sources.
 
@@ -93,8 +93,8 @@ The registry and the EHR have to identify the same patient the same way, or the 
 halves never join. Use the **MRN** as `patient_id` in every source. Don't use a
 registry's internal id, which the EHR never sees.
 
-Inside the site, the MRN can stay as it is: the calculator runs at the site, and its list
-of patients each rate didn't count is easier to act on with MRNs. **Before tables leave
+Within the site, keep the MRN as it is. The calculator runs at the site, and its list of
+the patients each rate didn't count is easier to act on when it shows MRNs. **Before tables leave
 the site** (to a vendor, a consultant, or anyone helping with the reporting), replace
 each MRN with its pseudonym:
 
@@ -134,9 +134,9 @@ check their output against this test vector:
 | `cocm-pseudonym-key-v1:AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=` | `123` (or `00123`) | `p-47cvhcslcvte5vth` |
 | the same | `MRN-0042` | `p-vwwfuzieeoipmduc` |
 
-**FHIR exports** give a patient its FHIR id unless told otherwise. Use
-`--fhir-patient-identifier` with the system of the `Patient.identifier` that holds the MRN,
-or the same setting under *FHIR options* on the page.
+**FHIR exports** identify each patient by its FHIR id unless you set this otherwise. To use
+the MRN, pass `--fhir-patient-identifier` with the system of the `Patient.identifier` that
+holds it, or use the same setting under *FHIR options* on the page.
 
 ### Event dates in local time
 
@@ -173,6 +173,6 @@ When a site fills a gap with a substitute, it says so in its submission:
 |---|---|
 | During the month | Document contacts, scales and case reviews as they happen; log outreach attempts |
 | Last week of the month | Review the caseload for anyone near <!--rule:inactivity-discharge.days-->90<!--/rule--> days without a clinical contact |
-| Month end to the <!--rule:when-to-run-the-report.earliest_run_day-->15<!--/rule-->th | Late notes and charges close. Don't run the report yet |
+| Month end to the <!--rule:when-to-run-the-report.earliest_run_day-->15<!--/rule-->th | Wait for late notes and charges to be entered. Don't run the report yet |
 | On or after the <!--rule:when-to-run-the-report.earliest_run_day-->15<!--/rule-->th | Run the extracts; calculate the metrics; review the patients each rate didn't count |
 | Before the NYS deadline | Submit the eleven numbers and the disclosures |

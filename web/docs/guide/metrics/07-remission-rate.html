@@ -43,7 +43,7 @@
 <li>That score is below the scale's remission threshold. For PHQ-9 and GAD-7 that's below 5.</li>
 </ol></li>
 </ul>
-<p>Unlike improvement, nothing carries forward. A patient in remission last month with no score this month isn't in remission this month.</p>
+<p>Unlike metric 6, no score carries forward from an earlier month. A patient in remission last month with no score this month isn't in remission this month.</p>
 <h2 id="worked-example">Worked example</h2>
 <p>From the <a href="../example-caseload.html">example caseload</a>:</p>
 <div class="table"><table>
@@ -60,9 +60,9 @@
 </tbody>
 </table></div>
 <p><strong>Metric 7: 2 of 8, 25.0%.</strong></p>
-<p>P8 is why the elevated-baseline guard exists: without it, a patient who enrolled with mild symptoms would count as in remission from the start.</p>
+<p>P8 shows why the elevated baseline is required. Without it, a patient who enrolled with mild symptoms would count as in remission from the start.</p>
 <h2 id="where-the-data-lives">Where the data lives</h2>
-<p>The same scores as <a href="06-improvement-rate.html">metric 6</a>. See <a href="../concepts/scales-and-outcomes.html#where-the-data-lives">scales and outcomes</a>.</p>
+<p>Metric 7 uses the same scores as <a href="06-improvement-rate.html">metric 6</a>. See <a href="../concepts/scales-and-outcomes.html#where-the-data-lives">scales and outcomes</a>.</p>
 <h2 id="common-mistakes">Common mistakes</h2>
 <div class="table"><table>
 <thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
@@ -76,7 +76,7 @@
 </table></div>
 <details class="dev" id="for-automation">
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
-<p>Reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a>, <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a> (for the inactivity discharge) and <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a>. Remission thresholds are calculator settings.</p>
+<p>The calculator reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a>, <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a> (for the inactivity discharge) and <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a>. Remission thresholds are calculator settings.</p>
 </details>
 <nav class="pager" aria-label="Previous and next">
 <a class="prev" rel="prev" href="06-improvement-rate.html"><small>Previous</small><strong>6. Improvement rate</strong></a>

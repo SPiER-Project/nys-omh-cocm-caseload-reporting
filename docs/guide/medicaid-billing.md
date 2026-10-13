@@ -1,18 +1,19 @@
 # NYS Medicaid billing for Collaborative Care
 
-How a certified practice bills New York State Medicaid for Collaborative Care, summarized
-from OMH's billing guidance (updated June 2025, with changes effective September 1,
-2025). It's here because billing and reporting draw on the same records, and a billing
-lead and a program lead need the same picture.
+This page summarizes how a certified practice bills New York State Medicaid for
+Collaborative Care, based on OMH's billing guidance (updated June 2025, with changes
+effective September 1, 2025). It's included because billing and reporting draw on the same
+records, so a practice's billing lead and program lead need the same information.
 
-This is a summary, not billing advice. The rules and rates change; check the current
-guidance with OMH at NYSCollaborativeCare@omh.ny.gov before submitting claims. This guide
-is an independent project, not an OMH product.
+This page is a summary and isn't billing advice. The rules and rates change, so check
+the current guidance with OMH at NYSCollaborativeCare@omh.ny.gov before submitting claims.
+This guide is an independent project and isn't published by OMH.
 
 ## Who can bill
 
 Practices certified in the NYS Collaborative Care Medicaid Program
-([about the program](about-the-program.md)), from the effective date OMH gives them.
+([about the program](about-the-program.md)) can bill from the effective date OMH gives
+them.
 Article 28 clinics submit institutional claims; non-Article 28 practices (group practices
 and private practitioners) submit professional claims.
 
@@ -51,8 +52,8 @@ For each patient, each calendar month:
 - the BHCM consulting a psychiatric consultant for an hour or more each week about
   enrolled patients. The consultant can't bill Medicaid for that consultation.
 
-These are the same two things [metric 5](metrics/05-monthly-contact-rate.md) counts: a
-month that meets them is a month of active treatment.
+The first two requirements are the ones [metric 5](metrics/05-monthly-contact-rate.md)
+counts. A month that meets both is a month of active treatment.
 
 ## Which code
 
@@ -62,7 +63,7 @@ The code depends on the care team's total Collaborative Care time in the month:
 |---|---|---|---|
 | 99492 | The first month of care, with at least 70 minutes | $177.64 | $189.18 |
 | 99493 | Any later month, with at least 60 minutes | $177.64 | $189.18 |
-| T2022 | A month below those minutes. There's no minimum time for T2022 | $177.64 | $189.18 |
+| T2022 | A month with less time than that. There's no minimum time for T2022 | $177.64 | $189.18 |
 | 99494 | An add-on for at least 30 minutes beyond the 70 or 60 (90 minutes or more in total). One per patient per month, and never with T2022 | $88.81 | $94.59 |
 
 OMH's rate file marks the April 2026 rates "Pending DOB Approval". From September 1, 2025
@@ -101,8 +102,9 @@ clinics.
 
 ## Billing other services alongside
 
-The monthly case payment can sit alongside separately billed services, but time spent on
-those services can't count toward the Collaborative Care minutes:
+A practice can bill other services separately in the same month as the monthly case
+payment, but time spent on those services can't count toward the Collaborative Care
+minutes:
 - **FQHCs:** the PPS rate for face-to-face counseling by a psychiatrist, licensed
   psychologist or licensed social worker.
 - **Article 28 clinics:** a separate claim with the appropriate APG rate code for a

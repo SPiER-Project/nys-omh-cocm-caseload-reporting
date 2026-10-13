@@ -39,19 +39,19 @@
 <p>From the <a href="../example-caseload.html">example caseload</a>: only P2 has an enrollment date in March (12 March), and P2 has Medicaid. P5 enrolled in February.</p>
 <p><strong>Metric 3: 1.</strong></p>
 <h2 id="where-the-data-lives">Where the data lives</h2>
-<p>The episode start date in the registry, or the date of the first BHCM encounter in the episode. See <a href="../concepts/enrollment-and-discharge.html#where-the-data-lives">enrollment and discharge</a>.</p>
+<p>Use the episode start date in the registry, or the date of the first BHCM encounter in the episode. See <a href="../concepts/enrollment-and-discharge.html#where-the-data-lives">enrollment and discharge</a>.</p>
 <h2 id="common-mistakes">Common mistakes</h2>
 <div class="table"><table>
 <thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
 <tbody>
 <tr><td>Counting referrals received this month</td><td>Overstated, and the patients counted aren't the ones enrolled</td></tr>
-<tr><td>Using the date the registry record was created</td><td>Patients land in the wrong month</td></tr>
+<tr><td>Using the date the registry record was created</td><td>Patients are counted in the wrong month</td></tr>
 <tr><td>Using the date a diagnosis was added to the problem list</td><td>Patients with long-standing diagnoses are dropped</td></tr>
 </tbody>
 </table></div>
 <details class="dev" id="for-automation">
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
-<p>Reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a> (<code>enrollment_date</code>) and <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>.</p>
+<p>The calculator reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a> (<code>enrollment_date</code>) and <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>.</p>
 </details>
 <nav class="pager" aria-label="Previous and next">
 <a class="prev" rel="prev" href="02-medicaid-enrollment.html"><small>Previous</small><strong>2. Medicaid enrollment</strong></a>

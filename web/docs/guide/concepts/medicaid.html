@@ -27,7 +27,7 @@
 <main id="main">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../start-here.html">Guide</a></li><li><a href="reporting-month.html">Concepts</a></li></ol></nav>
 <h1 id="medicaid">Medicaid</h1>
-<p>Which patients are Medicaid patients for the month. Seven of the eleven metrics count only Medicaid patients, so a payer mapping that misses a managed care plan understates all seven.</p>
+<p>This page explains which patients count as Medicaid patients for a month. Seven of the eleven metrics count only Medicaid patients, so a payer mapping that misses a managed care plan understates all seven.</p>
 <p><strong>Used by:</strong> metrics 2 to 8. Metrics 1, 9, 10 and 11 are all-payer; don't apply this filter to them.</p>
 <h2 id="what-nys-says">What NYS says</h2>
 <p>Metrics 2 to 8 count "Medicaid patients". Metric 7's description says "patients enrolled in treatment", but its numerator and denominator say Medicaid patients. NYS doesn't define a Medicaid patient. (<a href="../../reference/nys-source/nys-omh-cocm-metrics-2025.html">Source</a>)</p>
@@ -50,9 +50,9 @@
 <li><strong>Metric 7 is a Medicaid metric</strong> like the rest. <em>Our call: <a href="../../reference/our-calls.html#remission-is-a-medicaid-metric">remission is a Medicaid metric</a>.</em></li>
 </ul>
 <h2 id="what-the-program-should-do">What the program should do</h2>
-<p>The work is a <strong>payer mapping</strong>: a list of every payer and plan the practice bills, each assigned to a category. Build it once, as part of <a href="../site-setup.html">site setup</a>, and add to it when a new plan appears.</p>
+<p>The main task is a <strong>payer mapping</strong>, a list of every payer and plan the practice bills, each assigned to a category. Build it once, as part of <a href="../site-setup.html">site setup</a>, and add to it when a new plan appears.</p>
 <ul>
-<li><strong>Map by plan, not by carrier.</strong> One insurer often sells a Medicaid managed care plan, a Child Health Plus plan, an Essential Plan and commercial plans. Fidelis Care and Healthfirst are examples. The carrier name alone can't tell them apart; the plan or product can.</li>
+<li><strong>Map by plan, not by carrier.</strong> One insurer often sells a Medicaid managed care plan, a Child Health Plus plan, an Essential Plan and commercial plans. Fidelis Care and Healthfirst are examples. The carrier name alone doesn't tell them apart; the plan or product name does.</li>
 <li><strong>Expect Medicaid managed care to be listed under the plan's name.</strong> Few plan names contain the word "Medicaid".</li>
 <li><strong>Have someone who knows the billing system review the list.</strong> The front desk and billing often use different payer lists.</li>
 </ul>

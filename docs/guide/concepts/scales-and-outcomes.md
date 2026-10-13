@@ -1,9 +1,9 @@
 # Scales and outcomes
 
-The symptom scales, and how they become improvement and remission. This is where two
-sites with the same patients are most likely to report different numbers. Each step
-below (which scale, which score is the baseline, which score is current) is a choice a
-report writer would otherwise make alone.
+This page covers the symptom scales and how their scores are turned into improvement and
+remission. Two sites with the same patients are more likely to report different numbers
+here than anywhere else. Each step below (which scale, which score is the baseline, which
+score is current) is a choice a report writer would otherwise make alone.
 
 **Used by:** metrics 5 to 8. Metric 5 needs only "a scale was completed"; metrics 6 to 8
 use everything on this page.
@@ -147,8 +147,8 @@ A patient is in remission this month when all three hold:
 [remission needs an elevated baseline](../../reference/our-calls.md#remission-needs-an-elevated-baseline),
 [remission thresholds](../../reference/our-calls.md#remission-thresholds).*
 
-Unlike improvement, remission **doesn't carry forward**: no score this month, no
-remission. The metric 7 denominator is every Medicaid patient enrolled this month, as NYS
+Unlike improvement, remission **doesn't carry forward**: a patient with no score this
+month isn't in remission. The metric 7 denominator is every Medicaid patient enrolled this month, as NYS
 states. The elevated-baseline requirement applies only to the numerator.
 
 ### Not improved (metric 8)
@@ -223,8 +223,8 @@ for metric 5, because no scale was completed.
 ## For automation
 
 - [`scale_result`](../../reference/data-contract.md#t5-scale_result--one-row-per-completed-scored-administration)
-  holds every scored result. Each form is its own `instrument` value, so pairing is the
-  calculator's job.
+  holds every scored result. Each form is its own `instrument` value, and the calculator
+  pairs the forms.
 - [`cocm_episode.primary_scale`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment)
   is required. Where the source has none, the extract fills it from the default mapping,
   and the disclosure says so.

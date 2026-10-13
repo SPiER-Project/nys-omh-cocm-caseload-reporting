@@ -51,14 +51,14 @@ These aren't qualifying visits:
   workers;
 - phone calls without a billed E&M service, and portal messages.
 
-NYS leaves the criteria to each practice's workflow. The guide sets one standard so that
+NYS leaves the criteria to each practice's workflow. This guide uses one standard so that
 rates from different practices mean the same thing. A practice whose workflow is
 different (for example, adults only) should disclose it.
 
 ### What counts as screened (metric 9 numerator)
 
 A patient is screened if they have a **scored PHQ-2 or PHQ-9 dated in the <!--rule:what-counts-as-screened.lookback_months-->12<!--/rule--> months ending
-on the last day of the month**. Who gave it and why don't matter. *Our call:
+on the last day of the month**. It doesn't matter who gave it or why. *Our call:
 [what counts as screened](../../reference/our-calls.md#what-counts-as-screened).*
 
 - A CoCM patient's monitoring PHQ-9 counts.
@@ -72,7 +72,7 @@ on the last day of the month**. Who gave it and why don't matter. *Our call:
 
 A PHQ-9 is a patient's **initial PHQ-9** if it's dated this month and the patient has
 **no other scored PHQ-9 in the <!--rule:initial-phq-9.lookback_days-->365<!--/rule--> days before it**. Each patient counts at most once a
-month, on their first PHQ-9 of the month. Who gave it doesn't matter. *Our call:
+month, on their first PHQ-9 of the month. It doesn't matter who gave it. *Our call:
 [initial PHQ-9](../../reference/our-calls.md#initial-phq-9).*
 
 - **Denominator:** patients with an initial PHQ-9 this month.
@@ -90,7 +90,7 @@ excluded monitoring PHQs from metrics 9 and 10. The rules above don't need that 
 - Metric 10's <!--rule:initial-phq-9.lookback_days-->365<!--/rule-->-day rule excludes a CoCM patient's monthly PHQ-9s on its own, because
   each follows another within a year.
 
-That removes the hardest step in building the report from an EHR.
+Dropping the label removes the hardest step in building the report from an EHR.
 
 ## Worked example
 
@@ -119,7 +119,7 @@ expected results in `expected.toml`.
 - **Record every PHQ-2 and PHQ-9 as a scored, structured result**, including declines,
   so a decline isn't mistaken for a missed screen.
 - **Screen at the visit when the last screen is close to a year old**, not only at
-  annual physicals. Patients who come in only for acute visits are the usual gap.
+  annual physicals. Patients who come in only for acute visits are the ones most often missed.
 
 ## Where the data lives
 

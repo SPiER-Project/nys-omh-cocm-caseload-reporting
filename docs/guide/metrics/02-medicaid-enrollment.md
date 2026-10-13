@@ -8,7 +8,7 @@
 
 ## The rule
 
-[Metric 1](01-total-enrollment.md), limited to [Medicaid patients](../concepts/medicaid.md):
+Metric 2 is [metric 1](01-total-enrollment.md) limited to [Medicaid patients](../concepts/medicaid.md):
 patients with active New York State Medicaid coverage on the first day of the month,
 fee-for-service or managed care, primary or secondary.
 
@@ -24,8 +24,8 @@ which is Medicaid managed care, and counts.
 
 ## Where the data lives
 
-Enrollment from the registry or EHR; coverage from the practice-management or billing
-system. The [Medicaid](../concepts/medicaid.md#what-the-program-should-do) page covers
+Enrollment comes from the registry or EHR, and coverage from the practice-management or
+billing system. The [Medicaid](../concepts/medicaid.md#what-the-program-should-do) page covers
 the payer mapping this depends on.
 
 ## Common mistakes
@@ -35,10 +35,10 @@ the payer mapping this depends on.
 | Missing Medicaid managed care plans listed by plan name | Understated |
 | Counting Child Health Plus or Essential Plan members | Overstated |
 | Dropping dual eligibles because Medicare is primary | Understated |
-| Using today's payer instead of the first of the month | Patients reclassified after the fact |
+| Using today's payer instead of the first of the month | Patients are reclassified after the fact |
 
 ## For automation
 
-Reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment)
+The calculator reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment)
 and [`coverage`](../../reference/data-contract.md#t2-coverage), and [`contact`](../../reference/data-contract.md#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient) for the inactivity
 discharge.

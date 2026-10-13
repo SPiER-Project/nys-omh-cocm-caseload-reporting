@@ -1,7 +1,7 @@
 # Medicaid
 
-Which patients are Medicaid patients for the month. Seven of the eleven metrics count
-only Medicaid patients, so a payer mapping that misses a managed care plan understates
+This page explains which patients count as Medicaid patients for a month. Seven of the
+eleven metrics count only Medicaid patients, so a payer mapping that misses a managed care plan understates
 all seven.
 
 **Used by:** metrics 2 to 8. Metrics 1, 9, 10 and 11 are all-payer; don't apply this
@@ -40,14 +40,14 @@ have active New York State Medicaid coverage. *Our call:
 
 ## What the program should do
 
-The work is a **payer mapping**: a list of every payer and plan the practice bills, each
-assigned to a category. Build it once, as part of [site setup](../site-setup.md), and add
+The main task is a **payer mapping**, a list of every payer and plan the practice bills,
+each assigned to a category. Build it once, as part of [site setup](../site-setup.md), and add
 to it when a new plan appears.
 
 - **Map by plan, not by carrier.** One insurer often sells a Medicaid managed care plan,
   a Child Health Plus plan, an Essential Plan and commercial plans. Fidelis Care and
-  Healthfirst are examples. The carrier name alone can't tell them apart; the plan or
-  product can.
+  Healthfirst are examples. The carrier name alone doesn't tell them apart; the plan or
+  product name does.
 - **Expect Medicaid managed care to be listed under the plan's name.** Few plan names
   contain the word "Medicaid".
 - **Have someone who knows the billing system review the list.** The front desk and

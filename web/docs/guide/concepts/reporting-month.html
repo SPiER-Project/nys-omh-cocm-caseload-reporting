@@ -27,7 +27,7 @@
 <main id="main">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../start-here.html">Guide</a></li><li>Concepts</li></ol></nav>
 <h1 id="reporting-month">Reporting month</h1>
-<p>Every NYS metric is about "this month". This page says which month an event belongs to, when to run the report, and when a submitted month can change.</p>
+<p>Every NYS metric is about "this month". This page explains which month an event belongs to, when to run the report, and when a submitted month can change.</p>
 <p><strong>Used by:</strong> all eleven metrics.</p>
 <h2 id="what-nys-says">What NYS says</h2>
 <p>Every metric says "this month" or "during the reporting period", and none defines it. Metric 9 also looks back 12 months, and metric 8 looks back 60 days.</p>
@@ -35,7 +35,7 @@
 <p><strong>The month is the calendar month in the site's local time zone.</strong> It runs from 00:00 on the 1st to the end of the last day. <em>Our call: <a href="../../reference/our-calls.html#reporting-month">reporting month</a>.</em></p>
 <p><strong>An event belongs to the month it happened in.</strong> Use the date of service, contact, administration or review. Don't use the date the note was signed, the claim was posted, or the record was keyed in. <em>Our call.</em></p>
 <p><strong>Convert timestamps to local time before taking the date.</strong> Many systems store timestamps in UTC. In New York, a PHQ-9 completed at 9 p.m. on 31 March is stored as 1 April in UTC, which moves it into the wrong month. <em>Our call.</em></p>
-<p><strong>Run the report no earlier than the 15th of the following month.</strong> That gives late notes, scales and charges two weeks to land. <em>Our call: <a href="../../reference/our-calls.html#when-to-run-the-report">when to run the report</a>.</em> If NYS's deadline turns out to be earlier, the deadline wins.</p>
+<p><strong>Run the report no earlier than the 15th of the following month.</strong> That gives staff two weeks to enter late notes, scales and charges. <em>Our call: <a href="../../reference/our-calls.html#when-to-run-the-report">when to run the report</a>.</em> If NYS sets an earlier deadline, run the report in time to meet it.</p>
 <p><strong>Don't restate a submitted month except to correct an error.</strong> Late documentation that arrives after the run belongs to the month it happened in, but it doesn't reopen a month already submitted. A correction is a mistake in the extract or the logic, not a late note. <em>Our call.</em></p>
 <h2 id="what-the-program-should-do">What the program should do</h2>
 <ul>
@@ -61,7 +61,7 @@
 <thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
 <tbody>
 <tr><td>Using service dates for one metric and documentation dates for another</td><td>A patient sits in one month's denominator and the next month's numerator. Contact rate and improvement both fall</td></tr>
-<tr><td>Taking the date from a UTC timestamp</td><td>Evening events on the last day of the month land in the next month</td></tr>
+<tr><td>Taking the date from a UTC timestamp</td><td>Evening events on the last day of the month are counted in the next month</td></tr>
 <tr><td>Running the report on the 1st</td><td>Contacts and scales documented late are missed; contact rate is understated</td></tr>
 <tr><td>Restating last month whenever late notes arrive</td><td>Submitted numbers never settle, and month-to-month trends can't be compared</td></tr>
 </tbody>
@@ -70,7 +70,7 @@
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
 <ul>
 <li><a href="../../reference/data-contract.html#t8-site_month--one-row-per-submission"><code>site_month.extract_run_date</code></a>: the calculator warns if it is earlier than the 15th of the following month.</li>
-<li>Every date column in the data contract is a local date, not a timestamp. Extraction converts to local time.</li>
+<li>Every date column in the data contract is a local date, not a timestamp. The extract converts timestamps to local time first.</li>
 </ul>
 </details>
 <nav class="pager" aria-label="Previous and next">

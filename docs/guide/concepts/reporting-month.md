@@ -1,6 +1,6 @@
 # Reporting month
 
-Every NYS metric is about "this month". This page says which month an event belongs to,
+Every NYS metric is about "this month". This page explains which month an event belongs to,
 when to run the report, and when a submitted month can change.
 
 **Used by:** all eleven metrics.
@@ -24,10 +24,10 @@ or the record was keyed in. *Our call.*
 timestamps in UTC. In New York, a PHQ-9 completed at 9 p.m. on 31 March is stored as
 1 April in UTC, which moves it into the wrong month. *Our call.*
 
-**Run the report no earlier than the <!--rule:when-to-run-the-report.earliest_run_day-->15<!--/rule-->th of the following month.** That gives late
-notes, scales and charges two weeks to land. *Our call:
+**Run the report no earlier than the <!--rule:when-to-run-the-report.earliest_run_day-->15<!--/rule-->th of the following month.** That gives staff two weeks
+to enter late notes, scales and charges. *Our call:
 [when to run the report](../../reference/our-calls.md#when-to-run-the-report).*
-If NYS's deadline turns out to be earlier, the deadline wins.
+If NYS sets an earlier deadline, run the report in time to meet it.
 
 **Don't restate a submitted month except to correct an error.** Late documentation that
 arrives after the run belongs to the month it happened in, but it doesn't reopen a month
@@ -63,7 +63,7 @@ example.
 | Mistake | Effect |
 |---|---|
 | Using service dates for one metric and documentation dates for another | A patient sits in one month's denominator and the next month's numerator. Contact rate and improvement both fall |
-| Taking the date from a UTC timestamp | Evening events on the last day of the month land in the next month |
+| Taking the date from a UTC timestamp | Evening events on the last day of the month are counted in the next month |
 | Running the report on the 1st | Contacts and scales documented late are missed; contact rate is understated |
 | Restating last month whenever late notes arrive | Submitted numbers never settle, and month-to-month trends can't be compared |
 
@@ -71,5 +71,5 @@ example.
 
 - [`site_month.extract_run_date`](../../reference/data-contract.md#t8-site_month--one-row-per-submission):
   the calculator warns if it is earlier than the 15th of the following month.
-- Every date column in the data contract is a local date, not a timestamp. Extraction
-  converts to local time.
+- Every date column in the data contract is a local date, not a timestamp. The extract
+  converts timestamps to local time first.

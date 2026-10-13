@@ -52,7 +52,7 @@
 <p><strong>Metric 4: 18.7 weeks.</strong></p>
 <p>P4's 90 days without contact are part of the 160. Inactivity discharges always lengthen the average. That's accurate, because the patient was on the caseload, but a program that discharges disengaged patients sooner will see a shorter duration.</p>
 <h2 id="where-the-data-lives">Where the data lives</h2>
-<p>The episode start and end dates. See <a href="../concepts/enrollment-and-discharge.html#where-the-data-lives">enrollment and discharge</a>. Watch for episodes closed without an end date; don't fill the gap with the date the record was last updated.</p>
+<p>Use the episode start and end dates. See <a href="../concepts/enrollment-and-discharge.html#where-the-data-lives">enrollment and discharge</a>. Watch for episodes closed without an end date; don't fill the gap with the date the record was last updated.</p>
 <h2 id="common-mistakes">Common mistakes</h2>
 <div class="table"><table>
 <thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
@@ -65,7 +65,7 @@
 </table></div>
 <details class="dev" id="for-automation">
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
-<p>Reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a> (<code>enrollment_date</code>, <code>discharge_date</code>), <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, and <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a>: the effective discharge date is the earlier of the recorded date and the inactivity date.</p>
+<p>The calculator reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a> (<code>enrollment_date</code>, <code>discharge_date</code>), <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, and <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a>. The effective discharge date is the earlier of the recorded date and the inactivity date.</p>
 </details>
 <nav class="pager" aria-label="Previous and next">
 <a class="prev" rel="prev" href="03-newly-enrolled.html"><small>Previous</small><strong>3. Newly enrolled</strong></a>

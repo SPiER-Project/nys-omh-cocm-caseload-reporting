@@ -1,8 +1,8 @@
 # The eleven metrics at a glance
 
-What each metric counts, in a sentence, and how it's reported. Each one links to its own
-page, which has the full rule, a worked example, where the data lives and the common
-mistakes. Every rule is provisional until approved.
+This page describes each metric in one sentence and says how it's reported. Each metric
+links to its own page, which has the full rule, a worked example, where the data lives and
+the common mistakes. Every rule is provisional until approved.
 
 | # | Metric | What it counts | Reported as |
 |---|---|---|---|

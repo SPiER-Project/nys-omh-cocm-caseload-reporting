@@ -64,7 +64,7 @@
 </ul>
 <p><strong>Metric 6: 4 of 6, 66.7%.</strong></p>
 <h2 id="where-the-data-lives">Where the data lives</h2>
-<p>Scores from the registry's scale table, or EHR questionnaires and flowsheets; primary diagnosis and scale from the episode. See <a href="../concepts/scales-and-outcomes.html#where-the-data-lives">scales and outcomes</a>.</p>
+<p>Scores come from the registry's scale table, or from EHR questionnaires and flowsheets. The primary diagnosis and scale come from the episode. See <a href="../concepts/scales-and-outcomes.html#where-the-data-lives">scales and outcomes</a>.</p>
 <h2 id="common-mistakes">Common mistakes</h2>
 <div class="table"><table>
 <thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
@@ -78,7 +78,7 @@
 </table></div>
 <details class="dev" id="for-automation">
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
-<p>Reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a> (<code>primary_scale</code>), <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a> (for the inactivity discharge) and <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a>, from each open episode's enrollment date onward.</p>
+<p>The calculator reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a> (<code>primary_scale</code>), <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a> (for the inactivity discharge) and <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a>, from each open episode's enrollment date onward.</p>
 </details>
 <nav class="pager" aria-label="Previous and next">
 <a class="prev" rel="prev" href="05-monthly-contact-rate.html"><small>Previous</small><strong>5. Monthly contact rate</strong></a>

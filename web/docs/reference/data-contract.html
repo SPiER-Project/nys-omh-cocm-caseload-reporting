@@ -28,7 +28,7 @@
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="our-calls.html">Reference</a></li></ol></nav>
 <h1 id="data-contract">Data contract</h1>
 <p>Every site produces the same eight tables, however it produces them. One calculator reads them and computes the eleven NYS metrics, applying the rules in the <a href="../guide/start-here.html">guide</a>. How a site fills each table is in <a href="../collecting/overview.html">collecting the data</a>.</p>
-<p><strong>Status:</strong> sketch. Column names and code lists may still change; no schema file exists yet. This page serves the <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/tooling.md">tooling</a>; a clinic following the guide by hand doesn't need it.</p>
+<p><strong>Status:</strong> sketch. Column names and code lists may still change; no schema file exists yet. This page is for the <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/tooling.md">tooling</a>; a clinic following the guide by hand doesn't need it.</p>
 <h2 id="rules">Rules</h2>
 <ol>
 <li><strong>Every column is a fact the site already records.</strong> Baseline, "enrolled this month", days in treatment, improvement, remission, the inactivity discharge and the Medicaid flag are <strong>derived</strong>. The calculator computes them once, and nobody extracts them. Those are the places where two sites' report writers would otherwise disagree.</li>
@@ -110,7 +110,7 @@
 </tbody>
 </table></div>
 <p><strong>In FHIR:</strong> Observation.</p>
-<p>One table for both halves of the report. Rows are selected by instrument and date, not by purpose:</p>
+<p>One table serves both halves of the report. Rows are selected by instrument and date, not by purpose:</p>
 <ul>
 <li><strong>Metrics 5–8:</strong> any NYS scale dated on or after the episode's enrollment date. A score dated before it can never be the <a href="our-calls.html#baseline">baseline</a>.</li>
 <li><strong>Metric 9:</strong> any PHQ-2, PHQ-9 or PHQ-A in the 12 months ending on the last day of the month (<a href="our-calls.html#what-counts-as-screened">what counts as screened</a>).</li>
@@ -130,7 +130,7 @@
 </tbody>
 </table></div>
 <p><strong>In FHIR:</strong> No standard resource. Some systems record a case review as an <code>Encounter</code> without the patient, with the recommendation in a <code>Communication</code> or a note.</p>
-<p>One row per patient discussed, never one per meeting. That shape is what stops "the consultant attended the caseload review" from counting as a review of every patient. Extract reviews in the 60 days ending on the last day of the month.</p>
+<p>One row per patient discussed, never one per meeting. This shape prevents "the consultant attended the caseload review" from counting as a review of every patient. Extract reviews in the 60 days ending on the last day of the month.</p>
 <h3 id="t7-practice_visit--the-denominator-for-metric-9">T7. <code>practice_visit</code> — the denominator for metric 9</h3>
 <div class="table"><table>
 <thead><tr><th scope="col">Column</th><th scope="col">Type</th><th scope="col">Req</th><th scope="col">Notes</th><th scope="col">FHIR</th></tr></thead>
@@ -144,7 +144,7 @@
 </tbody>
 </table></div>
 <p><strong>In FHIR:</strong> Encounter.</p>
-<p>Every visit in the month, all payers. The calculator applies the <a href="our-calls.html#who-should-be-screened">qualifying-visit rule</a>, and keeping every visit means a change to that rule is a setting, not a new extract.</p>
+<p>Extract every visit in the month, for all payers. The calculator applies the <a href="our-calls.html#who-should-be-screened">qualifying-visit rule</a>, and keeping every visit means a change to that rule is a setting, not a new extract.</p>
 <h3 id="t8-site_month--one-row-per-submission">T8. <code>site_month</code> — one row per submission</h3>
 <div class="table"><table>
 <thead><tr><th scope="col">Column</th><th scope="col">Type</th><th scope="col">Req</th><th scope="col">Notes</th></tr></thead>

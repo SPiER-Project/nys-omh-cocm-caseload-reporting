@@ -1,8 +1,8 @@
 # Our calls
 
-Every place this guide interprets the [NYS document](nys-source/nys-omh-cocm-metrics-2025.md)
-or goes beyond it. The guide's pages state these rules inline; this page collects them,
-with the reasoning, in one place.
+This page lists every place where the guide interprets the
+[NYS document](nys-source/nys-omh-cocm-metrics-2025.md) or goes beyond it. The guide's pages
+state each rule where it applies; this page collects them in one place, with the reasoning.
 
 The values each call sets, and every call's status and approval, live in
 [`rules/calls.toml`](../../rules/calls.toml). The tables and numbers on this page are
@@ -10,7 +10,7 @@ generated from it; change them there, then run `python3 scripts/rules.py sync`.
 
 **Firmness**
 
-- **NYS says**: the source document settles it; we only restate it.
+- **NYS says**: the source document answers the question; we only restate it.
 - **Our call**: a practical decision the guidelines leave to the site, so we made one. A site that follows the guide
   should follow the call, and disclose it if NYS asks.
 - **Needs clinical sign-off**: our call, but a clinical judgement a reporting team
@@ -114,7 +114,7 @@ Report BHCM FTE as attested.
 **Why.** NYS doesn't say. Rounding at the last step and to the same precision everywhere
 means two sites with the same counts report the same rate.
 
-**If NYS rules otherwise.** The REDCap form's field format wins.
+**If NYS rules otherwise.** Use the REDCap form's field format.
 
 **Replaces.** Nothing; first raised here.
 
@@ -172,7 +172,7 @@ metric 4.
 
 **NYS says.** Metric 4 counts weeks "between initial assessment to date of discharge."
 
-**Why.** One start date for all metrics. Using the referral date or the date the record
+**Why.** Every metric should use the same start date. Using the referral date or the date the record
 was keyed in shortens or lengthens every patient's time in treatment.
 
 **Replaces.** D-03.
@@ -255,7 +255,7 @@ coverage known at the run date; Medicaid granted retroactively later doesn't res
 submitted month.
 
 **Why.**
-- First of the month: payer as of the report run date reclassifies patients after the fact.
+- First of the month: using the payer as of the report run date would reclassify patients after the fact.
 - Primary or secondary: the draft said "primary coverage" and also said dual eligibles count, but for most dual eligibles Medicare is primary. Any active Medicaid coverage resolves the contradiction.
 - Child Health Plus and the Essential Plan are separate programs, not Medicaid.
 - Managed care plans are listed by plan name (Fidelis, Healthfirst and so on), so map them by plan, not by looking for the word "Medicaid".
@@ -341,7 +341,7 @@ doesn't say what elevated means.
 
 **Why.**
 - PHQ-9 and GAD-7: 10 mirrors Appendix A's "score below 10" improvement criterion, so a patient can't qualify as improved at baseline.
-- PCL-5, SCARED and PSC-17: each threshold is the instrument's published screening cutoff, and it matches the remission threshold the draft proposed. That pairs naturally: elevated is at or above the cutoff, remission is below it.
+- PCL-5, SCARED and PSC-17: each threshold is the instrument's published screening cutoff, and it matches the remission threshold the draft proposed. Elevated is then at or above the cutoff, and remission is below it.
 - SMFQ: 12 is supported for adolescents seeking help, but the instrument's developers recommend no single cutpoint. It needs a clinician's judgement more than the others.
 - The draft promised these thresholds in an appendix that was never written.
 
@@ -369,8 +369,8 @@ which in whole scores is 7 or below.
 **NYS says.** "Score 50% improved from baseline", without saying whether exactly 50%
 counts.
 
-**Why.** "Improved by 50%" reads naturally as "by at least 50%". Stating it stops one
-site using "less than" and another "at most".
+**Why.** "Improved by 50%" reads naturally as "by at least 50%". Stating it prevents one
+site from using "less than" and another "at most".
 
 **Replaces.** Nothing; first raised here.
 
@@ -545,7 +545,7 @@ aren't qualifying visits. The code list still needs checking against a source (s
 criteria for universal depression screen (Refer to practice workflow)."
 
 **Why.**
-- NYS leaves the criteria to each practice. Publishing one set means two practices' rates mean the same thing.
+- NYS leaves the criteria to each practice. With one published set, two practices' rates measure the same thing.
 - Screening happens at medical visits, so lab, nurse and BHCM visits only inflate the denominator.
 - 12 matches USPSTF adolescent screening.
 - The draft defined visits but never said to count each patient once.
@@ -587,8 +587,8 @@ BHCM counts the same.
 
 **Consequence.** With this rule and [what counts as screened](#what-counts-as-screened),
 neither screening metric needs to know whether a PHQ was for screening or monitoring.
-That distinction now matters only for the [baseline](#baseline), and there the date
-alone decides it.
+That distinction now matters only for the [baseline](#baseline), and there only the
+date matters.
 
 **Replaces.** D-10 (for metric 10), R-10, Q-07.
 

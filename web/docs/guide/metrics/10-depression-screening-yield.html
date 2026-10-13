@@ -31,14 +31,14 @@
 <p>Number (#) and proportion (%) of all patients who scored a 10 or greater on their initial PHQ-9 during this month</p>
 <p>— <a href="../../reference/nys-source/nys-omh-cocm-metrics-2025.html#10-depression-screening-yield">NYS, metric 10</a></p>
 </blockquote>
-<p><strong>Reported as:</strong> a count <strong>and</strong> a percentage. <strong>Target:</strong> none; this measures how much depression screening finds, not performance. <strong>Population:</strong> the whole practice, all payers.</p>
+<p><strong>Reported as:</strong> a count <strong>and</strong> a percentage. <strong>Target:</strong> none. The metric shows how much depression the screening finds; it isn't a performance measure. <strong>Population:</strong> the whole practice, all payers.</p>
 <h2 id="the-rule">The rule</h2>
 <ul>
 <li><strong>Denominator:</strong> patients with an <a href="../concepts/screening.html#initial-phq-9-metric-10">initial PHQ-9</a> this month. That is a scored PHQ-9 (or PHQ-A) dated this month, with no other scored PHQ-9 in the 365 days before it. Each patient counts once, on their first PHQ-9 of the month.</li>
 <li><strong>Numerator:</strong> those whose initial PHQ-9 scored <strong>10 or more</strong>. <em>NYS says.</em></li>
 <li><strong>Report both:</strong> the numerator as the count, and numerator ÷ denominator as the percentage.</li>
 </ul>
-<p>A PHQ-2 is never an initial PHQ-9. A CoCM patient's monthly monitoring PHQ-9 isn't either, because there's always an earlier one within a year. That keeps the metric about patients newly screened with the full instrument.</p>
+<p>A PHQ-2 is never an initial PHQ-9. A CoCM patient's monthly monitoring PHQ-9 isn't either, because there's always an earlier one within a year. That keeps the metric focused on patients newly screened with the full instrument.</p>
 <h2 id="worked-example">Worked example</h2>
 <p>From the <a href="../concepts/screening.html#worked-example">screening</a> example:</p>
 <ul>
@@ -49,12 +49,12 @@
 </ul>
 <p><strong>Metric 10: 1 patient, 1 of 2, 50.0%.</strong></p>
 <h2 id="where-the-data-lives">Where the data lives</h2>
-<p>The same PHQ results as <a href="09-depression-screening-rate.html">metric 9</a>, with at least 13 months of PHQ-9 history, so that the 365 days before any PHQ-9 in the month are covered. See <a href="../concepts/screening.html#where-the-data-lives">screening</a>.</p>
+<p>Use the same PHQ results as <a href="09-depression-screening-rate.html">metric 9</a>, with at least 13 months of PHQ-9 history, so that the 365 days before any PHQ-9 in the month are covered. See <a href="../concepts/screening.html#where-the-data-lives">screening</a>.</p>
 <h2 id="common-mistakes">Common mistakes</h2>
 <div class="table"><table>
 <thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
 <tbody>
-<tr><td>Treating every PHQ-9 in the month as initial</td><td>Dominated by repeat and monitoring scores; yield distorted</td></tr>
+<tr><td>Treating every PHQ-9 in the month as initial</td><td>Repeat and monitoring scores dominate, and the yield is distorted</td></tr>
 <tr><td>Counting PHQ-2 results</td><td>Wrong instrument; PHQ-2 has a different scale</td></tr>
 <tr><td>Pulling too little history to see the prior 365 days</td><td>PHQ-9s are wrongly counted as initial</td></tr>
 <tr><td>Reporting only the percentage</td><td>NYS asks for the count too</td></tr>
@@ -62,7 +62,7 @@
 </table></div>
 <details class="dev" id="for-automation">
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
-<p>Reads <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a> (PHQ-9 and PHQ-A, with history back 365 days from the earliest PHQ-9 in the month).</p>
+<p>The calculator reads <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a> (PHQ-9 and PHQ-A, with history back 365 days from the earliest PHQ-9 in the month).</p>
 </details>
 <nav class="pager" aria-label="Previous and next">
 <a class="prev" rel="prev" href="09-depression-screening-rate.html"><small>Previous</small><strong>9. Depression screening rate</strong></a>

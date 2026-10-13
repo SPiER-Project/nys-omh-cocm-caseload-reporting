@@ -1,0 +1,101 @@
+/*
+  The calculator page (web/template.html). Uses the values in tokens.css only.
+*/
+main { padding-top: var(--space-8); }
+h1 { font-size: var(--text-display); letter-spacing: var(--tracking-tight); margin-bottom: var(--space-3); }
+h2 { margin: 0 0 var(--space-2); }
+.lede { font-size: var(--text-xl); margin-bottom: var(--space-4); }
+.muted, .status { color: var(--muted); }
+.small { font-size: var(--text-xs); }
+.status { min-height: calc(var(--leading-body) * 1em); font-size: var(--text-sm); margin: var(--space-2) 0 0; }
+.status.ready { color: var(--spruce); }
+
+/* Buttons */
+button, label.button {
+  display: inline-block; font: inherit; font-weight: var(--weight-bold); line-height: var(--leading-snug);
+  padding: var(--space-2) var(--space-5); margin: 0; border-radius: var(--radius-md);
+  border: var(--border-medium) solid var(--spruce); background: var(--spruce); color: var(--spruce-ink); cursor: pointer;
+}
+button.secondary, label.button { background: transparent; color: var(--spruce); }
+button:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; margin: var(--space-4) 0 0; }
+.actions.flush { margin-top: 0; }
+
+/* Opening */
+.privacy { border-left: var(--border-accent) solid var(--spruce); padding: var(--space-1) 0 var(--space-1) var(--space-4); margin: var(--space-5) 0; }
+.intro-note { margin: var(--space-4) 0 var(--space-7); }
+.program { background: var(--mist); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-5) var(--space-2); margin: var(--space-7) 0 var(--space-8); }
+.program h2 { font-size: var(--text-xl); display: inline; }
+.program > summary { cursor: pointer; margin-bottom: var(--space-3); }
+.program:not([open]) { padding-bottom: var(--space-5); }
+.program:not([open]) > summary { margin-bottom: 0; }
+table.needs { margin: var(--space-1) 0 var(--space-4); }
+table.needs td:first-child { font-weight: var(--weight-bold); width: 38%; }
+
+/* The three steps: a real sequence, so numbered */
+ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 0; }
+ol.steps > li { counter-increment: step; position: relative; padding: 0 0 var(--space-7) var(--step-indent); }
+ol.steps > li::before {
+  content: counter(step); position: absolute; left: 0; top: calc(-1 * var(--space-1));
+  font-size: var(--text-3xl); font-weight: var(--weight-bold); line-height: 1; color: var(--spruce);
+}
+ol.steps > li:not(:last-child)::after {
+  content: ""; position: absolute; left: var(--space-2); top: var(--space-8); bottom: var(--space-2);
+  border-left: var(--border-medium) solid var(--line);
+}
+.downloads { list-style: none; padding: 0; margin: 0 0 var(--space-4); }
+.downloads li { padding: var(--space-2) 0; border-bottom: var(--border-thin) solid var(--line); }
+.downloads li:first-child { border-top: var(--border-thin) solid var(--line); }
+
+/* Data tray: the eight tables, filling in as files arrive */
+.drop { border: var(--border-medium) dashed var(--line); border-radius: var(--radius-lg); padding: var(--space-5); text-align: center; margin: var(--space-4) 0; }
+.drop.over { border-color: var(--spruce); background: var(--spruce-soft); }
+.drop input { display: block; margin: var(--space-2) auto 0; max-width: 100%; font: inherit; font-size: var(--text-sm); }
+.tray { list-style: none; padding: 0; margin: 0; }
+.tray li {
+  display: grid; grid-template-columns: var(--space-5) 1fr auto; gap: 0 var(--space-2); align-items: baseline;
+  padding: var(--space-2) 0; border-bottom: var(--border-thin) solid var(--line);
+}
+.tray li:first-child { border-top: var(--border-thin) solid var(--line); }
+.tray .mark { width: var(--dot-size); height: var(--dot-size); border-radius: 50%; border: var(--border-medium) solid var(--muted); align-self: center; }
+.tray .have .mark { background: var(--spruce); border-color: var(--spruce); }
+.tray .name { font-weight: var(--weight-bold); }
+.tray .what { grid-column: 2; font-size: var(--text-xs); color: var(--muted); }
+.tray .state { grid-row: 1; grid-column: 3; font-size: var(--text-xs); color: var(--muted); text-align: right; }
+.tray .have .state { color: var(--spruce); font-weight: var(--weight-bold); }
+
+details.option { border-top: var(--border-thin) solid var(--line); border-bottom: var(--border-thin) solid var(--line); padding: var(--space-2) 0; margin: var(--space-4) 0; }
+details.option + details.option { border-top: 0; margin-top: calc(-1 * var(--space-4)); }
+details.option > summary { cursor: pointer; font-weight: var(--weight-bold); }
+details.option[open] > summary { margin-bottom: var(--space-2); }
+label.field { display: block; font-weight: var(--weight-bold); margin-bottom: var(--space-1); }
+input[type=month], input[type=text] {
+  font: inherit; padding: var(--space-2); border: var(--border-medium) solid var(--line);
+  border-radius: var(--radius-md); background: var(--paper); color: var(--ink); max-width: 100%;
+}
+
+/* Results */
+#results { border-top: var(--border-thick) solid var(--ink); padding-top: var(--space-6); margin-top: var(--space-4); }
+table { font-size: inherit; }
+td.num { width: var(--space-8); color: var(--muted); }
+#metrics td:last-child { font-weight: var(--weight-bold); }
+.panel { border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); margin: var(--space-4) 0; }
+.warn { background: var(--amber-soft); color: var(--amber); }
+.error { background: var(--brick-soft); color: var(--brick); }
+.warn ul { margin: var(--space-1) 0 0; padding-left: var(--space-5); }
+.checks-ok { color: var(--spruce); font-weight: var(--weight-bold); }
+details.checks { margin: 0 0 var(--space-5); }
+details.checks summary { font-weight: var(--weight-bold); cursor: pointer; }
+details.checks ul { padding-left: var(--space-5); margin: var(--space-2) 0 0; }
+.checks li { margin-bottom: var(--space-1); }
+.checks .level { font-weight: var(--weight-bold); margin-right: var(--space-1); }
+.checks .rows { color: var(--muted); font-size: var(--text-xs); }
+details.fell { border-bottom: var(--border-thin) solid var(--line); padding: var(--space-2) 0; }
+details.fell summary { cursor: pointer; font-weight: var(--weight-bold); }
+.ids { white-space: nowrap; }
+
+@media (max-width: 34rem) {
+  h1 { font-size: var(--text-3xl-narrow); }
+  ol.steps > li { padding-left: var(--space-8); }
+  ol.steps > li::before { font-size: var(--text-3xl-narrow); }
+}

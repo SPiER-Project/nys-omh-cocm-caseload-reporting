@@ -1,13 +1,13 @@
 # Start here
 
-**Status:** written, but provisional: every call the guide makes still needs approval. See
-[`our-calls.md`](../reference/our-calls.md) for each call's status.
+**Status:** the guide is written but provisional, because every call in it still needs
+approval. [`our-calls.md`](../reference/our-calls.md) gives each call's status.
 
 This guide tells a New York clinic how to report the eleven CoCM metrics NYS OMH asks for
 each month, and how to get each fact out of the systems it has. It's an opinionated
-approach to the [NYS reporting guidelines](../reference/nys-source/nys-omh-cocm-metrics-2025.md):
-where turning them into numbers takes a practical decision, the guide makes a call and
-says why.
+approach to the [NYS reporting guidelines](../reference/nys-source/nys-omh-cocm-metrics-2025.md).
+Where turning the guidelines into numbers needs a decision, the decision is recorded as a
+call, with the reasoning for it.
 
 New to the program itself? [About the NYS Collaborative Care Medicaid Program](about-the-program.md)
 covers what it is, how it began and what it asks of practices, and
@@ -15,8 +15,8 @@ covers what it is, how it began and what it asks of practices, and
 
 ## The metrics
 
-[The eleven metrics at a glance](metrics/at-a-glance.md) says what each one counts, in a
-sentence. Each metric's own page has the full rule.
+[The eleven metrics at a glance](metrics/at-a-glance.md) describes what each metric
+counts in one sentence. Each metric's own page has the full rule.
 
 | # | Metric | Population |
 |---|---|---|
@@ -50,8 +50,8 @@ patients.
 [Asking for the data](../collecting/requests.md) has ready-to-send requests for the
 people who hold it: billing, the EHR team and whoever keeps the registry.
 
-[Collecting the data](../collecting/overview.md) says where each fact lives in a clinic's
-systems, and gives three routes for getting it out:
+[Collecting the data](../collecting/overview.md) explains where each fact is kept in a
+clinic's systems, and gives three routes for getting it out:
 - a spreadsheet registry;
 - a registry product plus an EHR report;
 - the EHR alone.

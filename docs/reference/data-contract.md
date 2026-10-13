@@ -6,7 +6,7 @@ reads them and computes the eleven NYS metrics, applying the rules in the
 [collecting the data](../collecting/overview.md).
 
 **Status:** sketch. Column names and code lists may still change; no schema file exists
-yet. This page serves the [tooling](../tooling.md); a clinic following the guide by hand
+yet. This page is for the [tooling](../tooling.md); a clinic following the guide by hand
 doesn't need it.
 
 ## Rules
@@ -120,7 +120,7 @@ the full log shows a caseload that is mostly unanswered outreach. How the site d
 
 **In FHIR:** Observation.
 
-One table for both halves of the report. Rows are selected by instrument and date, not by
+One table serves both halves of the report. Rows are selected by instrument and date, not by
 purpose:
 
 - **Metrics 5–8:** any NYS scale dated on or after the episode's enrollment date. A
@@ -150,7 +150,7 @@ they were the hardest columns for an EHR-only site to fill.
 
 **In FHIR:** No standard resource. Some systems record a case review as an `Encounter` without the patient, with the recommendation in a `Communication` or a note.
 
-One row per patient discussed, never one per meeting. That shape is what stops "the
+One row per patient discussed, never one per meeting. This shape prevents "the
 consultant attended the caseload review" from counting as a review of every patient.
 Extract reviews in the <!--rule:psychiatric-case-review.window_days-->60<!--/rule--> days ending on the last day of the month.
 
@@ -167,7 +167,7 @@ Extract reviews in the <!--rule:psychiatric-case-review.window_days-->60<!--/rul
 
 **In FHIR:** Encounter.
 
-Every visit in the month, all payers. The calculator applies the
+Extract every visit in the month, for all payers. The calculator applies the
 [qualifying-visit rule](our-calls.md#who-should-be-screened), and keeping every visit
 means a change to that rule is a setting, not a new extract.
 

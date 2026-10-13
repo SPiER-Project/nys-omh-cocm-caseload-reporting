@@ -27,14 +27,14 @@
 <main id="main">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="requests.html">Getting the data</a></li></ol></nav>
 <h1 id="collecting-the-data">Collecting the data</h1>
-<p>The <a href="../guide/start-here.html">guide</a> says what each metric counts. This page says where those facts live in a clinic's systems, which route to take to get them out, and what every route has to get right.</p>
+<p>The <a href="../guide/start-here.html">guide</a> explains what each metric counts. This page covers where those facts are kept in a clinic's systems, which route to take to get them out, and what every route has to get right.</p>
 <h2 id="where-each-fact-lives">Where each fact lives</h2>
 <p>Almost every site has <strong>at least two sources</strong>:</p>
 <ul>
 <li>the CoCM registry, or whatever stands in for one;</li>
 <li>the EHR or practice-management system.</li>
 </ul>
-<p>NYS says as much: metrics 9 and 10 are "not tracked in your CoCM registry." Medicaid status usually isn't in the registry either, so every Medicaid metric needs both sources.</p>
+<p>NYS notes that the data for metrics 9 and 10 is "not tracked in your CoCM registry." Medicaid status usually isn't in the registry either, so every Medicaid metric needs both sources.</p>
 <div class="table"><table>
 <thead><tr><th scope="col">Fact</th><th scope="col">Usual source</th><th scope="col">Needed for</th><th scope="col">Guide page</th></tr></thead>
 <tbody>
@@ -88,7 +88,7 @@
 <h2 id="what-every-route-must-get-right">What every route must get right</h2>
 <h3 id="one-patient-id">One patient id</h3>
 <p>The registry and the EHR have to identify the same patient the same way, or the two halves never join. Use the <strong>MRN</strong> as <code>patient_id</code> in every source. Don't use a registry's internal id, which the EHR never sees.</p>
-<p>Inside the site, the MRN can stay as it is: the calculator runs at the site, and its list of patients each rate didn't count is easier to act on with MRNs. <strong>Before tables leave the site</strong> (to a vendor, a consultant, or anyone helping with the reporting), replace each MRN with its pseudonym:</p>
+<p>Within the site, keep the MRN as it is. The calculator runs at the site, and its list of the patients each rate didn't count is easier to act on when it shows MRNs. <strong>Before tables leave the site</strong> (to a vendor, a consultant, or anyone helping with the reporting), replace each MRN with its pseudonym:</p>
 <ol>
 <li><strong>Make a key, once.</strong> At the command line:</li>
 </ol>
@@ -114,7 +114,7 @@
 <tr><td>the same</td><td><code>MRN-0042</code></td><td><code>p-vwwfuzieeoipmduc</code></td></tr>
 </tbody>
 </table></div>
-<p><strong>FHIR exports</strong> give a patient its FHIR id unless told otherwise. Use <code>--fhir-patient-identifier</code> with the system of the <code>Patient.identifier</code> that holds the MRN, or the same setting under <em>FHIR options</em> on the page.</p>
+<p><strong>FHIR exports</strong> identify each patient by its FHIR id unless you set this otherwise. To use the MRN, pass <code>--fhir-patient-identifier</code> with the system of the <code>Patient.identifier</code> that holds it, or use the same setting under <em>FHIR options</em> on the page.</p>
 <h3 id="event-dates-in-local-time">Event dates in local time</h3>
 <p>Every date must be when the event happened, in local time. Use the date of service, administration or review, not the date of the note, the charge, or the record. Convert UTC timestamps before taking the date. See <a href="../guide/concepts/reporting-month.html">reporting month</a>.</p>
 <h3 id="how-far-back-to-extract">How far back to extract</h3>
@@ -145,7 +145,7 @@
 <tbody>
 <tr><td>During the month</td><td>Document contacts, scales and case reviews as they happen; log outreach attempts</td></tr>
 <tr><td>Last week of the month</td><td>Review the caseload for anyone near 90 days without a clinical contact</td></tr>
-<tr><td>Month end to the 15th</td><td>Late notes and charges close. Don't run the report yet</td></tr>
+<tr><td>Month end to the 15th</td><td>Wait for late notes and charges to be entered. Don't run the report yet</td></tr>
 <tr><td>On or after the 15th</td><td>Run the extracts; calculate the metrics; review the patients each rate didn't count</td></tr>
 <tr><td>Before the NYS deadline</td><td>Submit the eleven numbers and the disclosures</td></tr>
 </tbody>

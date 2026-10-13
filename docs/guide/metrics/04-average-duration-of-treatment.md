@@ -41,7 +41,7 @@ that discharges disengaged patients sooner will see a shorter duration.
 
 ## Where the data lives
 
-The episode start and end dates. See
+Use the episode start and end dates. See
 [enrollment and discharge](../concepts/enrollment-and-discharge.md#where-the-data-lives).
 Watch for episodes closed without an end date; don't fill the gap with the date the
 record was last updated.
@@ -57,7 +57,7 @@ record was last updated.
 
 ## For automation
 
-Reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment)
+The calculator reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment)
 (`enrollment_date`, `discharge_date`), [`coverage`](../../reference/data-contract.md#t2-coverage),
-and [`contact`](../../reference/data-contract.md#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient): the effective discharge date is the earlier of the recorded date and the
+and [`contact`](../../reference/data-contract.md#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient). The effective discharge date is the earlier of the recorded date and the
 inactivity date.

@@ -27,7 +27,7 @@
 <main id="main">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="start-here.html">Guide</a></li></ol></nav>
 <h1 id="site-setup">Site setup</h1>
-<p>The decisions and fixes a site makes once, before its first report, and revisits only when its systems or program change. Most monthly reporting problems trace back to one of these steps being skipped.</p>
+<p>A site makes the decisions and fixes on this page once, before its first report, and revisits them only when its systems or program change. Most monthly reporting problems trace back to one of these steps being skipped.</p>
 <p>Work through them in order. Allow a few weeks: several steps need someone from billing or IT. At the end, record what was decided in the <a href="#the-setup-record">setup record</a>.</p>
 <h2 id="1-name-the-people">1. Name the people</h2>
 <div class="table"><table>
@@ -53,7 +53,7 @@
 </table></div>
 <ul>
 <li><strong>Map by plan, not by carrier.</strong> Many carriers sell Medicaid managed care, Child Health Plus, Essential Plan and commercial plans under the same name.</li>
-<li><strong>Confirm the coverage report shows effective dates</strong>, so status can be taken on the first of the month.</li>
+<li><strong>Confirm the coverage report shows effective dates</strong>, so each patient's coverage can be taken as of the first of the month.</li>
 <li><strong>Keep the mapping as a list the billing contact owns</strong>, and add new plans as they appear.</li>
 </ul>
 <p>See <a href="concepts/medicaid.html#what-the-program-should-do">Medicaid</a>.</p>
@@ -64,7 +64,7 @@
 <li><strong>Apply the inactivity rule.</strong> Find every open episode with no clinical contact in the last 90 days, and either re-engage the patient or discharge them. Then make the 90-day review part of the monthly routine.</li>
 <li><strong>Returning patients get a new episode</strong>, not a reopened one.</li>
 </ul>
-<p>If there's no enrollment record at all, the site will infer enrollment from billing and must disclose it. A structured enrollment record is worth setting up instead. See <a href="concepts/enrollment-and-discharge.html">enrollment and discharge</a>.</p>
+<p>If there's no enrollment record at all, the site has to infer enrollment from billing and disclose that it did. It's better to set up a structured enrollment record. See <a href="concepts/enrollment-and-discharge.html">enrollment and discharge</a>.</p>
 <h2 id="6-set-the-primary-scale">6. Set the primary scale</h2>
 <p>With the clinical reviewer:</p>
 <ul>
@@ -75,12 +75,12 @@
 <li><strong>Agree whether to use the thresholds marked <em>needs clinical sign-off</strong></em> on the <a href="../reference/instruments.html">instruments</a> page for the scales the program uses. Note any the site uses differently.</li>
 </ul>
 <h2 id="7-decide-what-counts-as-a-treatment-contact">7. Decide what counts as a treatment contact</h2>
-<p>Write down, in one sentence, how the records tell a treatment contact from an outreach attempt, a scheduling call or a message. For example:</p>
+<p>Write down, in one sentence, how someone reading the records can tell a treatment contact from an outreach attempt, a scheduling call or a message. For example:</p>
 <ul>
 <li>"a contact marked 'session' in the registry"; or</li>
 <li>"a BHCM encounter with a signed progress note on the same day".</li>
 </ul>
-<p>The rule goes in every submission. If the records can't tell them apart, change the contact log so they can; until then, the contact rate will be overstated. See <a href="concepts/contacts-and-reviews.html#clinical-contact">clinical contact</a>.</p>
+<p>Include this rule with every submission. If the records can't tell them apart, change the contact log so they can; until then, the contact rate will be overstated. See <a href="concepts/contacts-and-reviews.html#clinical-contact">clinical contact</a>.</p>
 <p>Make sure outreach attempts are logged too, separately from contacts.</p>
 <h2 id="8-record-case-reviews-patient-by-patient">8. Record case reviews patient by patient</h2>
 <p>Set up a way for the consultant or BHCM to record, for each patient discussed, the review date and the recommendation. A registry consultation log, a structured EHR field, or a tab in the spreadsheet all work. A meeting note listing names doesn't. See <a href="concepts/contacts-and-reviews.html#psychiatric-case-review-metric-8">psychiatric case review</a>.</p>
@@ -98,7 +98,7 @@
 </ul>
 <p>See <a href="concepts/screening.html">screening</a>.</p>
 <h2 id="10-check-dates">10. Check dates</h2>
-<p>Pick five events from late on the last day of a recent month: a scale, a contact, a visit. Confirm each one's date comes out as that day in the extract, not the next. If any come out a day late, the source stores UTC timestamps; convert them to local time before taking the date. See <a href="concepts/reporting-month.html">reporting month</a>.</p>
+<p>Pick five events from late on the last day of a recent month: a scale, a contact, a visit. Confirm that each one has that day's date in the extract, not the next day's. If any are dated a day late, the source stores UTC timestamps; convert them to local time before taking the date. See <a href="concepts/reporting-month.html">reporting month</a>.</p>
 <h2 id="11-set-up-bhcm-fte">11. Set up BHCM FTE</h2>
 <p>Start a simple monthly record of each BHCM's CoCM share, with start dates, end dates and extended leave. See <a href="concepts/bhcm-fte.html">BHCM FTE</a>.</p>
 <h2 id="12-do-a-dry-run">12. Do a dry run</h2>
@@ -115,7 +115,7 @@
 <li><strong>Set the monthly calendar:</strong> extracts on or after the 15th, review, sign-off, and submission before the NYS deadline.</li>
 </ul>
 <h2 id="the-setup-record">The setup record</h2>
-<p>Keep a copy of this table with the site's reporting files, and update it when anything changes. Its answers are what the site discloses to NYS.</p>
+<p>Keep a copy of this table with the site's reporting files, and update it when anything changes. The site discloses these answers to NYS.</p>
 <div class="table"><table>
 <thead><tr><th scope="col">Decision</th><th scope="col">Our answer</th><th scope="col">Decided by</th><th scope="col">Date</th></tr></thead>
 <tbody>

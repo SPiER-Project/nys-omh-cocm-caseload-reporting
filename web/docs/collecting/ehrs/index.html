@@ -27,7 +27,7 @@
 <main id="main">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../requests.html">Getting the data</a></li><li>Systems</li></ol></nav>
 <h1 id="ehr-reports">EHR reports</h1>
-<p>What a site's report writer has to produce from the EHR, whatever the EHR. One recipe per EHR product will follow as they're written. Until then, this page is the specification any EHR's reports should meet.</p>
+<p>This page sets out what a site's report writer has to produce from the EHR, whichever EHR the site uses. Recipes for specific EHR products will be added as they're written. Until then, this page is the specification any EHR's reports should meet.</p>
 <p>Sites with a registry need only the first four reports; EHR-only sites need all eight. A site with a FHIR export can skip the first four reports: the calculator <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/tooling.md#reading-fhir">reads FHIR</a> for patients, coverage, visits and PHQ results. The columns match the <a href="../../reference/data-contract.html">data contract</a>. Start from the <a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/cocm-csv-templates.zip">CSV templates</a>: one file per table, with the column headings the calculator expects. The calculator page checks each file and lists any rows it can't use. <a href="../requests.html">Asking for the data</a> has ready-to-send requests for each report.</p>
 <h2 id="reports-every-site-needs">Reports every site needs</h2>
 <div class="table"><table>
@@ -56,7 +56,7 @@
 <li>which encounter types, departments, questionnaire and flowsheet IDs, and provider types to include;</li>
 <li>the traps particular to that EHR.</li>
 </ul>
-<p>No recipes yet. Which EHRs to write them for first depends on which ones NYS's CoCM sites use most (<a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/tooling.md">tooling plan</a>).</p>
+<p>There are no recipes yet. Which EHRs to write them for first depends on which ones NYS's CoCM sites use most (<a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/tooling.md">tooling plan</a>).</p>
 <nav class="pager" aria-label="Previous and next">
 <a class="prev" rel="prev" href="../workbook.html"><small>Previous</small><strong>The workbook route</strong></a>
 <a class="next" rel="next" href="../registries/prototype-cocm-registry.html"><small>Next</small><strong>Mapping: a prototype CoCM registry → data contract</strong></a>

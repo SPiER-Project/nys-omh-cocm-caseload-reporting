@@ -1,8 +1,8 @@
 # About the NYS Collaborative Care Medicaid Program
 
-What the program is, how it began, what it asks of practices, and where the metrics in
-this guide fit. Everything here comes from New York State documents, listed at the end
-with their dates. Where they differ, the newest wins.
+This page describes New York's Collaborative Care Medicaid Program and how the metrics in
+this guide fit into it. It's based on New York State documents, listed with their dates
+under Sources. If two documents disagree, it follows the more recent one.
 
 This guide is an independent project. It isn't published or endorsed by the Office of
 Mental Health (OMH). Questions about the program, billing or reporting go to OMH at
@@ -48,7 +48,7 @@ practices can apply, licensed under Article 28 or not. A practice commits to:
 - a written workflow that follows the five principles, from screening to discharge;
 - **quarterly data reports to OMH.**
 
-How billing works, code by code, is in [NYS Medicaid billing](medicaid-billing.md).
+[NYS Medicaid billing](medicaid-billing.md) explains how billing works, code by code.
 
 Each month a patient is billed, the care team must have at least one clinical contact
 with them, in which treatment is delivered and documented, and at least one completed
@@ -81,8 +81,8 @@ links that OMH sends. The numbers are:
 - psychiatric case review;
 - the practice's depression screening rate and screening yield.
 
-These are the eleven metrics in [OMH's 2025 metrics document](../reference/nys-source/nys-omh-cocm-metrics-2025.md),
-each defined for a month. This guide counts them month by month. How three months become
+These are the eleven metrics in [OMH's 2025 metrics document](../reference/nys-source/nys-omh-cocm-metrics-2025.md).
+Each is defined for a single month, and this guide counts them month by month. How three months become
 a quarterly submission depends on what OMH's REDCap form asks for (see
 [open questions](../open-questions.md#for-nys)). This guide explains how to count each one, and the
 [calculator](https://spier-project.github.io/nys-omh-cocm-caseload-reporting/) counts them

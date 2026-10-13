@@ -37,12 +37,13 @@ improve:
 
 P1, P3, P7 and P9 also had reviews, but they improved, so they aren't in the
 denominator. P4 had no contact for three months and no review since November. The metric
-is designed to surface patients like P4.
+is designed to catch patients like P4.
 
 ## Where the data lives
 
-A consultation or case-review log in the registry, one row per patient discussed; in an
-EHR, consultant notes, rarely a structured field. See
+A registry usually has a consultation or case-review log, with one row per patient
+discussed. In an EHR, reviews are usually in the consultant's notes, and rarely in a
+structured field. See
 [contacts and reviews](../concepts/contacts-and-reviews.md#where-the-data-lives). This is
 often the hardest fact to extract from an EHR alone.
 
@@ -52,11 +53,11 @@ often the hardest fact to extract from an EHR alone.
 |---|---|
 | Counting the consultant's attendance at a caseload meeting as a review of every patient | Overstated |
 | Counting a review with no documented recommendation | Overstated |
-| Measuring <!--rule:psychiatric-case-review.window_days-->60<!--/rule--> days back from the run date | Reviews early in the window drop out; understated |
+| Measuring <!--rule:psychiatric-case-review.window_days-->60<!--/rule--> days back from the run date | Understated: reviews early in the window are missed |
 | Including patients without an elevated baseline in the denominator | The denominator includes patients who can never improve under Appendix A |
 
 ## For automation
 
-Reads everything [metric 6](06-improvement-rate.md) reads, plus
+The calculator reads everything [metric 6](06-improvement-rate.md) reads, plus
 [`psych_review`](../../reference/data-contract.md#t6-psych_review--one-row-per-patient-discussed)
 (`review_date`, `recommendation_documented = true`).

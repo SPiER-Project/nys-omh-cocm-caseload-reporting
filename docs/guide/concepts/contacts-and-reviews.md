@@ -1,11 +1,11 @@
 # Contacts and reviews
 
-Two kinds of CoCM activity NYS counts:
+NYS counts two kinds of CoCM activity:
 - **Clinical contacts:** the care team treating the patient.
 - **Psychiatric case reviews:** the consultant reviewing the patient's case with the team.
 
-They are easy to confuse. Either one gets inflated when an attempt or a meeting is
-counted as the real thing.
+They are easy to confuse. Either count is inflated when an outreach attempt or a meeting
+is counted as a contact or a review.
 
 **Used by:** metric 5 (contacts) and metric 8 (reviews).
 
@@ -39,7 +39,7 @@ length; what makes it a contact is that the note documents treatment. *Our call:
 | Caregiver sessions for a pediatric patient | Portal messages, texts and email, **even with clinical content** |
 | Video and phone sessions where treatment is delivered | The psychiatric consultant's case review |
 
-Excluding all messages is stricter than the archived draft. A message can contain
+Excluding all messages is stricter than the rule in the archived draft. A message can contain
 clinical content, but it's hard to show in a chart that treatment was delivered, and a
 reviewer would have to read every message to decide.
 
@@ -89,7 +89,7 @@ Metric 5 for these six: 3 of 6, or **50.0%**.
 
 ## What the program should do
 
-- **Give a scale at every treatment contact**, or at least once a month. Patient C is
+- **Give a scale at every treatment contact**, or at least once a month. Patient C shows
   the most common way to miss metric 5.
 - **Document what treatment was delivered** in the contact note, not just that the
   patient was reached.
@@ -116,8 +116,8 @@ Metric 5 for these six: 3 of 6, or **50.0%**.
   [prototype registry mapping](../../collecting/registries/prototype-cocm-registry.md#t4-contact--patientcontact)
   shows the gap and a stricter rule that uses same-day progress notes.
 - **Don't build case reviews from attendance or time logs.** A record that the consultant
-  spent an hour at the caseload meeting says nothing about which patients were reviewed.
-  Nor does one note per meeting.
+  spent an hour at the caseload meeting doesn't show which patients were reviewed, and
+  neither does a single note per meeting.
 
 ## Common mistakes
 

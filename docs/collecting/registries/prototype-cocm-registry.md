@@ -3,7 +3,7 @@
 This page maps the data model of a prototype CoCM registry (Next.js + Prisma +
 PostgreSQL) to the [data contract](../../reference/data-contract.md). It is the first registry
 mapping (the [registry route](../overview.md#2-a-registry-product-plus-an-ehr-report)),
-and also a worked example of what a mapping has to settle. Where it applies a rule from
+and also a worked example of what a mapping has to decide. Where it applies a rule from
 the guide, it links to the page that sets the rule.
 
 **Mapped against:** the registry's Prisma schema as of 2026-03. No export code exists yet.
@@ -42,7 +42,7 @@ the practice-management system.**
 | Contract | Registry | Notes |
 |---|---|---|
 | `episode_id`, `patient_id` | `id`, `patientId` | |
-| `enrollment_date` | `startDate` | Entered by the user at enrollment. Nothing says it is the initial assessment date rather than the referral date ([enrollment date](../../guide/concepts/enrollment-and-discharge.md#enrollment-date)) |
+| `enrollment_date` | `startDate` | Entered by the user at enrollment. Nothing in the schema says whether it is the initial assessment date or the referral date ([enrollment date](../../guide/concepts/enrollment-and-discharge.md#enrollment-date)) |
 | `enrollment_source` | `registry` | Constant |
 | `primary_condition` | the `diagnoses` entry with `isPrimary`, by ICD-10 range | F32, F33 → `depression`; F41 → `anxiety`; F43.1 → `ptsd`; F90 → `adhd`; else `other`. **Gap:** the schema allows zero or several primary entries; both are extraction errors |
 | `primary_scale` | — | **Gap.** Derived from `primary_condition` by the [default mapping](../../guide/concepts/scales-and-outcomes.md#primary-scale), and disclosed. The registry stores only PHQ-9 and GAD-7, so PTSD and ADHD episodes have no scale |
@@ -61,7 +61,7 @@ the practice-management system.**
 
 ## T4 `contact` ← `PatientContact`
 
-The weakest mapping.
+This is the weakest mapping.
 
 | Contract | Registry | Notes |
 |---|---|---|
@@ -83,19 +83,19 @@ treatment, and metric 5 is overstated.
 
 ## T5 `scale_result` ← `AssessmentScore`
 
-The cleanest mapping.
+This is the cleanest mapping.
 
 | Contract | Registry | Notes |
 |---|---|---|
 | `result_id`, `patient_id` | `id`, `patientId` | |
-| `administered_date` | `administeredAt` | Stored in UTC. **Convert to the site's time zone before taking the date** ([reporting month](../../guide/concepts/reporting-month.md#the-rule)), or an evening score on the last day of the month lands in the next month |
+| `administered_date` | `administeredAt` | Stored in UTC. **Convert to the site's time zone before taking the date** ([reporting month](../../guide/concepts/reporting-month.md#the-rule)), or an evening score on the last day of the month falls in the next month |
 | `instrument` | `instrumentType` | `PHQ9` → `phq9`, `GAD7` → `gad7`, `PHQ2` → `phq2`. `GAD2` and `CSSRS` are not NYS instruments and are not extracted |
 | `total_score` | `totalScore` | |
 | `administered_by_role` | `performer.role` | `BHCM` → `bhcm`, `PCP` → `medical_provider`, else `other`. The performer is whoever "administered or entered" it, so this is weak evidence |
 | `loinc` | `loincCode` | Check the GAD-7 code: the registry's documentation gives `69737-5`, which is the GAD-7 panel. The total score is `70274-6` ([instruments](../../reference/instruments.md#loinc-codes)) |
 
 A score dated before the episode's `startDate` is a screening score entered into the
-episode. Extract it anyway: its date alone keeps it from being the
+episode. Extract it anyway: its date alone rules it out as the
 [baseline](../../guide/concepts/scales-and-outcomes.md#baseline), and it may count for
 [screening](../../guide/concepts/screening.md#screening-or-monitoring).
 

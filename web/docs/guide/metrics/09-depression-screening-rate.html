@@ -46,7 +46,7 @@
 </ul>
 <p><strong>Metric 9: 5 of 6, 83.3%.</strong></p>
 <h2 id="where-the-data-lives">Where the data lives</h2>
-<p>All from the EHR or practice-management system:</p>
+<p>All of it comes from the EHR or practice-management system:</p>
 <ul>
 <li>encounters joined to charges, with the rendering provider's type;</li>
 <li>patient dates of birth;</li>
@@ -59,14 +59,14 @@
 <tbody>
 <tr><td>Counting every encounter, including nurse, lab and BHCM visits</td><td>Understated: the denominator grows with patients nobody planned to screen</td></tr>
 <tr><td>Counting visits instead of patients</td><td>Distorted toward frequent visitors</td></tr>
-<tr><td>Excluding CoCM patients' monitoring PHQs</td><td>Understated: the archived draft's rule, now reversed</td></tr>
+<tr><td>Excluding CoCM patients' monitoring PHQs</td><td>Understated. This was the archived draft's rule, and it has been reversed</td></tr>
 <tr><td>Missing a PHQ questionnaire version or a department's flowsheet</td><td>Understated</td></tr>
 <tr><td>Counting a declined screen</td><td>Overstated</td></tr>
 </tbody>
 </table></div>
 <details class="dev" id="for-automation">
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
-<p>Reads <a href="../../reference/data-contract.html#t1-patient"><code>patient</code></a> (<code>birth_date</code>), <a href="../../reference/data-contract.html#t7-practice_visit--the-denominator-for-metric-9"><code>practice_visit</code></a>, <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a> (12 months of PHQ-2, PHQ-9 and PHQ-A) and <a href="../../reference/data-contract.html#t8-site_month--one-row-per-submission"><code>site_month</code></a> (<code>screening_age_floor</code>).</p>
+<p>The calculator reads <a href="../../reference/data-contract.html#t1-patient"><code>patient</code></a> (<code>birth_date</code>), <a href="../../reference/data-contract.html#t7-practice_visit--the-denominator-for-metric-9"><code>practice_visit</code></a>, <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a> (12 months of PHQ-2, PHQ-9 and PHQ-A) and <a href="../../reference/data-contract.html#t8-site_month--one-row-per-submission"><code>site_month</code></a> (<code>screening_age_floor</code>).</p>
 </details>
 <nav class="pager" aria-label="Previous and next">
 <a class="prev" rel="prev" href="08-psychiatric-consultation-rate.html"><small>Previous</small><strong>8. Psychiatric consultation rate</strong></a>

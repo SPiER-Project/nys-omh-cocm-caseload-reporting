@@ -32,7 +32,8 @@ From the [example caseload](../example-caseload.md):
 
 ## Where the data lives
 
-The registry's enrollment or episode records, or the EHR's program-enrollment records.
+Enrollment is in the registry's enrollment or episode records, or in the EHR's
+program-enrollment records.
 See [enrollment and discharge](../concepts/enrollment-and-discharge.md#where-the-data-lives).
 
 ## Common mistakes
@@ -46,6 +47,6 @@ See [enrollment and discharge](../concepts/enrollment-and-discharge.md#where-the
 
 ## For automation
 
-Reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment),
-and [`contact`](../../reference/data-contract.md#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient) for the inactivity discharge. Distinct `patient_id` among episodes overlapping
-the month.
+The calculator reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment),
+and [`contact`](../../reference/data-contract.md#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient) for the inactivity discharge. It counts distinct `patient_id` values among the episodes
+that overlap the month.

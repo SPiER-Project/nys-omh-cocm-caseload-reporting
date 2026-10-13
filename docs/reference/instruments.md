@@ -1,8 +1,8 @@
 # Instruments
 
-The symptom scales NYS names, with each one's scoring, thresholds and LOINC codes, in one
-place. The [scales and outcomes](../guide/concepts/scales-and-outcomes.md) page says how
-the guide uses them.
+This page lists the symptom scales NYS names, with each one's scoring, thresholds and
+LOINC codes. The [scales and outcomes](../guide/concepts/scales-and-outcomes.md) page
+explains how the guide uses them.
 
 ## At a glance
 

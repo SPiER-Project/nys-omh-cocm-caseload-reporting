@@ -34,7 +34,7 @@ The [screening](../concepts/screening.md#worked-example) page has the full examp
 
 ## Where the data lives
 
-All from the EHR or practice-management system:
+All of it comes from the EHR or practice-management system:
 - encounters joined to charges, with the rendering provider's type;
 - patient dates of birth;
 - every questionnaire, flowsheet row or observation that holds a PHQ-2, PHQ-9 or PHQ-A
@@ -48,13 +48,13 @@ See [screening](../concepts/screening.md#where-the-data-lives).
 |---|---|
 | Counting every encounter, including nurse, lab and BHCM visits | Understated: the denominator grows with patients nobody planned to screen |
 | Counting visits instead of patients | Distorted toward frequent visitors |
-| Excluding CoCM patients' monitoring PHQs | Understated: the archived draft's rule, now reversed |
+| Excluding CoCM patients' monitoring PHQs | Understated. This was the archived draft's rule, and it has been reversed |
 | Missing a PHQ questionnaire version or a department's flowsheet | Understated |
 | Counting a declined screen | Overstated |
 
 ## For automation
 
-Reads [`patient`](../../reference/data-contract.md#t1-patient) (`birth_date`),
+The calculator reads [`patient`](../../reference/data-contract.md#t1-patient) (`birth_date`),
 [`practice_visit`](../../reference/data-contract.md#t7-practice_visit--the-denominator-for-metric-9),
 [`scale_result`](../../reference/data-contract.md#t5-scale_result--one-row-per-completed-scored-administration)
 (<!--rule:what-counts-as-screened.lookback_months-->12<!--/rule--> months of PHQ-2, PHQ-9 and PHQ-A) and

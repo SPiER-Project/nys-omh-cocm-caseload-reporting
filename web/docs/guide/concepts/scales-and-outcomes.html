@@ -27,7 +27,7 @@
 <main id="main">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../start-here.html">Guide</a></li><li><a href="reporting-month.html">Concepts</a></li></ol></nav>
 <h1 id="scales-and-outcomes">Scales and outcomes</h1>
-<p>The symptom scales, and how they become improvement and remission. This is where two sites with the same patients are most likely to report different numbers. Each step below (which scale, which score is the baseline, which score is current) is a choice a report writer would otherwise make alone.</p>
+<p>This page covers the symptom scales and how their scores are turned into improvement and remission. Two sites with the same patients are more likely to report different numbers here than anywhere else. Each step below (which scale, which score is the baseline, which score is current) is a choice a report writer would otherwise make alone.</p>
 <p><strong>Used by:</strong> metrics 5 to 8. Metric 5 needs only "a scale was completed"; metrics 6 to 8 use everything on this page.</p>
 <h2 id="what-nys-says">What NYS says</h2>
 <ul>
@@ -122,7 +122,7 @@
 </tbody>
 </table></div>
 <p><em>Our calls: <a href="../../reference/our-calls.html#remission-timing">remission timing</a>, <a href="../../reference/our-calls.html#remission-needs-an-elevated-baseline">remission needs an elevated baseline</a>, <a href="../../reference/our-calls.html#remission-thresholds">remission thresholds</a>.</em></p>
-<p>Unlike improvement, remission <strong>doesn't carry forward</strong>: no score this month, no remission. The metric 7 denominator is every Medicaid patient enrolled this month, as NYS states. The elevated-baseline requirement applies only to the numerator.</p>
+<p>Unlike improvement, remission <strong>doesn't carry forward</strong>: a patient with no score this month isn't in remission. The metric 7 denominator is every Medicaid patient enrolled this month, as NYS states. The elevated-baseline requirement applies only to the numerator.</p>
 <h3 id="not-improved-metric-8">Not improved (metric 8)</h3>
 <p>The metric 8 population is metric 6's denominator minus its numerator: Medicaid patients enrolled 70 days or more, with an elevated baseline, who have not improved this month. <em>Our call: <a href="../../reference/our-calls.html#psychiatric-consultation-denominator">psychiatric consultation denominator</a>.</em></p>
 <h2 id="worked-example">Worked example</h2>
@@ -184,7 +184,7 @@
 <details class="dev" id="for-automation">
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
 <ul>
-<li><a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a> holds every scored result. Each form is its own <code>instrument</code> value, so pairing is the calculator's job.</li>
+<li><a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a> holds every scored result. Each form is its own <code>instrument</code> value, and the calculator pairs the forms.</li>
 <li><a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode.primary_scale</code></a> is required. Where the source has none, the extract fills it from the default mapping, and the disclosure says so.</li>
 <li>Baseline, elevated baseline, current score, improvement and remission are all derived by the calculator. None of them is extracted.</li>
 <li>Thresholds live in calculator settings, so a clinical sign-off changes a setting, not an extract.</li>

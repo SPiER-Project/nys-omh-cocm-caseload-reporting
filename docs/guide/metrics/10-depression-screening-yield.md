@@ -5,8 +5,8 @@
 >
 > — [NYS, metric 10](../../reference/nys-source/nys-omh-cocm-metrics-2025.md#10-depression-screening-yield)
 
-**Reported as:** a count **and** a percentage. **Target:** none; this measures how much
-depression screening finds, not performance. **Population:** the whole practice, all
+**Reported as:** a count **and** a percentage. **Target:** none. The metric shows how much
+depression the screening finds; it isn't a performance measure. **Population:** the whole practice, all
 payers.
 
 ## The rule
@@ -21,7 +21,7 @@ payers.
 
 A PHQ-2 is never an initial PHQ-9. A CoCM patient's monthly monitoring PHQ-9 isn't
 either, because there's always an earlier one within a year. That keeps the metric
-about patients newly screened with the full instrument.
+focused on patients newly screened with the full instrument.
 
 ## Worked example
 
@@ -36,7 +36,7 @@ From the [screening](../concepts/screening.md#worked-example) example:
 
 ## Where the data lives
 
-The same PHQ results as [metric 9](09-depression-screening-rate.md), with at least <!--rule:extraction.phq_history_months-->13<!--/rule-->
+Use the same PHQ results as [metric 9](09-depression-screening-rate.md), with at least <!--rule:extraction.phq_history_months-->13<!--/rule-->
 months of PHQ-9 history, so that the <!--rule:initial-phq-9.lookback_days-->365<!--/rule--> days before any PHQ-9 in the month are covered.
 See [screening](../concepts/screening.md#where-the-data-lives).
 
@@ -44,12 +44,12 @@ See [screening](../concepts/screening.md#where-the-data-lives).
 
 | Mistake | Effect |
 |---|---|
-| Treating every PHQ-9 in the month as initial | Dominated by repeat and monitoring scores; yield distorted |
+| Treating every PHQ-9 in the month as initial | Repeat and monitoring scores dominate, and the yield is distorted |
 | Counting PHQ-2 results | Wrong instrument; PHQ-2 has a different scale |
 | Pulling too little history to see the prior <!--rule:initial-phq-9.lookback_days-->365<!--/rule--> days | PHQ-9s are wrongly counted as initial |
 | Reporting only the percentage | NYS asks for the count too |
 
 ## For automation
 
-Reads [`scale_result`](../../reference/data-contract.md#t5-scale_result--one-row-per-completed-scored-administration)
+The calculator reads [`scale_result`](../../reference/data-contract.md#t5-scale_result--one-row-per-completed-scored-administration)
 (PHQ-9 and PHQ-A, with history back <!--rule:initial-phq-9.lookback_days-->365<!--/rule--> days from the earliest PHQ-9 in the month).

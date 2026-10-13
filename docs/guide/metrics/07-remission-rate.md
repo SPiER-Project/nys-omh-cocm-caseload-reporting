@@ -25,7 +25,7 @@ clinical sign-off. Expect this metric's rules to change more than any other's.
   3. That score is below the scale's remission threshold. For PHQ-9 and GAD-7 that's
      below <!--rule:remission-thresholds.thresholds.phq9.below-->5<!--/rule-->.
 
-Unlike improvement, nothing carries forward. A patient in remission last month with no
+Unlike metric 6, no score carries forward from an earlier month. A patient in remission last month with no
 score this month isn't in remission this month.
 
 ## Worked example
@@ -45,12 +45,12 @@ From the [example caseload](../example-caseload.md):
 
 **Metric 7: <!--expect:example-caseload.m7-->2 of 8, 25.0%<!--/expect-->.**
 
-P8 is why the elevated-baseline guard exists: without it, a patient who enrolled with
+P8 shows why the elevated baseline is required. Without it, a patient who enrolled with
 mild symptoms would count as in remission from the start.
 
 ## Where the data lives
 
-The same scores as [metric 6](06-improvement-rate.md). See
+Metric 7 uses the same scores as [metric 6](06-improvement-rate.md). See
 [scales and outcomes](../concepts/scales-and-outcomes.md#where-the-data-lives).
 
 ## Common mistakes
@@ -65,7 +65,7 @@ The same scores as [metric 6](06-improvement-rate.md). See
 
 ## For automation
 
-Reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment),
+The calculator reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment),
 [`coverage`](../../reference/data-contract.md#t2-coverage), [`contact`](../../reference/data-contract.md#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient) (for the inactivity
 discharge) and [`scale_result`](../../reference/data-contract.md#t5-scale_result--one-row-per-completed-scored-administration).
 Remission thresholds are calculator settings.

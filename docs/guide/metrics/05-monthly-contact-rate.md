@@ -48,8 +48,9 @@ and a portal message.
 
 ## Where the data lives
 
-Contacts from the registry's contact log, or BHCM and telephone encounters in the EHR.
-Scales from the registry's scale table, or questionnaires and flowsheets in the EHR. See
+Contacts come from the registry's contact log, or from BHCM and telephone encounters in
+the EHR. Scales come from the registry's scale table, or from questionnaires and
+flowsheets in the EHR. See
 [contacts and reviews](../concepts/contacts-and-reviews.md#where-the-data-lives).
 
 ## Common mistakes
@@ -64,7 +65,7 @@ Scales from the registry's scale table, or questionnaires and flowsheets in the 
 
 ## For automation
 
-Reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment),
+The calculator reads [`cocm_episode`](../../reference/data-contract.md#t3-cocm_episode--one-row-per-enrollment),
 [`coverage`](../../reference/data-contract.md#t2-coverage),
 [`contact`](../../reference/data-contract.md#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient)
 (`contact_kind = treatment`) and

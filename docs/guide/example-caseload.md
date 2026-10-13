@@ -1,14 +1,14 @@
 # Example caseload
 
-One small, invented CoCM caseload, used by every metric page from
-[metric 1](metrics/01-total-enrollment.md) to [metric 8](metrics/08-psychiatric-consultation-rate.md).
-Each metric page takes the slice it needs, so the eight results below all come from the
-same patients.
+This page sets out one small, invented CoCM caseload. Every metric page from
+[metric 1](metrics/01-total-enrollment.md) to [metric 8](metrics/08-psychiatric-consultation-rate.md)
+uses it. Each page uses the part of the data it needs, so the eight results below all come
+from the same patients.
 
 **Reporting month:** March 2025. The metric 8 review window is 31 January to 31 March.
 
 The same patients are test data in [`tests/fixtures/example-caseload`](../../tests/fixtures/example-caseload),
-in the data contract's shape, with the expected results in `expected.toml`. Any tool that
+in the format the data contract sets out, with the expected results in `expected.toml`. Any tool that
 calculates the metrics should reproduce the results below from it.
 
 ## The patients
@@ -28,9 +28,9 @@ calculates the metrics should reproduce the results below from it.
 
 ## Their scores and contacts
 
-March in detail. Every patient also had a treatment contact at least monthly from
-enrollment until March, except P4, whose last was on 10 December; P4's calls since then
-went unanswered.
+The table shows March in detail. Every patient also had a treatment contact at least
+monthly from enrollment until March, except P4, whose last contact was on 10 December;
+P4's calls since then went unanswered.
 
 | Patient | Baseline | Elevated? | March activity | Last psychiatric review |
 |---|---|---|---|---|

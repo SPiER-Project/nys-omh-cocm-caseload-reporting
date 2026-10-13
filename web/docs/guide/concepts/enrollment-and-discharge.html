@@ -27,7 +27,7 @@
 <main id="main">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../start-here.html">Guide</a></li><li><a href="reporting-month.html">Concepts</a></li></ol></nav>
 <h1 id="enrollment-and-discharge">Enrollment and discharge</h1>
-<p>Who is enrolled in CoCM, from when, and until when. Every CoCM metric starts here: get enrollment wrong and metrics 1 to 8 are all wrong in the same direction.</p>
+<p>This page defines who is enrolled in CoCM, from when, and until when. Every CoCM metric depends on enrollment: if it's wrong, metrics 1 to 8 are all wrong in the same direction.</p>
 <p><strong>Used by:</strong> metrics 1 to 8.</p>
 <h2 id="what-nys-says">What NYS says</h2>
 <ul>
@@ -42,10 +42,10 @@
 <p>A patient is enrolled from a <strong>documented CoCM enrollment</strong> until they are discharged. The record can be a registry enrollment or a structured program-enrollment record in the EHR. <em>Our call: <a href="../../reference/our-calls.html#what-counts-as-enrolled">what counts as enrolled</a>.</em></p>
 <ul>
 <li>A referral is not an enrollment. Neither is a warm handoff or verbal consent with nothing recorded.</li>
-<li>A site with no enrollment record at all may infer enrollment from CoCM billing (99492, 99493, 99494, T2022, G2214, G0512), and must say so in its submission. Billing undercounts: an enrolled patient can go a month without a billable service.</li>
+<li>A site with no enrollment record at all may infer enrollment from CoCM billing (99492, 99493, 99494, T2022, G2214, G0512), and must say so in its submission. Billing undercounts enrollment, because an enrolled patient can go a month without a billable service.</li>
 </ul>
 <h3 id="enrollment-date">Enrollment date</h3>
-<p>The enrollment date is <strong>the date of the BHCM's initial assessment</strong>. If the assessment takes more than one contact, use the first contact at which a symptom-monitoring scale was given. This one date is the start for every metric. <em>Our call: <a href="../../reference/our-calls.html#enrollment-date">enrollment date</a>.</em></p>
+<p>The enrollment date is <strong>the date of the BHCM's initial assessment</strong>. If the assessment takes more than one contact, use the first contact at which a symptom-monitoring scale was given. Every metric uses this date as the start of enrollment. <em>Our call: <a href="../../reference/our-calls.html#enrollment-date">enrollment date</a>.</em></p>
 <h3 id="discharge">Discharge</h3>
 <p>A patient is discharged on the date their CoCM episode is closed, for any reason: graduation, transfer to specialty care, withdrawal, loss to follow-up, death.</p>
 <p>A patient with <strong>no clinical contact for 90 consecutive days</strong> is discharged, with a discharge date of the last clinical contact plus 90 days. If there has been no clinical contact since enrollment, count the 90 days from the enrollment date. <em>Our call: <a href="../../reference/our-calls.html#inactivity-discharge">inactivity discharge</a>.</em></p>
@@ -82,7 +82,7 @@
 <li>D counts as enrolled in March, with no contact, so D lowers March's <a href="../metrics/05-monthly-contact-rate.html">contact rate</a>.</li>
 <li>D's 90 inactive days lengthen average duration.</li>
 </ul>
-<p>Both are accurate: the patient was on the caseload and wasn't being reached. The fix is operational, not a reporting one: discharge disengaged patients sooner than 90 days where the program's protocol allows.</p>
+<p>Both effects are accurate, because the patient was on the caseload and wasn't being reached. To avoid them, change how the program runs rather than how it reports: discharge disengaged patients sooner than 90 days where the program's protocol allows.</p>
 <h2 id="what-the-program-should-do">What the program should do</h2>
 <ul>
 <li>Record the enrollment at the initial assessment, with that date, not when the referral arrives.</li>
@@ -104,7 +104,7 @@
 <ul>
 <li>An episode status of "planned", "waitlist" or "referred" is not an enrollment.</li>
 <li>An episode can be closed without an end date. Don't fill the gap from the date the record was last updated; that's a documentation date.</li>
-<li>A cancelled episode may have been a cancelled referral (never enrolled) or a discharge. Only the history shows which.</li>
+<li>A cancelled episode may have been a cancelled referral (never enrolled) or a discharge. Only the episode's history can show which.</li>
 </ul>
 <p>The <a href="../../collecting/registries/prototype-cocm-registry.html#episode-status">prototype registry mapping</a> works through each of these.</p>
 <h2 id="common-mistakes">Common mistakes</h2>

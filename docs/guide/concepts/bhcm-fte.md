@@ -1,7 +1,7 @@
 # BHCM FTE
 
-How much behavioral health care manager (BHCM) time the practice devotes to CoCM. It's
-reported on its own as metric 11, and it's the yardstick NYS uses for caseload size.
+BHCM FTE is how much behavioral health care manager (BHCM) time the practice devotes to
+CoCM. It's reported on its own as metric 11, and NYS also uses it to judge caseload size.
 
 **Used by:** metric 11, and the optimal-caseload reference in metric 1.
 
@@ -49,8 +49,8 @@ which is above NYS's optimal caseload of more than 75.
 
 - Keep a simple monthly record of each BHCM's CoCM share, and of start dates, end dates
   and extended leave.
-- Recheck the shares when someone's role changes. A BHCM who picks up other duties is
-  the usual reason the figure drifts.
+- Recheck the shares when someone's role changes. The figure most often drifts because a
+  BHCM has picked up other duties.
 
 ## Where the data lives
 

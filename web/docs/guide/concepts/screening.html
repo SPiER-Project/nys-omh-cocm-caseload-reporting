@@ -63,9 +63,9 @@
 <li>visits with diabetes educators, nutritionists, care coordinators or community health workers;</li>
 <li>phone calls without a billed E&amp;M service, and portal messages.</li>
 </ul>
-<p>NYS leaves the criteria to each practice's workflow. The guide sets one standard so that rates from different practices mean the same thing. A practice whose workflow is different (for example, adults only) should disclose it.</p>
+<p>NYS leaves the criteria to each practice's workflow. This guide uses one standard so that rates from different practices mean the same thing. A practice whose workflow is different (for example, adults only) should disclose it.</p>
 <h3 id="what-counts-as-screened-metric-9-numerator">What counts as screened (metric 9 numerator)</h3>
-<p>A patient is screened if they have a <strong>scored PHQ-2 or PHQ-9 dated in the 12 months ending on the last day of the month</strong>. Who gave it and why don't matter. <em>Our call: <a href="../../reference/our-calls.html#what-counts-as-screened">what counts as screened</a>.</em></p>
+<p>A patient is screened if they have a <strong>scored PHQ-2 or PHQ-9 dated in the 12 months ending on the last day of the month</strong>. It doesn't matter who gave it or why. <em>Our call: <a href="../../reference/our-calls.html#what-counts-as-screened">what counts as screened</a>.</em></p>
 <ul>
 <li>A CoCM patient's monitoring PHQ-9 counts.</li>
 <li>A positive PHQ-2 with no follow-up PHQ-9 still counts as screened. Following up a positive screen is good care, but it isn't what metric 9 measures.</li>
@@ -73,7 +73,7 @@
 <li>A PHQ-A (the adolescent PHQ-9) counts as a PHQ-9. <em>Our call: <a href="../../reference/our-calls.html#phq-a-counts-as-phq-9">PHQ-A counts as PHQ-9</a>.</em></li>
 </ul>
 <h3 id="initial-phq-9-metric-10">Initial PHQ-9 (metric 10)</h3>
-<p>A PHQ-9 is a patient's <strong>initial PHQ-9</strong> if it's dated this month and the patient has <strong>no other scored PHQ-9 in the 365 days before it</strong>. Each patient counts at most once a month, on their first PHQ-9 of the month. Who gave it doesn't matter. <em>Our call: <a href="../../reference/our-calls.html#initial-phq-9">initial PHQ-9</a>.</em></p>
+<p>A PHQ-9 is a patient's <strong>initial PHQ-9</strong> if it's dated this month and the patient has <strong>no other scored PHQ-9 in the 365 days before it</strong>. Each patient counts at most once a month, on their first PHQ-9 of the month. It doesn't matter who gave it. <em>Our call: <a href="../../reference/our-calls.html#initial-phq-9">initial PHQ-9</a>.</em></p>
 <ul>
 <li><strong>Denominator:</strong> patients with an initial PHQ-9 this month.</li>
 <li><strong>Numerator:</strong> those whose initial PHQ-9 scored 10 or more.</li>
@@ -85,7 +85,7 @@
 <li>Metric 9 counts any PHQ.</li>
 <li>Metric 10's 365-day rule excludes a CoCM patient's monthly PHQ-9s on its own, because each follows another within a year.</li>
 </ul>
-<p>That removes the hardest step in building the report from an EHR.</p>
+<p>Dropping the label removes the hardest step in building the report from an EHR.</p>
 <h2 id="worked-example">Worked example</h2>
 <p>Reporting month: March 2025. The same patients are test data in <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/tree/main/tests/fixtures/screening-example"><code>tests/fixtures/screening-example</code></a>, with the expected results in <code>expected.toml</code>.</p>
 <div class="table"><table>
@@ -109,7 +109,7 @@
 <ul>
 <li><strong>Write down the practice's screening workflow</strong> and compare it with the rule above. Disclose any differences, such as a different age floor.</li>
 <li><strong>Record every PHQ-2 and PHQ-9 as a scored, structured result</strong>, including declines, so a decline isn't mistaken for a missed screen.</li>
-<li><strong>Screen at the visit when the last screen is close to a year old</strong>, not only at annual physicals. Patients who come in only for acute visits are the usual gap.</li>
+<li><strong>Screen at the visit when the last screen is close to a year old</strong>, not only at annual physicals. Patients who come in only for acute visits are the ones most often missed.</li>
 </ul>
 <h2 id="where-the-data-lives">Where the data lives</h2>
 <p>All of it is in the EHR or practice-management system.</p>

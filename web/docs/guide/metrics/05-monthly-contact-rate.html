@@ -60,7 +60,7 @@
 <p><strong>Metric 5: 7 of 8, 87.5%.</strong> P4 counts against the rate in the month of their inactivity discharge, because they were still enrolled for the first ten days of March.</p>
 <p>The <a href="../concepts/contacts-and-reviews.html#worked-example">contacts and reviews</a> page has a second example with the harder cases: a scale with no contact, a contact with no scale, and a portal message.</p>
 <h2 id="where-the-data-lives">Where the data lives</h2>
-<p>Contacts from the registry's contact log, or BHCM and telephone encounters in the EHR. Scales from the registry's scale table, or questionnaires and flowsheets in the EHR. See <a href="../concepts/contacts-and-reviews.html#where-the-data-lives">contacts and reviews</a>.</p>
+<p>Contacts come from the registry's contact log, or from BHCM and telephone encounters in the EHR. Scales come from the registry's scale table, or from questionnaires and flowsheets in the EHR. See <a href="../concepts/contacts-and-reviews.html#where-the-data-lives">contacts and reviews</a>.</p>
 <h2 id="common-mistakes">Common mistakes</h2>
 <div class="table"><table>
 <thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
@@ -74,7 +74,7 @@
 </table></div>
 <details class="dev" id="for-automation">
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
-<p>Reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a>, <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a> (<code>contact_kind = treatment</code>) and <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a>.</p>
+<p>The calculator reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a>, <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a> (<code>contact_kind = treatment</code>) and <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a>.</p>
 </details>
 <nav class="pager" aria-label="Previous and next">
 <a class="prev" rel="prev" href="04-average-duration-of-treatment.html"><small>Previous</small><strong>4. Average duration of treatment</strong></a>

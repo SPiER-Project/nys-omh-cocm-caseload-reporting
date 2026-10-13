@@ -33,13 +33,13 @@
 </blockquote>
 <p><strong>Reported as:</strong> a count. <strong>Population:</strong> CoCM, Medicaid.</p>
 <h2 id="the-rule">The rule</h2>
-<p><a href="01-total-enrollment.html">Metric 1</a>, limited to <a href="../concepts/medicaid.html">Medicaid patients</a>: patients with active New York State Medicaid coverage on the first day of the month, fee-for-service or managed care, primary or secondary.</p>
+<p>Metric 2 is <a href="01-total-enrollment.html">metric 1</a> limited to <a href="../concepts/medicaid.html">Medicaid patients</a>: patients with active New York State Medicaid coverage on the first day of the month, fee-for-service or managed care, primary or secondary.</p>
 <p>This count is also the denominator for metrics 5 and 7.</p>
 <h2 id="worked-example">Worked example</h2>
 <p>From the <a href="../example-caseload.html">example caseload</a>: metric 1's nine patients, less P5, who has commercial coverage. P3 is dual Medicare–Medicaid and counts; P6 is in a HARP, which is Medicaid managed care, and counts.</p>
 <p><strong>Metric 2: 8.</strong></p>
 <h2 id="where-the-data-lives">Where the data lives</h2>
-<p>Enrollment from the registry or EHR; coverage from the practice-management or billing system. The <a href="../concepts/medicaid.html#what-the-program-should-do">Medicaid</a> page covers the payer mapping this depends on.</p>
+<p>Enrollment comes from the registry or EHR, and coverage from the practice-management or billing system. The <a href="../concepts/medicaid.html#what-the-program-should-do">Medicaid</a> page covers the payer mapping this depends on.</p>
 <h2 id="common-mistakes">Common mistakes</h2>
 <div class="table"><table>
 <thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
@@ -47,12 +47,12 @@
 <tr><td>Missing Medicaid managed care plans listed by plan name</td><td>Understated</td></tr>
 <tr><td>Counting Child Health Plus or Essential Plan members</td><td>Overstated</td></tr>
 <tr><td>Dropping dual eligibles because Medicare is primary</td><td>Understated</td></tr>
-<tr><td>Using today's payer instead of the first of the month</td><td>Patients reclassified after the fact</td></tr>
+<tr><td>Using today's payer instead of the first of the month</td><td>Patients are reclassified after the fact</td></tr>
 </tbody>
 </table></div>
 <details class="dev" id="for-automation">
 <summary><h2>For automation</h2> <span>For developers building their own report. Not needed to report.</span></summary>
-<p>Reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a> and <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, and <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a> for the inactivity discharge.</p>
+<p>The calculator reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a> and <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, and <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a> for the inactivity discharge.</p>
 </details>
 <nav class="pager" aria-label="Previous and next">
 <a class="prev" rel="prev" href="01-total-enrollment.html"><small>Previous</small><strong>1. Total enrollment</strong></a>

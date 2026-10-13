@@ -27,9 +27,9 @@
 <main id="main">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="start-here.html">Guide</a></li></ol></nav>
 <h1 id="example-caseload">Example caseload</h1>
-<p>One small, invented CoCM caseload, used by every metric page from <a href="metrics/01-total-enrollment.html">metric 1</a> to <a href="metrics/08-psychiatric-consultation-rate.html">metric 8</a>. Each metric page takes the slice it needs, so the eight results below all come from the same patients.</p>
+<p>This page sets out one small, invented CoCM caseload. Every metric page from <a href="metrics/01-total-enrollment.html">metric 1</a> to <a href="metrics/08-psychiatric-consultation-rate.html">metric 8</a> uses it. Each page uses the part of the data it needs, so the eight results below all come from the same patients.</p>
 <p><strong>Reporting month:</strong> March 2025. The metric 8 review window is 31 January to 31 March.</p>
-<p>The same patients are test data in <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/tree/main/tests/fixtures/example-caseload"><code>tests/fixtures/example-caseload</code></a>, in the data contract's shape, with the expected results in <code>expected.toml</code>. Any tool that calculates the metrics should reproduce the results below from it.</p>
+<p>The same patients are test data in <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/tree/main/tests/fixtures/example-caseload"><code>tests/fixtures/example-caseload</code></a>, in the format the data contract sets out, with the expected results in <code>expected.toml</code>. Any tool that calculates the metrics should reproduce the results below from it.</p>
 <h2 id="the-patients">The patients</h2>
 <div class="table"><table>
 <thead><tr><th scope="col">Patient</th><th scope="col">Coverage on 1 March</th><th scope="col">Enrolled</th><th scope="col">Discharged</th><th scope="col">Primary scale</th></tr></thead>
@@ -47,7 +47,7 @@
 </tbody>
 </table></div>
 <h2 id="their-scores-and-contacts">Their scores and contacts</h2>
-<p>March in detail. Every patient also had a treatment contact at least monthly from enrollment until March, except P4, whose last was on 10 December; P4's calls since then went unanswered.</p>
+<p>The table shows March in detail. Every patient also had a treatment contact at least monthly from enrollment until March, except P4, whose last contact was on 10 December; P4's calls since then went unanswered.</p>
 <div class="table"><table>
 <thead><tr><th scope="col">Patient</th><th scope="col">Baseline</th><th scope="col">Elevated?</th><th scope="col">March activity</th><th scope="col">Last psychiatric review</th></tr></thead>
 <tbody>

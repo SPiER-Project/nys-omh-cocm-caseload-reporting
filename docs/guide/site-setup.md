@@ -1,7 +1,7 @@
 # Site setup
 
-The decisions and fixes a site makes once, before its first report, and revisits only
-when its systems or program change. Most monthly reporting problems trace back to one of
+A site makes the decisions and fixes on this page once, before its first report, and
+revisits them only when its systems or program change. Most monthly reporting problems trace back to one of
 these steps being skipped.
 
 Work through them in order. Allow a few weeks: several steps need someone from billing or
@@ -40,8 +40,8 @@ List every payer and plan the practice bills, and assign each one a category:
 
 - **Map by plan, not by carrier.** Many carriers sell Medicaid managed care, Child Health
   Plus, Essential Plan and commercial plans under the same name.
-- **Confirm the coverage report shows effective dates**, so status can be taken on the
-  first of the month.
+- **Confirm the coverage report shows effective dates**, so each patient's coverage can
+  be taken as of the first of the month.
 - **Keep the mapping as a list the billing contact owns**, and add new plans as they
   appear.
 
@@ -59,8 +59,8 @@ See [Medicaid](concepts/medicaid.md#what-the-program-should-do).
   <!--rule:inactivity-discharge.days-->90<!--/rule-->-day review part of the monthly routine.
 - **Returning patients get a new episode**, not a reopened one.
 
-If there's no enrollment record at all, the site will infer enrollment from billing and
-must disclose it. A structured enrollment record is worth setting up instead. See
+If there's no enrollment record at all, the site has to infer enrollment from billing
+and disclose that it did. It's better to set up a structured enrollment record. See
 [enrollment and discharge](concepts/enrollment-and-discharge.md).
 
 ## 6. Set the primary scale
@@ -81,12 +81,12 @@ With the clinical reviewer:
 
 ## 7. Decide what counts as a treatment contact
 
-Write down, in one sentence, how the records tell a treatment contact from an outreach
-attempt, a scheduling call or a message. For example:
+Write down, in one sentence, how someone reading the records can tell a treatment contact
+from an outreach attempt, a scheduling call or a message. For example:
 - "a contact marked 'session' in the registry"; or
 - "a BHCM encounter with a signed progress note on the same day".
 
-The rule goes in every submission. If the records can't tell them apart, change the
+Include this rule with every submission. If the records can't tell them apart, change the
 contact log so they can; until then, the contact rate will be overstated. See
 [clinical contact](concepts/contacts-and-reviews.md#clinical-contact).
 
@@ -119,9 +119,9 @@ See [screening](concepts/screening.md).
 ## 10. Check dates
 
 Pick five events from late on the last day of a recent month: a scale, a contact, a
-visit. Confirm each one's date comes out as that day in the extract, not the next. If
-any come out a day late, the source stores UTC timestamps; convert them to local time
-before taking the date. See [reporting month](concepts/reporting-month.md).
+visit. Confirm that each one has that day's date in the extract, not the next day's. If any are dated
+a day late, the source stores UTC timestamps; convert them to local time before taking
+the date. See [reporting month](concepts/reporting-month.md).
 
 ## 11. Set up BHCM FTE
 
@@ -148,7 +148,7 @@ Report a recent past month in full before the first real submission.
 ## The setup record
 
 Keep a copy of this table with the site's reporting files, and update it when anything
-changes. Its answers are what the site discloses to NYS.
+changes. The site discloses these answers to NYS.
 
 | Decision | Our answer | Decided by | Date |
 |---|---|---|---|

@@ -1,0 +1,146 @@
+<!doctype html>
+<!-- Built from docs/guide/example-caseload.md by scripts/build_guide.py. Edit the Markdown, then rebuild. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Example caseload · CoCM caseload reporting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root {
+    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --mist: #eef3f2; --line: #cfdad7;
+    --spruce: #1f6f5c; --spruce-soft: #dcebe6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121a1f; --ink: #e3ebee; --muted: #9db0b8; --mist: #1a252b; --line: #2e3d44;
+      --spruce: #6fc4ab; --spruce-soft: #18342c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 17px/1.6 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .site { border-bottom: 1px solid var(--line); background: var(--mist); }
+  .site nav { max-width: 46rem; margin: 0 auto; padding: .6rem 1rem; display: flex; flex-wrap: wrap;
+              gap: .25rem 1.1rem; font-size: .95rem; }
+  .site a { color: var(--ink); text-decoration: none; }
+  .site a:hover, .site a[aria-current] { color: var(--spruce); text-decoration: underline; }
+  .site a.home { font-weight: 700; margin-right: auto; }
+  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
+  h2 { font-size: 1.35rem; line-height: 1.3; margin: 2.2rem 0 .6rem; }
+  h3 { font-size: 1.1rem; margin: 1.6rem 0 .5rem; }
+  h4, h5, h6 { font-size: 1rem; margin: 1.2rem 0 .4rem; }
+  p, ul, ol, blockquote, pre, .table { margin: 0 0 1rem; }
+  li { margin: .2rem 0; }
+  li > ul, li > ol { margin: .2rem 0; }
+  a { color: var(--spruce); text-underline-offset: .15em; }
+  :focus-visible { outline: 3px solid var(--spruce); outline-offset: 2px; border-radius: 4px; }
+  code { font: .9em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--mist);
+         padding: .05em .3em; border-radius: 4px; overflow-wrap: anywhere; }
+  pre { background: var(--mist); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; }
+  pre code { background: none; padding: 0; overflow-wrap: normal; }
+  blockquote { border-left: 4px solid var(--spruce); background: var(--mist); padding: .6rem 1rem;
+               border-radius: 0 8px 8px 0; }
+  blockquote > :last-child { margin-bottom: 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+  .table { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-size: .9rem; }
+  footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .9rem; }
+  footer a { color: var(--muted); }
+  @media (max-width: 34rem) { h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+<header class="site"><nav aria-label="Site">
+<a class="home" href="../../index.html">CoCM caseload calculator</a>
+<a href="start-here.html">Start here</a>
+<a href="../collecting/requests.html">Asking for the data</a>
+<a href="site-setup.html">Site setup</a>
+<a href="about-the-program.html">About the program</a>
+</nav></header>
+<main>
+<h1 id="example-caseload">Example caseload</h1>
+<p>One small, invented CoCM caseload, used by every metric page from <a href="metrics/01-total-enrollment.html">metric 1</a> to <a href="metrics/08-psychiatric-consultation-rate.html">metric 8</a>. Each metric page takes the slice it needs, so the eight results below all come from the same patients.</p>
+<p><strong>Reporting month:</strong> March 2025. The metric 8 review window is 31 January to 31 March.</p>
+<p>The same patients are test data in <a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/tree/main/tests/fixtures/example-caseload"><code>tests/fixtures/example-caseload</code></a>, in the data contract's shape, with the expected results in <code>expected.toml</code>. Any tool that calculates the metrics should reproduce the results below from it.</p>
+<h2 id="the-patients">The patients</h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Patient</th><th scope="col">Coverage on 1 March</th><th scope="col">Enrolled</th><th scope="col">Discharged</th><th scope="col">Primary scale</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>Medicaid managed care</td><td>4 Nov 2024</td><td>—</td><td>PHQ-9</td></tr>
+<tr><td>P2</td><td>Medicaid fee-for-service</td><td>12 Mar 2025</td><td>—</td><td>PHQ-9</td></tr>
+<tr><td>P3</td><td>Medicare and Medicaid (dual)</td><td>6 Jan 2025</td><td>—</td><td>PHQ-9</td></tr>
+<tr><td>P4</td><td>Medicaid managed care</td><td>1 Oct 2024</td><td>10 Mar 2025, inactivity (last contact 10 Dec 2024)</td><td>GAD-7</td></tr>
+<tr><td>P5</td><td>Commercial</td><td>3 Feb 2025</td><td>—</td><td>PHQ-9</td></tr>
+<tr><td>P6</td><td>Medicaid managed care (HARP)</td><td>2 Dec 2024</td><td>—</td><td>PCL-5</td></tr>
+<tr><td>P7</td><td>Medicaid fee-for-service</td><td>16 Sep 2024</td><td>—</td><td>PHQ-9</td></tr>
+<tr><td>P8</td><td>Medicaid managed care</td><td>16 Dec 2024</td><td>—</td><td>PHQ-9</td></tr>
+<tr><td>P9</td><td>Medicaid managed care</td><td>9 Dec 2024</td><td>21 Mar 2025, graduated</td><td>PHQ-9</td></tr>
+<tr><td>P10</td><td>Medicaid managed care</td><td>2 Sep 2024</td><td>27 Feb 2025, graduated</td><td>PHQ-9</td></tr>
+</tbody>
+</table></div>
+<h2 id="their-scores-and-contacts">Their scores and contacts</h2>
+<p>March in detail. Every patient also had a treatment contact at least monthly from enrollment until March, except P4, whose last was on 10 December; P4's calls since then went unanswered.</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Patient</th><th scope="col">Baseline</th><th scope="col">Elevated?</th><th scope="col">March activity</th><th scope="col">Last psychiatric review</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>18 (12 Nov)</td><td>Yes</td><td>Phone session and PHQ-9 of 8, 10 Mar</td><td>12 Feb, with recommendation</td></tr>
+<tr><td>P2</td><td>14 (12 Mar)</td><td>Yes</td><td>Initial assessment and PHQ-9, 12 Mar; video session, 26 Mar</td><td>—</td></tr>
+<tr><td>P3</td><td>15 (13 Jan)</td><td>Yes</td><td>Video session and PHQ-9 of 7, 17 Mar</td><td>3 Mar, with recommendation</td></tr>
+<tr><td>P4</td><td>16 (8 Oct)</td><td>Yes</td><td>None. Last GAD-7 was 12, on 10 Dec</td><td>20 Nov, with recommendation</td></tr>
+<tr><td>P5</td><td>13 (10 Feb)</td><td>Yes</td><td>Phone session and PHQ-9 of 11, 7 Mar</td><td>—</td></tr>
+<tr><td>P6</td><td>48 (9 Dec)</td><td>Yes, with the PCL-5 threshold of 33, which needs clinical sign-off</td><td>In-person session and PCL-5 of 40, 20 Mar</td><td>5 Mar, with recommendation</td></tr>
+<tr><td>P7</td><td>12 (16 Sep)</td><td>Yes</td><td>Phone session and PHQ-9 of 3, 24 Mar (February's was 4)</td><td>15 Jan, with recommendation</td></tr>
+<tr><td>P8</td><td>8 (18 Dec)</td><td><strong>No</strong></td><td>Video session and PHQ-9 of 4, 6 Mar</td><td>—</td></tr>
+<tr><td>P9</td><td>13 (9 Dec)</td><td>Yes</td><td>Phone session and PHQ-9 of 4, 14 Mar</td><td>26 Feb, with recommendation</td></tr>
+<tr><td>P10</td><td>—</td><td>—</td><td>None (discharged in February)</td><td>—</td></tr>
+</tbody>
+</table></div>
+<h2 id="derived-facts">Derived facts</h2>
+<p>The calculator, or the report writer, derives these from the two tables above. The concept pages explain each rule.</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Patient</th><th scope="col">Enrolled this month?</th><th scope="col">Medicaid?</th><th scope="col">Days in treatment</th><th scope="col">70+ days?</th><th scope="col">Active treatment?</th><th scope="col">Improved?</th><th scope="col">In remission?</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>Yes</td><td>Yes</td><td>147</td><td>Yes</td><td>Yes</td><td>Yes: 8 is below 10</td><td>No: 8 isn't below 5</td></tr>
+<tr><td>P2</td><td>Yes</td><td>Yes</td><td>19</td><td>No</td><td>Yes</td><td>—</td><td>No</td></tr>
+<tr><td>P3</td><td>Yes</td><td>Yes</td><td>84</td><td>Yes</td><td>Yes</td><td>Yes: 7 is below 10</td><td>No</td></tr>
+<tr><td>P4</td><td>Yes, discharged 10 Mar</td><td>Yes</td><td>160, to discharge</td><td>Yes</td><td>No: no contact or scale</td><td>No: 12 is neither below 10 nor half of 16</td><td>No: no score in March</td></tr>
+<tr><td>P5</td><td>Yes</td><td>No</td><td>56</td><td>No</td><td>Yes</td><td>—</td><td>—</td></tr>
+<tr><td>P6</td><td>Yes</td><td>Yes</td><td>119</td><td>Yes</td><td>Yes</td><td>No: 8 points better, needs 12</td><td>No: 40 isn't below 33</td></tr>
+<tr><td>P7</td><td>Yes</td><td>Yes</td><td>196</td><td>Yes</td><td>Yes</td><td>Yes</td><td><strong>Yes</strong>: 3 is below 5</td></tr>
+<tr><td>P8</td><td>Yes</td><td>Yes</td><td>105</td><td>Yes</td><td>Yes</td><td>Not assessed: no elevated baseline</td><td>No: 4 is below 5, but no elevated baseline</td></tr>
+<tr><td>P9</td><td>Yes, discharged 21 Mar</td><td>Yes</td><td>102, to discharge</td><td>Yes</td><td>Yes</td><td>Yes</td><td><strong>Yes</strong>: 4 on 14 Mar</td></tr>
+<tr><td>P10</td><td>No</td><td>Yes</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody>
+</table></div>
+<h2 id="the-results">The results</h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Metric</th><th scope="col">Result</th><th scope="col">Page</th></tr></thead>
+<tbody>
+<tr><td>1. Total enrollment</td><td>9</td><td><a href="metrics/01-total-enrollment.html">metric 1</a></td></tr>
+<tr><td>2. Medicaid enrollment</td><td>8</td><td><a href="metrics/02-medicaid-enrollment.html">metric 2</a></td></tr>
+<tr><td>3. Newly enrolled</td><td>1</td><td><a href="metrics/03-newly-enrolled.html">metric 3</a></td></tr>
+<tr><td>4. Average duration of treatment</td><td>18.7 weeks</td><td><a href="metrics/04-average-duration-of-treatment.html">metric 4</a></td></tr>
+<tr><td>5. Monthly contact rate</td><td>7 of 8, 87.5%</td><td><a href="metrics/05-monthly-contact-rate.html">metric 5</a></td></tr>
+<tr><td>6. Improvement rate</td><td>4 of 6, 66.7%</td><td><a href="metrics/06-improvement-rate.html">metric 6</a></td></tr>
+<tr><td>7. Remission rate</td><td>2 of 8, 25.0%</td><td><a href="metrics/07-remission-rate.html">metric 7</a></td></tr>
+<tr><td>8. Psychiatric consultation rate</td><td>1 of 2, 50.0%</td><td><a href="metrics/08-psychiatric-consultation-rate.html">metric 8</a></td></tr>
+</tbody>
+</table></div>
+<p>Metrics 9 and 10 use the whole practice, not the caseload; their example is on the <a href="concepts/screening.html#worked-example">screening</a> page. Metric 11's is on the <a href="concepts/bhcm-fte.html#worked-example">BHCM FTE</a> page.</p>
+</main>
+<footer>
+<p>An opinionated guide to the NYS Office of Mental Health's Collaborative Care caseload
+metrics. An independent project, not an OMH product. Every call it makes is provisional
+until approved.</p>
+<p><a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/example-caseload.md">This page on GitHub</a></p>
+</footer>
+</body>
+</html>

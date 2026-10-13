@@ -47,7 +47,7 @@ The guide comes first. Tooling follows the guide, never the other way round.
 | `docs/archive/` | Draft v0.1 and its review notes. Frozen: never edit; fix the guide instead |
 | `rules/calls.toml` | Every value the calls set; the calculator's settings |
 | `calculator/` | Standard-library Python: checks, compute, CSV, workbook and FHIR readers, pseudonyms, and the CLI and browser entry points |
-| `web/` | The browser page and the downloads Pages publishes |
+| `web/` | The browser page, the downloads and the guide's pages, all published by Pages |
 | `tests/` | Fixtures (synthetic), the worked-example registry and its lock file, unit tests |
 | `scripts/` | Builders and checkers |
 
@@ -60,6 +60,7 @@ The guide comes first. Tooling follows the guide, never the other way round.
 | `docs/reference/data-contract.md` | `calculator/schema.py` | `python3 scripts/build_schema.py` |
 | The data contract and the example fixture | `web/cocm-workbook*.xlsx` and `web/cocm-csv-*.zip` | `python3 scripts/build_workbook.py` |
 | `web/template.html`, `calculator/`, the rules, the example | `web/index.html` | `python3 scripts/build_web.py` |
+| `docs/guide/`, `docs/collecting/`, `docs/reference/` | The guide's pages, `web/docs/` | `python3 scripts/build_guide.py` |
 
 - Never edit generated output or text between markers. Change the source and rebuild.
 - If a call changes, a worked example that depends on it goes stale. Rework the example on
@@ -73,7 +74,7 @@ CI runs all of these on every PR. Run them before committing:
 python3 scripts/rules.py check && python3 scripts/examples.py check && \
 python3 -m unittest discover tests && python3 scripts/build_schema.py --check && \
 python3 scripts/build_workbook.py --check && python3 scripts/build_web.py --check && \
-python3 scripts/check_links.py
+python3 scripts/build_guide.py --check && python3 scripts/check_links.py
 ```
 
 ## Conventions
@@ -88,4 +89,5 @@ python3 scripts/check_links.py
   - one PR per piece of work, branched from `origin/main`;
   - the user reviews and merges, then asks for the next piece;
   - never stack a PR on another PR's branch.
-- **Pages** republishes `web/` on every push to `main`.
+- **Pages** republishes `web/` on every push to `main`. The guide is read there, at
+  `docs/guide/start-here.html`: after changing a doc, rebuild its page.

@@ -1,0 +1,130 @@
+<!doctype html>
+<!-- Built from docs/guide/concepts/medicaid.md by scripts/build_guide.py. Edit the Markdown, then rebuild. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medicaid · CoCM caseload reporting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root {
+    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --mist: #eef3f2; --line: #cfdad7;
+    --spruce: #1f6f5c; --spruce-soft: #dcebe6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121a1f; --ink: #e3ebee; --muted: #9db0b8; --mist: #1a252b; --line: #2e3d44;
+      --spruce: #6fc4ab; --spruce-soft: #18342c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 17px/1.6 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .site { border-bottom: 1px solid var(--line); background: var(--mist); }
+  .site nav { max-width: 46rem; margin: 0 auto; padding: .6rem 1rem; display: flex; flex-wrap: wrap;
+              gap: .25rem 1.1rem; font-size: .95rem; }
+  .site a { color: var(--ink); text-decoration: none; }
+  .site a:hover, .site a[aria-current] { color: var(--spruce); text-decoration: underline; }
+  .site a.home { font-weight: 700; margin-right: auto; }
+  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
+  h2 { font-size: 1.35rem; line-height: 1.3; margin: 2.2rem 0 .6rem; }
+  h3 { font-size: 1.1rem; margin: 1.6rem 0 .5rem; }
+  h4, h5, h6 { font-size: 1rem; margin: 1.2rem 0 .4rem; }
+  p, ul, ol, blockquote, pre, .table { margin: 0 0 1rem; }
+  li { margin: .2rem 0; }
+  li > ul, li > ol { margin: .2rem 0; }
+  a { color: var(--spruce); text-underline-offset: .15em; }
+  :focus-visible { outline: 3px solid var(--spruce); outline-offset: 2px; border-radius: 4px; }
+  code { font: .9em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--mist);
+         padding: .05em .3em; border-radius: 4px; overflow-wrap: anywhere; }
+  pre { background: var(--mist); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; }
+  pre code { background: none; padding: 0; overflow-wrap: normal; }
+  blockquote { border-left: 4px solid var(--spruce); background: var(--mist); padding: .6rem 1rem;
+               border-radius: 0 8px 8px 0; }
+  blockquote > :last-child { margin-bottom: 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+  .table { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-size: .9rem; }
+  footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .9rem; }
+  footer a { color: var(--muted); }
+  @media (max-width: 34rem) { h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+<header class="site"><nav aria-label="Site">
+<a class="home" href="../../../index.html">CoCM caseload calculator</a>
+<a href="../start-here.html">Start here</a>
+<a href="../../collecting/requests.html">Asking for the data</a>
+<a href="../site-setup.html">Site setup</a>
+<a href="../about-the-program.html">About the program</a>
+</nav></header>
+<main>
+<h1 id="medicaid">Medicaid</h1>
+<p>Which patients are Medicaid patients for the month. Seven of the eleven metrics count only Medicaid patients, so a payer mapping that misses a managed care plan understates all seven.</p>
+<p><strong>Used by:</strong> metrics 2 to 8. Metrics 1, 9, 10 and 11 are all-payer; don't apply this filter to them.</p>
+<h2 id="what-nys-says">What NYS says</h2>
+<p>Metrics 2 to 8 count "Medicaid patients". Metric 7's description says "patients enrolled in treatment", but its numerator and denominator say Medicaid patients. NYS doesn't define a Medicaid patient. (<a href="../../reference/nys-source/nys-omh-cocm-metrics-2025.html">Source</a>)</p>
+<h2 id="the-rule">The rule</h2>
+<p>A patient is a Medicaid patient for the month if, <strong>on the first day of the month</strong>, they have active New York State Medicaid coverage. <em>Our call: <a href="../../reference/our-calls.html#who-counts-as-medicaid">who counts as Medicaid</a>.</em></p>
+<div class="table"><table>
+<thead><tr><th scope="col">Counts</th><th scope="col">Doesn't count</th></tr></thead>
+<tbody>
+<tr><td>Medicaid fee-for-service</td><td>Child Health Plus</td></tr>
+<tr><td>Medicaid managed care, under any plan name</td><td>Essential Plan</td></tr>
+<tr><td>Health and Recovery Plans (HARPs), which are Medicaid managed care</td><td>Medicare only</td></tr>
+<tr><td>Dual Medicare–Medicaid patients, including integrated plans for duals</td><td>Commercial, self-pay</td></tr>
+<tr><td>Medicaid as secondary coverage</td><td>Medicaid applied for but not yet active</td></tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Primary or secondary doesn't matter.</strong> Most dual-eligible patients have Medicare as primary.</li>
+<li><strong>First of the month fixes the status for the whole month.</strong> A patient who gains Medicaid on the 10th is not a Medicaid patient that month; one who loses it on the 10th still is.</li>
+<li><strong>Use the coverage known at the run date, and don't restate.</strong> If Medicaid is later granted retroactively, earlier submitted months stay as they were (<a href="reporting-month.html">reporting month</a>).</li>
+<li><strong>Metric 7 is a Medicaid metric</strong> like the rest. <em>Our call: <a href="../../reference/our-calls.html#remission-is-a-medicaid-metric">remission is a Medicaid metric</a>.</em></li>
+</ul>
+<h2 id="what-the-program-should-do">What the program should do</h2>
+<p>The work is a <strong>payer mapping</strong>: a list of every payer and plan the practice bills, each assigned to a category. Build it once, as part of <a href="../site-setup.html">site setup</a>, and add to it when a new plan appears.</p>
+<ul>
+<li><strong>Map by plan, not by carrier.</strong> One insurer often sells a Medicaid managed care plan, a Child Health Plus plan, an Essential Plan and commercial plans. Fidelis Care and Healthfirst are examples. The carrier name alone can't tell them apart; the plan or product can.</li>
+<li><strong>Expect Medicaid managed care to be listed under the plan's name.</strong> Few plan names contain the word "Medicaid".</li>
+<li><strong>Have someone who knows the billing system review the list.</strong> The front desk and billing often use different payer lists.</li>
+</ul>
+<h2 id="where-the-data-lives">Where the data lives</h2>
+<p>Coverage almost always comes from the <strong>practice-management or billing system</strong>, not the registry.</p>
+<ul>
+<li>Use the coverage or insurance records with their effective and end dates. A "current insurance" field shows today's payer, not the first of the reporting month.</li>
+<li>The payer or financial class field is a starting point, but check it. Managed care plans are often classed as commercial.</li>
+<li>Registries rarely hold payer, and almost never its history. The <a href="../../collecting/registries/prototype-cocm-registry.html#t2-coverage--nothing-usable">prototype registry</a> stores a single insurance record with no dates, which can't support the rule.</li>
+</ul>
+<h2 id="common-mistakes">Common mistakes</h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
+<tbody>
+<tr><td>Using the payer as of the run date</td><td>Patients are reclassified after the fact; metrics 2–8 shift</td></tr>
+<tr><td>Looking for "Medicaid" in the plan name</td><td>Managed care patients are dropped; metrics 2–8 understated</td></tr>
+<tr><td>Classifying by carrier</td><td>Child Health Plus, Essential Plan and commercial members of a Medicaid carrier are counted as Medicaid</td></tr>
+<tr><td>Counting only primary coverage</td><td>Dual eligibles are dropped</td></tr>
+<tr><td>Applying the Medicaid filter to metric 1, 9, 10 or 11</td><td>All-payer metrics understated</td></tr>
+</tbody>
+</table></div>
+<h2 id="for-automation">For automation</h2>
+<ul>
+<li><a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a> holds each coverage period with a raw <code>payer_category</code>. The calculator decides which categories count as Medicaid, so a change of rule doesn't need a new extract.</li>
+<li><code>plan_name</code> is optional but worth extracting. It lets a reviewer spot a managed care plan coded as commercial.</li>
+</ul>
+</main>
+<footer>
+<p>An opinionated guide to the NYS Office of Mental Health's Collaborative Care caseload
+metrics. An independent project, not an OMH product. Every call it makes is provisional
+until approved.</p>
+<p><a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/concepts/medicaid.md">This page on GitHub</a></p>
+</footer>
+</body>
+</html>

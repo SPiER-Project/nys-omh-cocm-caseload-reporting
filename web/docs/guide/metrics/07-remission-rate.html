@@ -1,0 +1,127 @@
+<!doctype html>
+<!-- Built from docs/guide/metrics/07-remission-rate.md by scripts/build_guide.py. Edit the Markdown, then rebuild. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7. Remission rate · CoCM caseload reporting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root {
+    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --mist: #eef3f2; --line: #cfdad7;
+    --spruce: #1f6f5c; --spruce-soft: #dcebe6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121a1f; --ink: #e3ebee; --muted: #9db0b8; --mist: #1a252b; --line: #2e3d44;
+      --spruce: #6fc4ab; --spruce-soft: #18342c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 17px/1.6 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .site { border-bottom: 1px solid var(--line); background: var(--mist); }
+  .site nav { max-width: 46rem; margin: 0 auto; padding: .6rem 1rem; display: flex; flex-wrap: wrap;
+              gap: .25rem 1.1rem; font-size: .95rem; }
+  .site a { color: var(--ink); text-decoration: none; }
+  .site a:hover, .site a[aria-current] { color: var(--spruce); text-decoration: underline; }
+  .site a.home { font-weight: 700; margin-right: auto; }
+  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
+  h2 { font-size: 1.35rem; line-height: 1.3; margin: 2.2rem 0 .6rem; }
+  h3 { font-size: 1.1rem; margin: 1.6rem 0 .5rem; }
+  h4, h5, h6 { font-size: 1rem; margin: 1.2rem 0 .4rem; }
+  p, ul, ol, blockquote, pre, .table { margin: 0 0 1rem; }
+  li { margin: .2rem 0; }
+  li > ul, li > ol { margin: .2rem 0; }
+  a { color: var(--spruce); text-underline-offset: .15em; }
+  :focus-visible { outline: 3px solid var(--spruce); outline-offset: 2px; border-radius: 4px; }
+  code { font: .9em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--mist);
+         padding: .05em .3em; border-radius: 4px; overflow-wrap: anywhere; }
+  pre { background: var(--mist); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; }
+  pre code { background: none; padding: 0; overflow-wrap: normal; }
+  blockquote { border-left: 4px solid var(--spruce); background: var(--mist); padding: .6rem 1rem;
+               border-radius: 0 8px 8px 0; }
+  blockquote > :last-child { margin-bottom: 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+  .table { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-size: .9rem; }
+  footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .9rem; }
+  footer a { color: var(--muted); }
+  @media (max-width: 34rem) { h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+<header class="site"><nav aria-label="Site">
+<a class="home" href="../../../index.html">CoCM caseload calculator</a>
+<a href="../start-here.html">Start here</a>
+<a href="../../collecting/requests.html">Asking for the data</a>
+<a href="../site-setup.html">Site setup</a>
+<a href="../about-the-program.html">About the program</a>
+</nav></header>
+<main>
+<h1 id="7-remission-rate">7. Remission rate</h1>
+<blockquote>
+<p>Proportion (%) of patients enrolled in treatment for any length of time who have achieved remission criteria during this month. <strong>Numerator</strong>: Number of Medicaid patients who have demonstrated remission. <strong>Denominator</strong>: Number of Medicaid patients enrolled during this month.</p>
+<p>— <a href="../../reference/nys-source/nys-omh-cocm-metrics-2025.html#7-remission-rate">NYS, metric 7</a></p>
+</blockquote>
+<p><strong>Reported as:</strong> a percentage. <strong>Target:</strong> none given. <strong>Population:</strong> CoCM, Medicaid.</p>
+<p>NYS doesn't define remission criteria. Every threshold below is a call, and most need clinical sign-off. Expect this metric's rules to change more than any other's.</p>
+<h2 id="the-rule">The rule</h2>
+<ul>
+<li><strong>Denominator:</strong> <a href="02-medicaid-enrollment.html">metric 2</a>, every Medicaid patient enrolled this month, for any length of time. <em>Our call: <a href="../../reference/our-calls.html#remission-is-a-medicaid-metric">remission is a Medicaid metric</a>.</em></li>
+<li><strong>Numerator:</strong> those <a href="../concepts/scales-and-outcomes.html#remission-metric-7">in remission</a> this month. All three must hold:
+<ol>
+<li>An <a href="../concepts/scales-and-outcomes.html#elevated-baseline">elevated baseline</a> on the primary scale.</li>
+<li>A primary-scale score <strong>dated this month</strong>. If there's more than one, use the last.</li>
+<li>That score is below the scale's remission threshold. For PHQ-9 and GAD-7 that's below 5.</li>
+</ol></li>
+</ul>
+<p>Unlike improvement, nothing carries forward. A patient in remission last month with no score this month isn't in remission this month.</p>
+<h2 id="worked-example">Worked example</h2>
+<p>From the <a href="../example-caseload.html">example caseload</a>:</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Patient</th><th scope="col">March score</th><th scope="col">Elevated baseline?</th><th scope="col">In remission?</th></tr></thead>
+<tbody>
+<tr><td>P1</td><td>PHQ-9 8</td><td>Yes</td><td>No: not below 5</td></tr>
+<tr><td>P2</td><td>PHQ-9 14</td><td>Yes</td><td>No</td></tr>
+<tr><td>P3</td><td>PHQ-9 7</td><td>Yes</td><td>No</td></tr>
+<tr><td>P4</td><td>None</td><td>Yes</td><td>No: no score in March</td></tr>
+<tr><td>P6</td><td>PCL-5 40</td><td>Yes</td><td>No: not below 33</td></tr>
+<tr><td>P7</td><td>PHQ-9 3</td><td>Yes</td><td><strong>Yes</strong></td></tr>
+<tr><td>P8</td><td>PHQ-9 4</td><td><strong>No</strong>, baseline 8</td><td>No: below 5, but never had an elevated baseline</td></tr>
+<tr><td>P9</td><td>PHQ-9 4</td><td>Yes</td><td><strong>Yes</strong></td></tr>
+</tbody>
+</table></div>
+<p><strong>Metric 7: 2 of 8, 25.0%.</strong></p>
+<p>P8 is why the elevated-baseline guard exists: without it, a patient who enrolled with mild symptoms would count as in remission from the start.</p>
+<h2 id="where-the-data-lives">Where the data lives</h2>
+<p>The same scores as <a href="06-improvement-rate.html">metric 6</a>. See <a href="../concepts/scales-and-outcomes.html#where-the-data-lives">scales and outcomes</a>.</p>
+<h2 id="common-mistakes">Common mistakes</h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
+<tbody>
+<tr><td>Carrying an old score forward</td><td>Overstated</td></tr>
+<tr><td>Counting patients without an elevated baseline</td><td>Overstated</td></tr>
+<tr><td>Using any scale instead of the primary scale</td><td>Overstated</td></tr>
+<tr><td>Reporting it for all payers</td><td>The wrong population; NYS's numerator and denominator are Medicaid</td></tr>
+<tr><td>Using a threshold of 10 (the improvement cutoff) instead of 5</td><td>Overstated</td></tr>
+</tbody>
+</table></div>
+<h2 id="for-automation">For automation</h2>
+<p>Reads <a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode</code></a>, <a href="../../reference/data-contract.html#t2-coverage"><code>coverage</code></a>, <a href="../../reference/data-contract.html#t4-contact--one-row-per-bhcm-or-team-interaction-with-the-patient"><code>contact</code></a> (for the inactivity discharge) and <a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a>. Remission thresholds are calculator settings.</p>
+</main>
+<footer>
+<p>An opinionated guide to the NYS Office of Mental Health's Collaborative Care caseload
+metrics. An independent project, not an OMH product. Every call it makes is provisional
+until approved.</p>
+<p><a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/metrics/07-remission-rate.md">This page on GitHub</a></p>
+</footer>
+</body>
+</html>

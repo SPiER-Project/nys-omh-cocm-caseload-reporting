@@ -1,0 +1,239 @@
+<!doctype html>
+<!-- Built from docs/guide/concepts/scales-and-outcomes.md by scripts/build_guide.py. Edit the Markdown, then rebuild. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scales and outcomes · CoCM caseload reporting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root {
+    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --mist: #eef3f2; --line: #cfdad7;
+    --spruce: #1f6f5c; --spruce-soft: #dcebe6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121a1f; --ink: #e3ebee; --muted: #9db0b8; --mist: #1a252b; --line: #2e3d44;
+      --spruce: #6fc4ab; --spruce-soft: #18342c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 17px/1.6 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .site { border-bottom: 1px solid var(--line); background: var(--mist); }
+  .site nav { max-width: 46rem; margin: 0 auto; padding: .6rem 1rem; display: flex; flex-wrap: wrap;
+              gap: .25rem 1.1rem; font-size: .95rem; }
+  .site a { color: var(--ink); text-decoration: none; }
+  .site a:hover, .site a[aria-current] { color: var(--spruce); text-decoration: underline; }
+  .site a.home { font-weight: 700; margin-right: auto; }
+  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
+  h2 { font-size: 1.35rem; line-height: 1.3; margin: 2.2rem 0 .6rem; }
+  h3 { font-size: 1.1rem; margin: 1.6rem 0 .5rem; }
+  h4, h5, h6 { font-size: 1rem; margin: 1.2rem 0 .4rem; }
+  p, ul, ol, blockquote, pre, .table { margin: 0 0 1rem; }
+  li { margin: .2rem 0; }
+  li > ul, li > ol { margin: .2rem 0; }
+  a { color: var(--spruce); text-underline-offset: .15em; }
+  :focus-visible { outline: 3px solid var(--spruce); outline-offset: 2px; border-radius: 4px; }
+  code { font: .9em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--mist);
+         padding: .05em .3em; border-radius: 4px; overflow-wrap: anywhere; }
+  pre { background: var(--mist); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; }
+  pre code { background: none; padding: 0; overflow-wrap: normal; }
+  blockquote { border-left: 4px solid var(--spruce); background: var(--mist); padding: .6rem 1rem;
+               border-radius: 0 8px 8px 0; }
+  blockquote > :last-child { margin-bottom: 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+  .table { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-size: .9rem; }
+  footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .9rem; }
+  footer a { color: var(--muted); }
+  @media (max-width: 34rem) { h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+<header class="site"><nav aria-label="Site">
+<a class="home" href="../../../index.html">CoCM caseload calculator</a>
+<a href="../start-here.html">Start here</a>
+<a href="../../collecting/requests.html">Asking for the data</a>
+<a href="../site-setup.html">Site setup</a>
+<a href="../about-the-program.html">About the program</a>
+</nav></header>
+<main>
+<h1 id="scales-and-outcomes">Scales and outcomes</h1>
+<p>The symptom scales, and how they become improvement and remission. This is where two sites with the same patients are most likely to report different numbers. Each step below (which scale, which score is the baseline, which score is current) is a choice a report writer would otherwise make alone.</p>
+<p><strong>Used by:</strong> metrics 5 to 8. Metric 5 needs only "a scale was completed"; metrics 6 to 8 use everything on this page.</p>
+<h2 id="what-nys-says">What NYS says</h2>
+<ul>
+<li>Metric 5 lists the appropriate scales: PHQ-9, GAD-7, PCL-5, SMFQ, SCARED, PSC-17 and NICHQ Vanderbilt.</li>
+<li>Appendix A gives the improvement criteria for each scale. It includes only patients "who had an elevated baseline score" and in treatment at least 10 weeks. Patients count "when they meet criteria for the scale used to treat their primary diagnosis."</li>
+<li>Metric 7 asks for patients who "achieved remission criteria during this month". NYS doesn't define remission criteria anywhere.</li>
+</ul>
+<p>(<a href="../../reference/nys-source/nys-omh-cocm-metrics-2025.html#appendix-a-improvement-rate-specifications">Source</a>)</p>
+<h2 id="the-rule">The rule</h2>
+<h3 id="a-scale-result">A scale result</h3>
+<p>A scale result is <strong>a completed administration with a total score and a date</strong>. A form that was offered, ordered or partly completed, with no total score, doesn't count. Nor does a note that says "PHQ-9 administered" with no score.</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Scale</th><th scope="col">Forms</th><th scope="col">Typically used for</th></tr></thead>
+<tbody>
+<tr><td>PHQ-9</td><td>One. The adolescent version (PHQ-A) counts as a PHQ-9</td><td>Depression</td></tr>
+<tr><td>GAD-7</td><td>One</td><td>Anxiety</td></tr>
+<tr><td>PCL-5</td><td>One</td><td>PTSD</td></tr>
+<tr><td>SMFQ</td><td>Child (SMFQ-C) and parent (SMFQ-P)</td><td>Adolescent depression</td></tr>
+<tr><td>SCARED</td><td>Child and caregiver</td><td>Child and adolescent anxiety</td></tr>
+<tr><td>PSC-17</td><td>One</td><td>General pediatric behavioral concerns</td></tr>
+<tr><td>NICHQ Vanderbilt</td><td>Parent (Vanderbilt-P) and teacher (Vanderbilt-T)</td><td>ADHD</td></tr>
+</tbody>
+</table></div>
+<h3 id="primary-scale">Primary scale</h3>
+<p>Each episode has <strong>one primary scale</strong>, recorded at enrollment and kept for the whole episode. It is the scale the clinic uses to treat the primary diagnosis. If a site has no record of which that is, use the default:</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Primary diagnosis</th><th scope="col">Primary scale</th></tr></thead>
+<tbody>
+<tr><td>Depression, adult</td><td>PHQ-9</td></tr>
+<tr><td>Depression, adolescent</td><td>PHQ-9 or SMFQ (child form); the site picks one and uses it for every adolescent</td></tr>
+<tr><td>Anxiety, adult</td><td>GAD-7</td></tr>
+<tr><td>Anxiety, child or adolescent</td><td>SCARED</td></tr>
+<tr><td>PTSD</td><td>PCL-5</td></tr>
+<tr><td>ADHD</td><td>NICHQ Vanderbilt</td></tr>
+<tr><td>General pediatric behavioral concern</td><td>PSC-17</td></tr>
+</tbody>
+</table></div>
+<p><em>Our call: <a href="../../reference/our-calls.html#primary-scale">primary scale</a>.</em> A patient may complete other scales too. They count for metric 5, but improvement and remission are judged only on the primary scale.</p>
+<h3 id="baseline">Baseline</h3>
+<p>The baseline is <strong>the first primary-scale score on or within 14 days after the enrollment date</strong>. If there's none in that window, it's the first primary-scale score after enrollment. A score from before the enrollment date, such as the screening PHQ-9 that led to the referral, is never the baseline. <em>Our call: <a href="../../reference/our-calls.html#baseline">baseline</a>.</em></p>
+<p>For scales with two forms, each form has its own baseline.</p>
+<h3 id="elevated-baseline">Elevated baseline</h3>
+<p>Only a patient with an <strong>elevated baseline</strong> can count as improved or in remission.</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Scale</th><th scope="col">Elevated at or above</th><th scope="col">Firmness</th></tr></thead>
+<tbody>
+<tr><td>PHQ-9</td><td>10</td><td>Our call</td></tr>
+<tr><td>GAD-7</td><td>10</td><td>Our call</td></tr>
+<tr><td>PCL-5</td><td>33</td><td>Needs clinical sign-off</td></tr>
+<tr><td>SCARED</td><td>25</td><td>Needs clinical sign-off</td></tr>
+<tr><td>PSC-17</td><td>15</td><td>Needs clinical sign-off</td></tr>
+<tr><td>SMFQ (child form)</td><td>12</td><td>Needs clinical sign-off</td></tr>
+<tr><td>SMFQ (parent form)</td><td>not yet set</td><td>Needs clinical sign-off</td></tr>
+<tr><td>NICHQ Vanderbilt</td><td>not yet set</td><td>Needs clinical sign-off</td></tr>
+</tbody>
+</table></div>
+<p><em><a href="../../reference/our-calls.html#elevated-baseline">Elevated baseline</a>.</em> The values marked for sign-off are each instrument's published screening cutoff (sources on the <a href="../../reference/instruments.html#where-the-thresholds-come-from">instruments</a> page), but a clinician still needs to agree to use them this way. Until a scale has a threshold, patients on that scale can't be counted as improved or in remission.</p>
+<h3 id="improvement-metrics-6-and-8">Improvement (metrics 6 and 8)</h3>
+<p>Compare the baseline with <strong>the current score</strong>: the most recent primary-scale score after the baseline, on or before the last day of the month. If there's no score this month, the most recent earlier score in the episode is current. A patient with no score since baseline has not improved. <em>Our call: <a href="../../reference/our-calls.html#current-score-for-improvement">current score for improvement</a>.</em></p>
+<div class="table"><table>
+<thead><tr><th scope="col">Scale</th><th scope="col">Improved when (NYS Appendix A)</th></tr></thead>
+<tbody>
+<tr><td>PHQ-9</td><td>Current score is at most half the baseline, <strong>or</strong> below 10</td></tr>
+<tr><td>GAD-7</td><td>Current score is at most half the baseline, <strong>or</strong> below 10</td></tr>
+<tr><td>PCL-5</td><td>Current score is at least 12 points below baseline</td></tr>
+<tr><td>NICHQ Vanderbilt</td><td>Parent <strong>or</strong> teacher form is at most half its baseline</td></tr>
+<tr><td>SCARED</td><td>Caregiver <strong>and/or</strong> child form is at most half its baseline</td></tr>
+<tr><td>SMFQ</td><td>Child form at least 8 points below its baseline, <strong>or</strong> parent form at least 6 points below its baseline</td></tr>
+<tr><td>PSC-17</td><td>Current score is at most half the baseline</td></tr>
+</tbody>
+</table></div>
+<p>"50% improved" means the current score is at most half the baseline, so a PHQ-9 baseline of 15 is improved at 7 or below. <em>NYS says</em>, except for that reading, which is <em>our call: <a href="../../reference/our-calls.html#fifty-percent-improved">fifty percent improved</a>.</em></p>
+<h3 id="paired-forms">Paired forms</h3>
+<p>For SCARED, SMFQ and the Vanderbilt, <strong>either form meeting its criteria counts</strong>, compared against that same form's baseline. The forms don't have to be completed on the same day. <em>NYS says, for improvement; our call to apply it to remission: <a href="../../reference/our-calls.html#paired-forms">paired forms</a>.</em></p>
+<h3 id="remission-metric-7">Remission (metric 7)</h3>
+<p>A patient is in remission this month when all three hold:</p>
+<ol>
+<li>They have an <a href="#elevated-baseline">elevated baseline</a>.</li>
+<li>They have a <strong>primary-scale score dated this month</strong>. If there's more than one, use the last.</li>
+<li>That score is <strong>below the remission threshold</strong>:</li>
+</ol>
+<div class="table"><table>
+<thead><tr><th scope="col">Scale</th><th scope="col">Remission below</th><th scope="col">Firmness</th></tr></thead>
+<tbody>
+<tr><td>PHQ-9</td><td>5</td><td>Our call</td></tr>
+<tr><td>GAD-7</td><td>5</td><td>Our call</td></tr>
+<tr><td>PCL-5</td><td>33</td><td>Needs clinical sign-off</td></tr>
+<tr><td>SCARED</td><td>25</td><td>Needs clinical sign-off</td></tr>
+<tr><td>PSC-17</td><td>15</td><td>Needs clinical sign-off</td></tr>
+<tr><td>SMFQ (child form)</td><td>8</td><td>Needs clinical sign-off</td></tr>
+<tr><td>NICHQ Vanderbilt</td><td>fewer than 6 symptom items rated 2 or 3</td><td>Needs clinical sign-off</td></tr>
+</tbody>
+</table></div>
+<p><em>Our calls: <a href="../../reference/our-calls.html#remission-timing">remission timing</a>, <a href="../../reference/our-calls.html#remission-needs-an-elevated-baseline">remission needs an elevated baseline</a>, <a href="../../reference/our-calls.html#remission-thresholds">remission thresholds</a>.</em></p>
+<p>Unlike improvement, remission <strong>doesn't carry forward</strong>: no score this month, no remission. The metric 7 denominator is every Medicaid patient enrolled this month, as NYS states. The elevated-baseline requirement applies only to the numerator.</p>
+<h3 id="not-improved-metric-8">Not improved (metric 8)</h3>
+<p>The metric 8 population is metric 6's denominator minus its numerator: Medicaid patients enrolled 70 days or more, with an elevated baseline, who have not improved this month. <em>Our call: <a href="../../reference/our-calls.html#psychiatric-consultation-denominator">psychiatric consultation denominator</a>.</em></p>
+<h2 id="worked-example">Worked example</h2>
+<p>One adult patient whose primary scale is PHQ-9. Enrolled 6 January 2025.</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Date</th><th scope="col">PHQ-9</th><th scope="col">What it is</th></tr></thead>
+<tbody>
+<tr><td>20 Dec 2024</td><td>16</td><td>Screening at a PCP visit. Before enrollment, so not the baseline</td></tr>
+<tr><td>13 Jan 2025</td><td>15</td><td><strong>Baseline</strong>: first PHQ-9 within 14 days of enrollment. Elevated (15 ≥ 10)</td></tr>
+<tr><td>10 Feb 2025</td><td>11</td><td></td></tr>
+<tr><td>17 Mar 2025</td><td>7</td><td></td></tr>
+<tr><td>April</td><td>none</td><td></td></tr>
+</tbody>
+</table></div>
+<div class="table"><table>
+<thead><tr><th scope="col">Month</th><th scope="col">Days enrolled at month end</th><th scope="col">In metric 6?</th><th scope="col">Current score</th><th scope="col">Improved?</th><th scope="col">In remission?</th></tr></thead>
+<tbody>
+<tr><td>February</td><td>53</td><td>No, under 70 days</td><td>11</td><td>—</td><td>No (11 isn't below 5)</td></tr>
+<tr><td>March</td><td>84</td><td>Yes</td><td>7</td><td><strong>Yes</strong>: below 10, and at most half of 15</td><td>No (7 isn't below 5)</td></tr>
+<tr><td>April</td><td>114</td><td>Yes</td><td>7, carried forward</td><td><strong>Yes</strong></td><td>No: no score in April</td></tr>
+</tbody>
+</table></div>
+<p>In April the patient also misses <a href="contacts-and-reviews.html#active-treatment-metric-5">active treatment</a> for metric 5, because no scale was completed.</p>
+<h2 id="what-the-program-should-do">What the program should do</h2>
+<ul>
+<li><strong>Record the primary scale at enrollment</strong>, and don't change it during the episode. If the clinical focus really changes, close the episode and open a new one.</li>
+<li><strong>Give the primary scale within two weeks of enrollment</strong>, so the baseline is the score the program meant it to be.</li>
+<li><strong>Give the primary scale at least monthly.</strong> Improvement carries forward, but remission and metric 5 don't.</li>
+<li><strong>Record every scale as a scored, structured result</strong>, not only in the note.</li>
+<li><strong>For paired forms, record which form each score is.</strong> A caregiver SCARED and a child SCARED are different results.</li>
+</ul>
+<h2 id="where-the-data-lives">Where the data lives</h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Fact</th><th scope="col">Registry</th><th scope="col">EHR without a registry</th></tr></thead>
+<tbody>
+<tr><td>Scale results</td><td>The registry's assessment or scale table</td><td>Questionnaire results, flowsheet rows or observations with a structured total score</td></tr>
+<tr><td>Which form</td><td>Usually the instrument name</td><td>Often a separate questionnaire or flowsheet row per form</td></tr>
+<tr><td>Primary diagnosis</td><td>The episode's primary or target condition</td><td>The diagnosis linked to the CoCM episode, or the BHCM's assessment diagnosis</td></tr>
+<tr><td>Primary scale</td><td>A primary-scale field, if the registry has one</td><td>Rarely recorded; use the default mapping from the primary diagnosis, and disclose it</td></tr>
+</tbody>
+</table></div>
+<ul>
+<li>Many registries store only PHQ-9 and GAD-7. Episodes for PTSD, ADHD or pediatric concerns then have no primary-scale scores at all. The <a href="../../collecting/registries/prototype-cocm-registry.html#t5-scale_result--assessmentscore">prototype registry mapping</a> is an example.</li>
+<li>In an EHR, the same PHQ-9 questionnaire may be used by the PCP for screening and by the BHCM for monitoring. For this page, only the date matters: a score before the enrollment date is never the baseline. The screening metrics don't need the distinction either (<a href="screening.html">screening</a>).</li>
+</ul>
+<h2 id="common-mistakes">Common mistakes</h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Mistake</th><th scope="col">Effect</th></tr></thead>
+<tbody>
+<tr><td>Counting a patient improved if any scale improved</td><td>Improvement overstated</td></tr>
+<tr><td>Comparing with last month's score instead of the baseline</td><td>Improvement understated for patients who improved early and then held steady</td></tr>
+<tr><td>Using a pre-enrollment screening score as baseline</td><td>The baseline is older and often higher; improvement overstated</td></tr>
+<tr><td>Including patients without an elevated baseline in improvement</td><td>Patients enrolled with mild scores count as "improved" on day one</td></tr>
+<tr><td>Carrying a months-old score forward for remission</td><td>Remission overstated</td></tr>
+<tr><td>Counting an unscored or partial form</td><td>Metric 5 overstated</td></tr>
+<tr><td>Changing the primary scale mid-episode</td><td>The baseline is lost, or compared across different scales</td></tr>
+</tbody>
+</table></div>
+<h2 id="for-automation">For automation</h2>
+<ul>
+<li><a href="../../reference/data-contract.html#t5-scale_result--one-row-per-completed-scored-administration"><code>scale_result</code></a> holds every scored result. Each form is its own <code>instrument</code> value, so pairing is the calculator's job.</li>
+<li><a href="../../reference/data-contract.html#t3-cocm_episode--one-row-per-enrollment"><code>cocm_episode.primary_scale</code></a> is required. Where the source has none, the extract fills it from the default mapping, and the disclosure says so.</li>
+<li>Baseline, elevated baseline, current score, improvement and remission are all derived by the calculator. None of them is extracted.</li>
+<li>Thresholds live in calculator settings, so a clinical sign-off changes a setting, not an extract.</li>
+</ul>
+</main>
+<footer>
+<p>An opinionated guide to the NYS Office of Mental Health's Collaborative Care caseload
+metrics. An independent project, not an OMH product. Every call it makes is provisional
+until approved.</p>
+<p><a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/concepts/scales-and-outcomes.md">This page on GitHub</a></p>
+</footer>
+</body>
+</html>

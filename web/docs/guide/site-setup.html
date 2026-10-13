@@ -1,0 +1,182 @@
+<!doctype html>
+<!-- Built from docs/guide/site-setup.md by scripts/build_guide.py. Edit the Markdown, then rebuild. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Site setup · CoCM caseload reporting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root {
+    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --mist: #eef3f2; --line: #cfdad7;
+    --spruce: #1f6f5c; --spruce-soft: #dcebe6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121a1f; --ink: #e3ebee; --muted: #9db0b8; --mist: #1a252b; --line: #2e3d44;
+      --spruce: #6fc4ab; --spruce-soft: #18342c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 17px/1.6 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .site { border-bottom: 1px solid var(--line); background: var(--mist); }
+  .site nav { max-width: 46rem; margin: 0 auto; padding: .6rem 1rem; display: flex; flex-wrap: wrap;
+              gap: .25rem 1.1rem; font-size: .95rem; }
+  .site a { color: var(--ink); text-decoration: none; }
+  .site a:hover, .site a[aria-current] { color: var(--spruce); text-decoration: underline; }
+  .site a.home { font-weight: 700; margin-right: auto; }
+  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
+  h2 { font-size: 1.35rem; line-height: 1.3; margin: 2.2rem 0 .6rem; }
+  h3 { font-size: 1.1rem; margin: 1.6rem 0 .5rem; }
+  h4, h5, h6 { font-size: 1rem; margin: 1.2rem 0 .4rem; }
+  p, ul, ol, blockquote, pre, .table { margin: 0 0 1rem; }
+  li { margin: .2rem 0; }
+  li > ul, li > ol { margin: .2rem 0; }
+  a { color: var(--spruce); text-underline-offset: .15em; }
+  :focus-visible { outline: 3px solid var(--spruce); outline-offset: 2px; border-radius: 4px; }
+  code { font: .9em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--mist);
+         padding: .05em .3em; border-radius: 4px; overflow-wrap: anywhere; }
+  pre { background: var(--mist); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; }
+  pre code { background: none; padding: 0; overflow-wrap: normal; }
+  blockquote { border-left: 4px solid var(--spruce); background: var(--mist); padding: .6rem 1rem;
+               border-radius: 0 8px 8px 0; }
+  blockquote > :last-child { margin-bottom: 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+  .table { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-size: .9rem; }
+  footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .9rem; }
+  footer a { color: var(--muted); }
+  @media (max-width: 34rem) { h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+<header class="site"><nav aria-label="Site">
+<a class="home" href="../../index.html">CoCM caseload calculator</a>
+<a href="start-here.html">Start here</a>
+<a href="../collecting/requests.html">Asking for the data</a>
+<a href="site-setup.html" aria-current="page">Site setup</a>
+<a href="about-the-program.html">About the program</a>
+</nav></header>
+<main>
+<h1 id="site-setup">Site setup</h1>
+<p>The decisions and fixes a site makes once, before its first report, and revisits only when its systems or program change. Most monthly reporting problems trace back to one of these steps being skipped.</p>
+<p>Work through them in order. Allow a few weeks: several steps need someone from billing or IT. At the end, record what was decided in the <a href="#the-setup-record">setup record</a>.</p>
+<h2 id="1-name-the-people">1. Name the people</h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Role</th><th scope="col">Does</th><th scope="col">Usually</th></tr></thead>
+<tbody>
+<tr><td><strong>Owner</strong></td><td>Signs off the submission each month; makes the site's decisions below</td><td>The CoCM program lead</td></tr>
+<tr><td><strong>Report writer</strong></td><td>Runs the extracts and calculates the metrics</td><td>An analyst, a registry administrator, or the program lead in a spreadsheet site</td></tr>
+<tr><td><strong>Billing contact</strong></td><td>Supplies coverage and visit data; maintains the payer mapping</td><td>Someone from billing or practice management</td></tr>
+<tr><td><strong>Clinical reviewer</strong></td><td>Agrees the primary-scale choices and any thresholds marked <em>needs clinical sign-off</em></td><td>The psychiatric consultant or medical director</td></tr>
+</tbody>
+</table></div>
+<h2 id="2-choose-your-route">2. Choose your route</h2>
+<p>Decide where each fact will come from: a spreadsheet registry, a registry product plus an EHR report, or the EHR alone. <a href="../collecting/overview.html#pick-your-route">Collecting the data</a> describes the three. Write down the source system for each row of the <a href="../collecting/overview.html#where-each-fact-lives">where each fact lives</a> table.</p>
+<h2 id="3-link-the-registry-and-the-ehr">3. Link the registry and the EHR</h2>
+<p>Every patient in the registry needs their <strong>MRN</strong>, so registry data can be joined to coverage, visits and screening from the EHR. Check a sample of 20 registry patients against the EHR. Any patient who can't be matched drops out of every Medicaid metric. See <a href="../collecting/overview.html#one-patient-id">one patient id</a>.</p>
+<h2 id="4-build-the-payer-mapping">4. Build the payer mapping</h2>
+<p>List every payer and plan the practice bills, and assign each one a category:</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Plan as it appears in billing</th><th scope="col">Category</th><th scope="col">Medicaid?</th></tr></thead>
+<tbody>
+<tr><td><em>(each plan, as named)</em></td><td>Medicaid fee-for-service, Medicaid managed care (including HARP), dual, Child Health Plus, Essential Plan, Medicare, commercial, self-pay, other</td><td>Yes for the first three</td></tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>Map by plan, not by carrier.</strong> Many carriers sell Medicaid managed care, Child Health Plus, Essential Plan and commercial plans under the same name.</li>
+<li><strong>Confirm the coverage report shows effective dates</strong>, so status can be taken on the first of the month.</li>
+<li><strong>Keep the mapping as a list the billing contact owns</strong>, and add new plans as they appear.</li>
+</ul>
+<p>See <a href="concepts/medicaid.html#what-the-program-should-do">Medicaid</a>.</p>
+<h2 id="5-fix-how-enrollment-and-discharge-are-recorded">5. Fix how enrollment and discharge are recorded</h2>
+<ul>
+<li><strong>Enrollment date is the BHCM's initial assessment.</strong> Check that it isn't the referral date or the date the record was created. If past dates are wrong, correct open episodes; leave closed ones alone unless the error is large.</li>
+<li><strong>Every closed episode has a discharge date and reason.</strong> Close any episode that has ended but is still open.</li>
+<li><strong>Apply the inactivity rule.</strong> Find every open episode with no clinical contact in the last 90 days, and either re-engage the patient or discharge them. Then make the 90-day review part of the monthly routine.</li>
+<li><strong>Returning patients get a new episode</strong>, not a reopened one.</li>
+</ul>
+<p>If there's no enrollment record at all, the site will infer enrollment from billing and must disclose it. A structured enrollment record is worth setting up instead. See <a href="concepts/enrollment-and-discharge.html">enrollment and discharge</a>.</p>
+<h2 id="6-set-the-primary-scale">6. Set the primary scale</h2>
+<p>With the clinical reviewer:</p>
+<ul>
+<li><strong>Confirm which scale the program uses for each condition.</strong> Start from the <a href="concepts/scales-and-outcomes.html#primary-scale">default mapping</a>.</li>
+<li><strong>Choose PHQ-9 or SMFQ for adolescent depression</strong>, and use the same one for every adolescent.</li>
+<li><strong>Record a primary scale on every open episode</strong>, and add the field to the enrollment workflow for new ones.</li>
+<li><strong>Check the registry or EHR can store every scale the program uses</strong>, with a total score and date, and with each form (child, caregiver, teacher) kept separate.</li>
+<li><strong>Agree whether to use the thresholds marked <em>needs clinical sign-off</strong></em> on the <a href="../reference/instruments.html">instruments</a> page for the scales the program uses. Note any the site uses differently.</li>
+</ul>
+<h2 id="7-decide-what-counts-as-a-treatment-contact">7. Decide what counts as a treatment contact</h2>
+<p>Write down, in one sentence, how the records tell a treatment contact from an outreach attempt, a scheduling call or a message. For example:</p>
+<ul>
+<li>"a contact marked 'session' in the registry"; or</li>
+<li>"a BHCM encounter with a signed progress note on the same day".</li>
+</ul>
+<p>The rule goes in every submission. If the records can't tell them apart, change the contact log so they can; until then, the contact rate will be overstated. See <a href="concepts/contacts-and-reviews.html#clinical-contact">clinical contact</a>.</p>
+<p>Make sure outreach attempts are logged too, separately from contacts.</p>
+<h2 id="8-record-case-reviews-patient-by-patient">8. Record case reviews patient by patient</h2>
+<p>Set up a way for the consultant or BHCM to record, for each patient discussed, the review date and the recommendation. A registry consultation log, a structured EHR field, or a tab in the spreadsheet all work. A meeting note listing names doesn't. See <a href="concepts/contacts-and-reviews.html#psychiatric-case-review-metric-8">psychiatric case review</a>.</p>
+<h2 id="9-check-the-screening-workflow">9. Check the screening workflow</h2>
+<ul>
+<li><p><strong>Compare the practice's universal screening workflow with the guide's:</strong></p>
+<ul>
+<li>patients 12 and older;</li>
+<li>at qualifying medical visits;</li>
+<li>PHQ-2 or PHQ-9 at least yearly.</li>
+</ul>
+<p>If the practice's workflow differs (for example, adults only), decide whether to change it or to report under it and disclose the difference.</p></li>
+<li><p><strong>List every place a PHQ-2, PHQ-9 or PHQ-A is recorded:</strong> each questionnaire, flowsheet row and department, including the BHCM's and the patient portal's. The visit and PHQ reports must cover all of them.</p></li>
+<li><p><strong>Confirm provider types are recorded</strong> well enough to tell medical visits from nurse, lab and behavioral health visits.</p></li>
+</ul>
+<p>See <a href="concepts/screening.html">screening</a>.</p>
+<h2 id="10-check-dates">10. Check dates</h2>
+<p>Pick five events from late on the last day of a recent month: a scale, a contact, a visit. Confirm each one's date comes out as that day in the extract, not the next. If any come out a day late, the source stores UTC timestamps; convert them to local time before taking the date. See <a href="concepts/reporting-month.html">reporting month</a>.</p>
+<h2 id="11-set-up-bhcm-fte">11. Set up BHCM FTE</h2>
+<p>Start a simple monthly record of each BHCM's CoCM share, with start dates, end dates and extended leave. See <a href="concepts/bhcm-fte.html">BHCM FTE</a>.</p>
+<h2 id="12-do-a-dry-run">12. Do a dry run</h2>
+<p>Report a recent past month in full before the first real submission.</p>
+<ul>
+<li><strong>Run the extracts and calculate all eleven metrics</strong>, following each <a href="start-here.html#the-metrics">metric page</a>.</li>
+<li><strong>Read the patient list behind each number</strong>, not just the number. Do the BHCMs recognize the enrolled caseload? Are the patients counted as not improved the ones the team would expect?</li>
+<li><strong>Look for the usual problems:</strong>
+<ul>
+<li>an enrolled count well above the BHCMs' real caseloads;</li>
+<li>a contact rate near 100%, which often means outreach is being counted;</li>
+<li>a screening rate far below what the clinic expects, which often means a missed questionnaire.</li>
+</ul></li>
+<li><strong>Set the monthly calendar:</strong> extracts on or after the 15th, review, sign-off, and submission before the NYS deadline.</li>
+</ul>
+<h2 id="the-setup-record">The setup record</h2>
+<p>Keep a copy of this table with the site's reporting files, and update it when anything changes. Its answers are what the site discloses to NYS.</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Decision</th><th scope="col">Our answer</th><th scope="col">Decided by</th><th scope="col">Date</th></tr></thead>
+<tbody>
+<tr><td>Route, and the source system for each fact</td><td></td><td></td><td></td></tr>
+<tr><td>Payer mapping location and owner</td><td></td><td></td><td></td></tr>
+<tr><td>Where enrollment is recorded (registry, EHR record, or billing inferred)</td><td></td><td></td><td></td></tr>
+<tr><td>Primary scale for each condition; PHQ-9 or SMFQ for adolescents</td><td></td><td></td><td></td></tr>
+<tr><td>Thresholds used for scales that need clinical sign-off</td><td></td><td></td><td></td></tr>
+<tr><td>How a treatment contact is identified</td><td></td><td></td><td></td></tr>
+<tr><td>How case reviews are recorded</td><td></td><td></td><td></td></tr>
+<tr><td>Screening workflow, and any difference from the guide</td><td></td><td></td><td></td></tr>
+<tr><td>Every source of PHQ results</td><td></td><td></td><td></td></tr>
+<tr><td>Monthly run date and sign-off</td><td></td><td></td><td></td></tr>
+</tbody>
+</table></div>
+</main>
+<footer>
+<p>An opinionated guide to the NYS Office of Mental Health's Collaborative Care caseload
+metrics. An independent project, not an OMH product. Every call it makes is provisional
+until approved.</p>
+<p><a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/site-setup.md">This page on GitHub</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<!-- Built from docs/collecting/registries/prototype-cocm-registry.md by scripts/build_guide.py. Edit the Markdown, then rebuild. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapping: a prototype CoCM registry → data contract · CoCM caseload reporting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root {
+    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --mist: #eef3f2; --line: #cfdad7;
+    --spruce: #1f6f5c; --spruce-soft: #dcebe6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121a1f; --ink: #e3ebee; --muted: #9db0b8; --mist: #1a252b; --line: #2e3d44;
+      --spruce: #6fc4ab; --spruce-soft: #18342c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 17px/1.6 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .site { border-bottom: 1px solid var(--line); background: var(--mist); }
+  .site nav { max-width: 46rem; margin: 0 auto; padding: .6rem 1rem; display: flex; flex-wrap: wrap;
+              gap: .25rem 1.1rem; font-size: .95rem; }
+  .site a { color: var(--ink); text-decoration: none; }
+  .site a:hover, .site a[aria-current] { color: var(--spruce); text-decoration: underline; }
+  .site a.home { font-weight: 700; margin-right: auto; }
+  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
+  h2 { font-size: 1.35rem; line-height: 1.3; margin: 2.2rem 0 .6rem; }
+  h3 { font-size: 1.1rem; margin: 1.6rem 0 .5rem; }
+  h4, h5, h6 { font-size: 1rem; margin: 1.2rem 0 .4rem; }
+  p, ul, ol, blockquote, pre, .table { margin: 0 0 1rem; }
+  li { margin: .2rem 0; }
+  li > ul, li > ol { margin: .2rem 0; }
+  a { color: var(--spruce); text-underline-offset: .15em; }
+  :focus-visible { outline: 3px solid var(--spruce); outline-offset: 2px; border-radius: 4px; }
+  code { font: .9em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--mist);
+         padding: .05em .3em; border-radius: 4px; overflow-wrap: anywhere; }
+  pre { background: var(--mist); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; }
+  pre code { background: none; padding: 0; overflow-wrap: normal; }
+  blockquote { border-left: 4px solid var(--spruce); background: var(--mist); padding: .6rem 1rem;
+               border-radius: 0 8px 8px 0; }
+  blockquote > :last-child { margin-bottom: 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+  .table { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-size: .9rem; }
+  footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .9rem; }
+  footer a { color: var(--muted); }
+  @media (max-width: 34rem) { h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+<header class="site"><nav aria-label="Site">
+<a class="home" href="../../../index.html">CoCM caseload calculator</a>
+<a href="../../guide/start-here.html">Start here</a>
+<a href="../requests.html">Asking for the data</a>
+<a href="../../guide/site-setup.html">Site setup</a>
+<a href="../../guide/about-the-program.html">About the program</a>
+</nav></header>
+<main>
+<h1 id="mapping-a-prototype-cocm-registry--data-contract">Mapping: a prototype CoCM registry → data contract</h1>
+<p>This page maps the data model of a prototype CoCM registry (Next.js + Prisma + PostgreSQL) to the <a href="../../reference/data-contract.html">data contract</a>. It is the first registry mapping (the <a href="../overview.html#2-a-registry-product-plus-an-ehr-report">registry route</a>), and also a worked example of what a mapping has to settle. Where it applies a rule from the guide, it links to the page that sets the rule.</p>
+<p><strong>Mapped against:</strong> the registry's Prisma schema as of 2026-03. No export code exists yet.</p>
+<h2 id="summary">Summary</h2>
+<p>The registry covers the CoCM half of the contract (T3–T6), with one gap in each table. It has nothing for the EHR half: coverage (T2) and practice visits (T7) must come from the practice-management system, which is the two-source pattern every site will have.</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Metric</th><th scope="col">From the registry alone?</th></tr></thead>
+<tbody>
+<tr><td>1 Total enrollment</td><td>Yes, once the <a href="#episode-status">status rules</a> are settled</td></tr>
+<tr><td>2–4</td><td>No: they need coverage (T2)</td></tr>
+<tr><td>5 Contact rate</td><td>Needs coverage, and <a href="#t4-contact--patientcontact">T4's gap</a> overstates it</td></tr>
+<tr><td>6–8</td><td>Needs coverage; only patients whose primary scale is PHQ-9 or GAD-7</td></tr>
+<tr><td>9–10</td><td>No: EHR</td></tr>
+<tr><td>11</td><td>No: attested</td></tr>
+</tbody>
+</table></div>
+<h2 id="t1-patient--patient">T1 <code>patient</code> ← <code>Patient</code></h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Contract</th><th scope="col">Registry</th><th scope="col">Notes</th></tr></thead>
+<tbody>
+<tr><td><code>patient_id</code></td><td>keyed hash of <code>Patient.mrn</code></td><td>Not <code>Patient.id</code>, which is an internal id the EHR never sees; the two sources would never join (<a href="../overview.html#one-patient-id">one patient id</a>)</td></tr>
+<tr><td><code>birth_date</code></td><td><code>dateOfBirth</code></td><td>Only metric 9 uses it, and metric 9's patients come from the EHR</td></tr>
+</tbody>
+</table></div>
+<h2 id="t2-coverage--nothing-usable">T2 <code>coverage</code> ← nothing usable</h2>
+<p><code>Patient.insurance</code> is one JSON object (<code>payerId</code>, <code>memberId</code>, <code>planName</code>, <code>groupNumber</code>). It has no dates, so the <a href="../../guide/concepts/medicaid.html#the-rule">first-of-month rule</a> cannot be applied; no payer category, so Medicaid can only be guessed from <code>planName</code>; and no history. <strong>Coverage comes from the practice-management system.</strong></p>
+<h2 id="t3-cocm_episode--episode">T3 <code>cocm_episode</code> ← <code>Episode</code></h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Contract</th><th scope="col">Registry</th><th scope="col">Notes</th></tr></thead>
+<tbody>
+<tr><td><code>episode_id</code>, <code>patient_id</code></td><td><code>id</code>, <code>patientId</code></td><td></td></tr>
+<tr><td><code>enrollment_date</code></td><td><code>startDate</code></td><td>Entered by the user at enrollment. Nothing says it is the initial assessment date rather than the referral date (<a href="../../guide/concepts/enrollment-and-discharge.html#enrollment-date">enrollment date</a>)</td></tr>
+<tr><td><code>enrollment_source</code></td><td><code>registry</code></td><td>Constant</td></tr>
+<tr><td><code>primary_condition</code></td><td>the <code>diagnoses</code> entry with <code>isPrimary</code>, by ICD-10 range</td><td>F32, F33 → <code>depression</code>; F41 → <code>anxiety</code>; F43.1 → <code>ptsd</code>; F90 → <code>adhd</code>; else <code>other</code>. <strong>Gap:</strong> the schema allows zero or several primary entries; both are extraction errors</td></tr>
+<tr><td><code>primary_scale</code></td><td>—</td><td><strong>Gap.</strong> Derived from <code>primary_condition</code> by the <a href="../../guide/concepts/scales-and-outcomes.html#primary-scale">default mapping</a>, and disclosed. The registry stores only PHQ-9 and GAD-7, so PTSD and ADHD episodes have no scale</td></tr>
+<tr><td><code>diagnosis_date</code></td><td>—</td><td></td></tr>
+<tr><td><code>discharge_date</code></td><td><code>endDate</code></td><td><strong>Gap:</strong> optional even on <code>FINISHED</code>. Do not fall back to <code>updatedAt</code> or the audit log: those are documentation dates, which is the <a href="../../guide/concepts/enrollment-and-discharge.html#discharge">backdating error</a>. Without an end date, the <a href="../../guide/concepts/enrollment-and-discharge.html#discharge">inactivity rule</a> still closes the episode 90 days after the last clinical contact</td></tr>
+<tr><td><code>discharge_reason</code></td><td><code>dischargeReason</code></td><td>Free text; needs a lookup to the contract's list, else <code>other</code></td></tr>
+</tbody>
+</table></div>
+<h3 id="episode-status">Episode status</h3>
+<div class="table"><table>
+<thead><tr><th scope="col"><code>status</code></th><th scope="col">Contract meaning</th></tr></thead>
+<tbody>
+<tr><td><code>PLANNED</code>, <code>WAITLIST</code></td><td>Not enrolled; these are referral states (<a href="../../guide/concepts/enrollment-and-discharge.html#enrolled">what counts as enrolled</a>). Not extracted</td></tr>
+<tr><td><code>ACTIVE</code>, <code>ONHOLD</code></td><td>Enrolled. On hold still counts in the denominators until discharged</td></tr>
+<tr><td><code>FINISHED</code></td><td>Discharged on <code>endDate</code></td></tr>
+<tr><td><code>CANCELLED</code></td><td><strong>Depends on the prior status.</strong> From <code>PLANNED</code> or <code>WAITLIST</code>: never enrolled, not extracted. From <code>ACTIVE</code> or <code>ONHOLD</code>: a discharge. Only the audit log records which</td></tr>
+</tbody>
+</table></div>
+<h2 id="t4-contact--patientcontact">T4 <code>contact</code> ← <code>PatientContact</code></h2>
+<p>The weakest mapping.</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Contract</th><th scope="col">Registry</th><th scope="col">Notes</th></tr></thead>
+<tbody>
+<tr><td><code>contact_id</code>, <code>patient_id</code>, <code>contact_date</code></td><td><code>id</code>, <code>patientId</code>, <code>date</code></td><td>No episode link; contacts are attributed to an episode by date</td></tr>
+<tr><td><code>modality</code></td><td><code>type</code></td><td><code>PHONE</code>, <code>VIDEO</code>, <code>IN_PERSON</code> map directly</td></tr>
+<tr><td><code>contact_kind</code></td><td><code>type</code> and <code>successful</code></td><td><code>PORTAL_MESSAGE</code>, <code>EMAIL</code> → <code>message</code>. <code>successful = false</code> → <code>outreach_attempt</code>. <strong>Gap:</strong> <code>successful = true</code> means the patient was reached, not that treatment was delivered; a scheduling call looks the same as a session</td></tr>
+<tr><td><code>staff_role</code></td><td>—</td><td><strong>Gap:</strong> no author. Extracted as <code>bhcm</code>, and disclosed</td></tr>
+<tr><td><code>with_caregiver</code></td><td>—</td><td></td></tr>
+</tbody>
+</table></div>
+<p><strong>Use the stricter rule for <code>treatment</code>.</strong> A reached contact counts as treatment only if a <code>ClinicalNote</code> of type <code>PROGRESS</code> or <code>PHONE</code> exists for that patient on the same day. That is the "corroborating documentation" NYS asks for in a <a href="../../guide/concepts/contacts-and-reviews.html#clinical-contact">clinical contact</a>. Notes carry only <code>createdAt</code> (entry time), so a note written the next morning misses; widen the match to the next calendar day if that's common at the site. Disclose the rule used.</p>
+<p>Without the note check, every reached call, including scheduling calls, counts as treatment, and metric 5 is overstated.</p>
+<h2 id="t5-scale_result--assessmentscore">T5 <code>scale_result</code> ← <code>AssessmentScore</code></h2>
+<p>The cleanest mapping.</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Contract</th><th scope="col">Registry</th><th scope="col">Notes</th></tr></thead>
+<tbody>
+<tr><td><code>result_id</code>, <code>patient_id</code></td><td><code>id</code>, <code>patientId</code></td><td></td></tr>
+<tr><td><code>administered_date</code></td><td><code>administeredAt</code></td><td>Stored in UTC. <strong>Convert to the site's time zone before taking the date</strong> (<a href="../../guide/concepts/reporting-month.html#the-rule">reporting month</a>), or an evening score on the last day of the month lands in the next month</td></tr>
+<tr><td><code>instrument</code></td><td><code>instrumentType</code></td><td><code>PHQ9</code> → <code>phq9</code>, <code>GAD7</code> → <code>gad7</code>, <code>PHQ2</code> → <code>phq2</code>. <code>GAD2</code> and <code>CSSRS</code> are not NYS instruments and are not extracted</td></tr>
+<tr><td><code>total_score</code></td><td><code>totalScore</code></td><td></td></tr>
+<tr><td><code>administered_by_role</code></td><td><code>performer.role</code></td><td><code>BHCM</code> → <code>bhcm</code>, <code>PCP</code> → <code>medical_provider</code>, else <code>other</code>. The performer is whoever "administered or entered" it, so this is weak evidence</td></tr>
+<tr><td><code>loinc</code></td><td><code>loincCode</code></td><td>Check the GAD-7 code: the registry's documentation gives <code>69737-5</code>, which is the GAD-7 panel. The total score is <code>70274-6</code> (<a href="../../reference/instruments.html#loinc-codes">instruments</a>)</td></tr>
+</tbody>
+</table></div>
+<p>A score dated before the episode's <code>startDate</code> is a screening score entered into the episode. Extract it anyway: its date alone keeps it from being the <a href="../../guide/concepts/scales-and-outcomes.html#baseline">baseline</a>, and it may count for <a href="../../guide/concepts/screening.html#screening-or-monitoring">screening</a>.</p>
+<h2 id="t6-psych_review--consultation">T6 <code>psych_review</code> ← <code>Consultation</code></h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Contract</th><th scope="col">Registry</th><th scope="col">Notes</th></tr></thead>
+<tbody>
+<tr><td><code>review_id</code>, <code>patient_id</code>, <code>review_date</code></td><td><code>id</code>, <code>patientId</code>, <code>consultationDate</code></td><td>One row per patient, the shape the contract requires</td></tr>
+<tr><td><code>recommendation_documented</code></td><td><code>recommendations</code> is non-empty after trimming</td><td>Required in the schema, but an empty string passes</td></tr>
+<tr><td><code>recommendation_to</code></td><td>—</td><td>Not captured</td></tr>
+</tbody>
+</table></div>
+<p>Not sources for T6: <code>TimeEntry</code> with <code>SCR_PARTICIPATION</code> (meeting attendance; see <a href="../../guide/concepts/contacts-and-reviews.html#psychiatric-case-review-metric-8">psychiatric case review</a>), and <code>ClinicalNote</code> of type <code>SCR</code> (one note per caseload review, not per patient).</p>
+<h2 id="t7-practice_visit-t8-site_month">T7 <code>practice_visit</code>, T8 <code>site_month</code></h2>
+<p>T7 comes from the EHR. The registry stores no FTE for T8; <code>TimeEntry</code> minutes per BHCM per month could cross-check an attested figure, but logged time is not scheduled effort.</p>
+<h2 id="changes-to-the-registry-that-would-close-the-gaps">Changes to the registry that would close the gaps</h2>
+<ol>
+<li><code>PatientContact</code>: a performer, a purpose (treatment / outreach / scheduling), and an episode link. This is the one that fixes metric 5.</li>
+<li><code>Episode</code>: a <code>primaryScale</code>; <code>endDate</code> required on <code>FINISHED</code>; <code>dischargeReason</code> as an enum.</li>
+<li>A coverage history table with a payer category, if the registry should report metrics 2–8 without the practice-management system.</li>
+<li><code>Consultation.recommendationTo</code>.</li>
+<li>PCL-5, SMFQ, SCARED, PSC-17 and Vanderbilt, for pediatric or PTSD caseloads, and the PHQ-A for adolescents.</li>
+</ol>
+</main>
+<footer>
+<p>An opinionated guide to the NYS Office of Mental Health's Collaborative Care caseload
+metrics. An independent project, not an OMH product. Every call it makes is provisional
+until approved.</p>
+<p><a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/collecting/registries/prototype-cocm-registry.md">This page on GitHub</a></p>
+</footer>
+</body>
+</html>

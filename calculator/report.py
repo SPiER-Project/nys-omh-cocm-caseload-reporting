@@ -77,7 +77,8 @@ def summary(results):
     return "\n".join(lines)
 
 
-GUIDE = "https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/"
+SITE = "https://spier-project.github.io/nys-omh-cocm-caseload-reporting/"
+GUIDE = SITE + "docs/guide/"
 
 
 def month_name(month):
@@ -165,7 +166,7 @@ def summary_html(results, made=None):
     for m, name in NAMES.items():
         result, numerator, denominator = cells(m, results["metrics"][m])
         out.append(f'<tr><td class="num">{m[1:]}</td>'
-                   f'<td><a href="{GUIDE}metrics/{PAGES[m]}.md">{e(name)}</a></td>'
+                   f'<td><a href="{GUIDE}metrics/{PAGES[m]}.html">{e(name)}</a></td>'
                    f'<td class="num result">{e(result)}</td><td class="num">{e(numerator)}</td>'
                    f'<td class="num">{e(denominator)}</td></tr>')
     out += ["</tbody>", "</table>"]
@@ -182,8 +183,8 @@ def summary_html(results, made=None):
     out += ["<footer>",
             "<p>This summary has no patient-level data. The list of patients each rate didn't "
             "count, and why, is in the full results; keep that at your site.</p>",
-            f'<p>Counted with the <a href="https://spier-project.github.io/nys-omh-cocm-caseload-reporting/">'
-            f'CoCM caseload calculator</a>, following an <a href="{GUIDE}">opinionated guide</a> '
+            f'<p>Counted with the <a href="{SITE}">'
+            f'CoCM caseload calculator</a>, following an <a href="{GUIDE}start-here.html">opinionated guide</a> '
             "to OMH's caseload metrics. It is an independent project, not an OMH product.</p>",
             "</footer>", "</main>", "</body>", "</html>"]
     return "\n".join(out) + "\n"

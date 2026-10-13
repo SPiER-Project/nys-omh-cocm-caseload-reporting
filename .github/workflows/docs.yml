@@ -21,6 +21,8 @@ jobs:
         run: python3 -m unittest discover tests
       - name: The browser page is built from the current sources
         run: python3 scripts/build_web.py --check
+      - name: The guide's web pages are built from the current docs
+        run: python3 scripts/build_guide.py --check
       - name: The calculator's schema is built from the current data contract
         run: python3 scripts/build_schema.py --check
       - name: The workbooks and CSV templates are built from the current data contract

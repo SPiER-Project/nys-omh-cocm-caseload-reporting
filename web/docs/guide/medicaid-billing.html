@@ -1,0 +1,178 @@
+<!doctype html>
+<!-- Built from docs/guide/medicaid-billing.md by scripts/build_guide.py. Edit the Markdown, then rebuild. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NYS Medicaid billing for Collaborative Care · CoCM caseload reporting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root {
+    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --mist: #eef3f2; --line: #cfdad7;
+    --spruce: #1f6f5c; --spruce-soft: #dcebe6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121a1f; --ink: #e3ebee; --muted: #9db0b8; --mist: #1a252b; --line: #2e3d44;
+      --spruce: #6fc4ab; --spruce-soft: #18342c;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 17px/1.6 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .site { border-bottom: 1px solid var(--line); background: var(--mist); }
+  .site nav { max-width: 46rem; margin: 0 auto; padding: .6rem 1rem; display: flex; flex-wrap: wrap;
+              gap: .25rem 1.1rem; font-size: .95rem; }
+  .site a { color: var(--ink); text-decoration: none; }
+  .site a:hover, .site a[aria-current] { color: var(--spruce); text-decoration: underline; }
+  .site a.home { font-weight: 700; margin-right: auto; }
+  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
+  h2 { font-size: 1.35rem; line-height: 1.3; margin: 2.2rem 0 .6rem; }
+  h3 { font-size: 1.1rem; margin: 1.6rem 0 .5rem; }
+  h4, h5, h6 { font-size: 1rem; margin: 1.2rem 0 .4rem; }
+  p, ul, ol, blockquote, pre, .table { margin: 0 0 1rem; }
+  li { margin: .2rem 0; }
+  li > ul, li > ol { margin: .2rem 0; }
+  a { color: var(--spruce); text-underline-offset: .15em; }
+  :focus-visible { outline: 3px solid var(--spruce); outline-offset: 2px; border-radius: 4px; }
+  code { font: .9em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--mist);
+         padding: .05em .3em; border-radius: 4px; overflow-wrap: anywhere; }
+  pre { background: var(--mist); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; }
+  pre code { background: none; padding: 0; overflow-wrap: normal; }
+  blockquote { border-left: 4px solid var(--spruce); background: var(--mist); padding: .6rem 1rem;
+               border-radius: 0 8px 8px 0; }
+  blockquote > :last-child { margin-bottom: 0; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+  .table { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-size: .9rem; }
+  footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .9rem; }
+  footer a { color: var(--muted); }
+  @media (max-width: 34rem) { h1 { font-size: 1.6rem; } }
+</style>
+</head>
+<body>
+<header class="site"><nav aria-label="Site">
+<a class="home" href="../../index.html">CoCM caseload calculator</a>
+<a href="start-here.html">Start here</a>
+<a href="../collecting/requests.html">Asking for the data</a>
+<a href="site-setup.html">Site setup</a>
+<a href="about-the-program.html">About the program</a>
+</nav></header>
+<main>
+<h1 id="nys-medicaid-billing-for-collaborative-care">NYS Medicaid billing for Collaborative Care</h1>
+<p>How a certified practice bills New York State Medicaid for Collaborative Care, summarized from OMH's billing guidance (updated June 2025, with changes effective September 1, 2025). It's here because billing and reporting draw on the same records, and a billing lead and a program lead need the same picture.</p>
+<p>This is a summary, not billing advice. The rules and rates change; check the current guidance with OMH at NYSCollaborativeCare@omh.ny.gov before submitting claims. This guide is an independent project, not an OMH product.</p>
+<h2 id="who-can-bill">Who can bill</h2>
+<p>Practices certified in the NYS Collaborative Care Medicaid Program (<a href="about-the-program.html">about the program</a>), from the effective date OMH gives them. Article 28 clinics submit institutional claims; non-Article 28 practices (group practices and private practitioners) submit professional claims.</p>
+<h2 id="which-patients">Which patients</h2>
+<p><strong>Medicaid patients with an eligible diagnosis.</strong> Collaborative Care is carved out of Medicaid managed care, so claims for every Medicaid patient, managed care members included, go directly to fee-for-service Medicaid.</p>
+<p>The eligible diagnoses (OMH's 2024 ICD-10 code list):</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Condition</th><th scope="col">ICD-10 codes</th></tr></thead>
+<tbody>
+<tr><td>Depression</td><td>F32.0–F32.5, F32.9, F32.A, F32.81 (premenstrual dysphoric disorder), F33.0–F33.3, F33.41, F33.42, F33.9, F34.1 (dysthymia), F06.30 (mood disorder due to another condition)</td></tr>
+<tr><td>Perinatal</td><td>O99.340–O99.343, O99.345 (mental disorders complicating pregnancy or the puerperium), F53 (puerperal psychosis), N94.3 (premenstrual tension syndrome)</td></tr>
+<tr><td>Anxiety</td><td>F41.0, F41.1, F41.3, F41.8, F41.9, F40 and F40.1, F40.10, F40.11, F40.8, F40.9 (phobic anxiety disorders)</td></tr>
+<tr><td>Trauma</td><td>F43.0 (acute stress reaction), F43.1, F43.10, F43.11, F43.12 (PTSD)</td></tr>
+<tr><td>Suicide risk</td><td>Z91.5 (personal history of self-harm), R45.851 (suicidal ideation)</td></tr>
+<tr><td>ADHD, ages 6–18 only</td><td>F90.0, F90.1, F90.2, F90.9</td></tr>
+</tbody>
+</table></div>
+<p>The list gives the recurrent mild depression code as "F33"; F33.0 is the billable code for it. Practices enrolling patients with ADHD must also report a <strong>Vanderbilt completion rate</strong> with the quarterly report.</p>
+<p><strong>Dual Medicare–Medicaid patients:</strong> Medicaid pays last. Bill Medicare first with the CPT codes below, then Medicaid, showing what Medicare paid. A month billed with T2022, which Medicare doesn't accept, can be zero-filled and sent straight to Medicaid.</p>
+<h2 id="what-a-billable-month-needs">What a billable month needs</h2>
+<p>For each patient, each calendar month:</p>
+<ul>
+<li><strong>at least one clinical contact,</strong> in which treatment is delivered and documented in the chart. It can be in person, a group session, or by phone if treatment is delivered;</li>
+<li><strong>at least one validated symptom-monitoring scale,</strong> recorded in the registry;</li>
+<li>the patient managed in a state-approved registry;</li>
+<li>the BHCM consulting a psychiatric consultant for an hour or more each week about enrolled patients. The consultant can't bill Medicaid for that consultation.</li>
+</ul>
+<p>These are the same two things <a href="metrics/05-monthly-contact-rate.html">metric 5</a> counts: a month that meets them is a month of active treatment.</p>
+<h2 id="which-code">Which code</h2>
+<p>The code depends on the care team's total Collaborative Care time in the month:</p>
+<div class="table"><table>
+<thead><tr><th scope="col">Code</th><th scope="col">When</th><th scope="col">Rate from April 1, 2026</th><th scope="col">Hospital clinics</th></tr></thead>
+<tbody>
+<tr><td>99492</td><td>The first month of care, with at least 70 minutes</td><td>$177.64</td><td>$189.18</td></tr>
+<tr><td>99493</td><td>Any later month, with at least 60 minutes</td><td>$177.64</td><td>$189.18</td></tr>
+<tr><td>T2022</td><td>A month below those minutes. There's no minimum time for T2022</td><td>$177.64</td><td>$189.18</td></tr>
+<tr><td>99494</td><td>An add-on for at least 30 minutes beyond the 70 or 60 (90 minutes or more in total). One per patient per month, and never with T2022</td><td>$88.81</td><td>$94.59</td></tr>
+</tbody>
+</table></div>
+<p>OMH's rate file marks the April 2026 rates "Pending DOB Approval". From September 1, 2025 to March 31, 2026 the rates were $172.97 and $86.48, and $184.21 and $92.10 in hospital clinics.</p>
+<h2 id="how-to-claim">How to claim</h2>
+<ul>
+<li><strong>Date of service:</strong> the last day of the month. If the patient's Medicaid eligibility ends during the month, use their last day of eligibility.</li>
+<li><strong>Article 28, institutional claims</strong> (837i or UB-04):
+<ul>
+<li>value code 24 followed by the rate code, for example <code>245246</code>;</li>
+<li>rate code <strong>5246</strong>, the monthly case payment, with the procedure code on the line;</li>
+<li>for the add-on, a second, separate claim with rate code <strong>5261</strong> and procedure code 99494;</li>
+<li>rate codes 5247, 5248 and 5249 are no longer paid.</li>
+</ul></li>
+<li><strong>Non-Article 28, professional claims</strong> (837p or CMS-1500):
+<ul>
+<li>the procedure codes only, since professional claims carry no rate codes;</li>
+<li>the directing primary care provider's NPI as attending provider, plus a Medicaid-enrolled referring provider if the attending isn't enrolled;</li>
+<li>the billing provider needs specialty code <strong>333</strong> on their provider file, which OMH adds during certification;</li>
+<li>Service Authorization Exception Code <strong>7</strong> (special handling), in box 25D of the eMedNY 150003 form.</li>
+</ul></li>
+</ul>
+<h2 id="limits">Limits</h2>
+<ul>
+<li><strong>24 months of Collaborative Care per patient,</strong> not necessarily in a row. The limit resets after six months without a service. Most patients improve and are discharged within nine months.</li>
+<li><strong>Timely filing: 90 days</strong> from the date of service. Later claims need OMH's prior approval to use delay reason code 3, and must then be submitted within 30 days of the approval letter.</li>
+<li><strong>Earlier rules that no longer apply</strong> (from September 1, 2025): the 25% retainage, the 12-month limit, and the separate year-two rate.</li>
+</ul>
+<h2 id="billing-other-services-alongside">Billing other services alongside</h2>
+<p>The monthly case payment can sit alongside separately billed services, but time spent on those services can't count toward the Collaborative Care minutes:</p>
+<ul>
+<li><strong>FQHCs:</strong> the PPS rate for face-to-face counseling by a psychiatrist, licensed psychologist or licensed social worker.</li>
+<li><strong>Article 28 clinics:</strong> a separate claim with the appropriate APG rate code for a psychiatrist's or licensed psychologist's services. A licensed social worker's face-to-face service to a pregnant woman or a child in the program uses special rate codes instead of APGs; the guidance lists 4222, 4223 and 4224.</li>
+<li><strong>Private practitioners:</strong> a separate professional claim for services within their scope.</li>
+</ul>
+<p>Patients enrolled in a health home can also receive Collaborative Care.</p>
+<h2 id="examples-from-the-guidance">Examples from the guidance</h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Month</th><th scope="col">What happened</th><th scope="col">Article 28 claim</th></tr></thead>
+<tbody>
+<tr><td>January, the first month</td><td>Enrolled January 10 after a 50-minute assessment; a 15-minute call; 75 minutes in all</td><td>January 31, rate code 5246, 99492</td></tr>
+<tr><td>April, a later month</td><td>One 15-minute call with a PHQ-9; under 60 minutes</td><td>April 30, rate code 5246, T2022</td></tr>
+<tr><td>June, a later month</td><td>90 minutes across three contacts</td><td>Two claims for June 30: rate code 5246 with 99493, and rate code 5261 with 99494</td></tr>
+</tbody>
+</table></div>
+<h2 id="how-billing-relates-to-reporting">How billing relates to reporting</h2>
+<ul>
+<li><strong>Billed months aren't the same as enrolled months.</strong> A patient stays enrolled in a month with no billable contact; the guide counts enrollment from the registry, not from claims (<a href="../reference/our-calls.html#what-counts-as-enrolled">what counts as enrolled</a>).</li>
+<li><strong>Managed care members are Medicaid patients</strong> for both billing and reporting, which matches the guide's <a href="../reference/our-calls.html#who-counts-as-medicaid">Medicaid call</a>.</li>
+<li><strong>A billable month is a month of active treatment</strong> for metric 5: one clinical contact and one symptom scale.</li>
+</ul>
+<h2 id="sources">Sources</h2>
+<div class="table"><table>
+<thead><tr><th scope="col">Document</th><th scope="col">Date</th><th scope="col">Where</th></tr></thead>
+<tbody>
+<tr><td>Medicaid Collaborative Care Program Billing Guidance (OMH and DOH)</td><td>Updated June 2025</td><td><a href="https://aims.uw.edu/nyscc/medicaid/">Linked from the AIMS Center's NYS page</a></td></tr>
+<tr><td>Billing Guidance: Summary of Updates (rates)</td><td>Effective September 1, 2025</td><td><a href="https://aims.uw.edu/nyscc/wp-content/uploads/2025/06/Updates-Medicaid-Collaborative-Care-Program-Eff.-9.1.25.docx">OMH, hosted by the AIMS Center</a></td></tr>
+<tr><td>Collaborative Care statewide rate file (rates for freestanding clinics, hospital clinics and practitioner claims; rate codes; procedure codes T2022, 99492, 99493 and 99494)</td><td>Rates effective April 1, 2026; file updated June 2026</td><td><a href="https://omh.ny.gov/omhweb/medicaid_reimbursement/excel/collaborative-care-rates.xlsx">OMH Medicaid reimbursement rates</a></td></tr>
+<tr><td>Eligible diagnosis code list</td><td>2024</td><td><a href="https://aims.uw.edu/nyscc/medicaid/">Linked from the AIMS Center's NYS page</a></td></tr>
+<tr><td>NYS Medicaid Collaborative Care Provider Certification Overview</td><td>August 2025</td><td><a href="https://aims.uw.edu/nyscc/wp-content/uploads/2025/11/NYS-CCMP-Provider-Certification-Overview-8.22.25.pdf">OMH, hosted by the AIMS Center</a></td></tr>
+<tr><td>eMedNY: submitting claims over 90 days old</td><td>—</td><td><a href="https://www.emedny.org/HIPAA/QuickRefDocs/FOD-7001_Sub_Claims_Over_90_days_Old.pdf">eMedNY</a></td></tr>
+</tbody>
+</table></div>
+</main>
+<footer>
+<p>An opinionated guide to the NYS Office of Mental Health's Collaborative Care caseload
+metrics. An independent project, not an OMH product. Every call it makes is provisional
+until approved.</p>
+<p><a href="https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting/blob/main/docs/guide/medicaid-billing.md">This page on GitHub</a></p>
+</footer>
+</body>
+</html>

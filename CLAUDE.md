@@ -47,7 +47,7 @@ The guide comes first. Tooling follows the guide, never the other way round.
 | `docs/archive/` | Draft v0.1 and its review notes. Frozen: never edit; fix the guide instead |
 | `rules/calls.toml` | Every value the calls set; the calculator's settings |
 | `calculator/` | Standard-library Python: checks, compute, CSV, workbook and FHIR readers, pseudonyms, and the CLI and browser entry points |
-| `web/` | The browser page, the downloads and the guide's pages, all published by Pages |
+| `web/` | The browser page, the downloads, the guide's pages and their stylesheets (`web/styles/`), all published by Pages |
 | `tests/` | Fixtures (synthetic), the worked-example registry and its lock file, unit tests |
 | `scripts/` | Builders and checkers |
 
@@ -89,5 +89,11 @@ python3 scripts/build_guide.py --check && python3 scripts/check_links.py
   - one PR per piece of work, branched from `origin/main`;
   - the user reviews and merges, then asks for the next piece;
   - never stack a PR on another PR's branch.
+- **Styles:** every value is a token in `web/styles/tokens.css`. Component stylesheets
+  (`site.css`, `guide.css`, `calculator.css`) use tokens only, and pages carry no styles of
+  their own; `tests/test_styles.py` checks both.
+- **Navigation:** `scripts/sitenav.py` is the site map. It sets the header, breadcrumbs and
+  next and previous for every page. A new guide page must be added there, or the guide
+  build fails.
 - **Pages** republishes `web/` on every push to `main`. The guide is read there, at
   `docs/guide/start-here.html`: after changing a doc, rebuild its page.

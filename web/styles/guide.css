@@ -1,0 +1,61 @@
+/*
+  The guide's pages (web/docs/, built by scripts/build_guide.py).
+  Uses the values in tokens.css only.
+*/
+ul, ol, blockquote, pre, .table { margin: 0 0 var(--space-4); }
+li { margin: var(--space-1) 0; }
+li > ul, li > ol { margin: var(--space-1) 0; }
+code {
+  font: var(--code-size) var(--font-mono); background: var(--mist);
+  padding: 0 var(--space-1); border-radius: var(--radius-sm); overflow-wrap: anywhere;
+}
+pre { background: var(--mist); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); overflow-x: auto; }
+pre code { background: none; padding: 0; overflow-wrap: normal; }
+blockquote {
+  border-left: var(--border-accent) solid var(--spruce); background: var(--mist);
+  padding: var(--space-2) var(--space-4); border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+blockquote > :last-child { margin-bottom: 0; }
+hr { border: 0; border-top: var(--border-thin) solid var(--line); margin: var(--space-7) 0; }
+.table { overflow-x: auto; }
+
+/* Where this page sits: the section trail above the title */
+.crumbs ol { list-style: none; margin: 0 0 var(--space-2); padding: 0; display: flex; flex-wrap: wrap; font-size: var(--text-xs); color: var(--muted); }
+.crumbs li { margin: 0; }
+.crumbs li + li::before { content: "›"; padding: 0 var(--space-2); }
+.crumbs a { color: var(--muted); }
+
+/* "For automation" sections, folded for clinic readers */
+details.dev {
+  border-top: var(--border-thin) solid var(--line); border-bottom: var(--border-thin) solid var(--line);
+  margin: var(--space-7) 0 var(--space-4); padding: var(--space-2) 0;
+}
+details.dev > summary { cursor: pointer; }
+details.dev > summary h2 { display: inline; font-size: var(--text-lg); margin: 0; }
+details.dev > summary span { display: block; color: var(--muted); font-size: var(--text-xs); margin: var(--space-1) 0 0 var(--space-5); }
+details.dev[open] > summary { margin-bottom: var(--space-3); }
+
+/* Previous and next, in the guide's reading order */
+.pager {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);
+  margin-top: var(--space-8); padding-top: var(--space-6); border-top: var(--border-thin) solid var(--line);
+}
+.pager a {
+  display: block; padding: var(--space-3) var(--space-4); border: var(--border-thin) solid var(--line);
+  border-radius: var(--radius-md); text-decoration: none; color: var(--ink);
+}
+.pager a:hover { border-color: var(--spruce); }
+.pager .next { grid-column: 2; text-align: right; }
+.pager small { display: block; color: var(--muted); font-size: var(--text-xs); }
+.pager strong { color: var(--spruce); }
+
+footer {
+  max-width: var(--measure); margin: 0 auto; padding: var(--space-6) var(--gutter) var(--space-7);
+  border-top: var(--border-thin) solid var(--line); color: var(--muted); font-size: var(--text-xs);
+}
+footer a { color: var(--muted); }
+
+@media (max-width: 34rem) {
+  .pager { grid-template-columns: 1fr; }
+  .pager .next { grid-column: 1; }
+}

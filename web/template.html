@@ -6,6 +6,9 @@
   Python source, rules/calls.toml and the example caseload. Don't edit web/index.html
   directly; edit the template or the sources and rebuild.
 
+  Its stylesheets, web/styles/, are linked here and inlined by the build, so the built
+  page still works as one file.
+
   The workbooks it links to (cocm-workbook.xlsx and cocm-workbook-example.xlsx) are built
   by scripts/build_workbook.py and published next to it.
 
@@ -21,129 +24,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
-<style>
-  :root {
-    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --mist: #eef3f2; --line: #cfdad7;
-    --spruce: #1f6f5c; --spruce-ink: #ffffff; --spruce-soft: #dcebe6;
-    --amber: #8a5300; --amber-soft: #fbf0dc; --brick: #9c3424; --brick-soft: #f8e4e0;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #121a1f; --ink: #e3ebee; --muted: #9db0b8; --mist: #1a252b; --line: #2e3d44;
-      --spruce: #6fc4ab; --spruce-ink: #0c1a16; --spruce-soft: #18342c;
-      --amber: #f0c374; --amber-soft: #33270f; --brick: #f2a596; --brick-soft: #3a1c17;
-    }
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0; background: var(--paper); color: var(--ink);
-    font: 17px/1.55 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
-  }
-  main { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1rem 5rem; }
-  h1 { font-size: 2.25rem; line-height: 1.15; letter-spacing: -0.01em; margin: 0 0 .75rem; }
-  h2 { font-size: 1.3rem; line-height: 1.25; margin: 0 0 .6rem; }
-  h3 { font-size: 1.05rem; margin: 1.5rem 0 .5rem; }
-  p { margin: 0 0 .9rem; }
-  a { color: var(--spruce); text-underline-offset: .15em; }
-  :focus-visible { outline: 3px solid var(--spruce); outline-offset: 2px; border-radius: 4px; }
-  .lede { font-size: 1.15rem; margin-bottom: 1rem; }
-  .muted, .status { color: var(--muted); }
-  .small { font-size: .92rem; }
-  .status { min-height: 1.5em; font-size: .95rem; margin: .5rem 0 0; }
-  .status.ready { color: var(--spruce); }
-  [hidden] { display: none !important; }
-
-  /* Buttons */
-  button, label.button {
-    display: inline-block; font: inherit; font-weight: 700; padding: .6rem 1.1rem; margin: 0;
-    border-radius: 8px; border: 2px solid var(--spruce); background: var(--spruce);
-    color: var(--spruce-ink); cursor: pointer; line-height: 1.3;
-  }
-  button.secondary, label.button { background: transparent; color: var(--spruce); }
-  button:disabled { opacity: .45; cursor: not-allowed; }
-  .actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin: 1rem 0 0; }
-
-  /* Opening */
-  .privacy { border-left: 4px solid var(--spruce); padding: .1rem 0 .1rem 1rem; margin: 1.25rem 0; }
-  .program { background: var(--mist); border-radius: 12px; padding: 1.25rem 1.25rem .5rem; margin: 2rem 0 2.5rem; }
-  .intro-note { margin: 1rem 0 2rem; }
-  .program h2 { font-size: 1.15rem; display: inline; }
-  .program > summary { cursor: pointer; margin-bottom: .75rem; }
-  .program:not([open]) { padding-bottom: 1.25rem; }
-  .program:not([open]) > summary { margin-bottom: 0; }
-  table.needs { margin: .25rem 0 1rem; }
-  table.needs td:first-child { font-weight: 700; width: 38%; }
-
-  /* The three steps: a real sequence, so numbered */
-  ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 0; }
-  ol.steps > li { counter-increment: step; position: relative; padding: 0 0 2.25rem 3.25rem; }
-  ol.steps > li::before {
-    content: counter(step); position: absolute; left: 0; top: -.2rem;
-    font-size: 2rem; font-weight: 700; line-height: 1; color: var(--spruce);
-  }
-  ol.steps > li:not(:last-child)::after {
-    content: ""; position: absolute; left: .6rem; top: 2.4rem; bottom: .6rem;
-    border-left: 2px solid var(--line);
-  }
-  .downloads { list-style: none; padding: 0; margin: 0 0 1rem; }
-  .downloads li { padding: .45rem 0; border-bottom: 1px solid var(--line); }
-  .downloads li:first-child { border-top: 1px solid var(--line); }
-
-  /* Data tray: the eight tables, filling in as files arrive */
-  .drop { border: 2px dashed var(--line); border-radius: 12px; padding: 1.25rem; text-align: center; margin: 1rem 0; }
-  .drop.over { border-color: var(--spruce); background: var(--spruce-soft); }
-  .drop input { display: block; margin: .6rem auto 0; max-width: 100%; font: inherit; font-size: .95rem; }
-  .tray { list-style: none; padding: 0; margin: 0; }
-  .tray li { display: grid; grid-template-columns: 1.4rem 1fr auto; gap: .1rem .6rem; align-items: baseline;
-             padding: .55rem 0; border-bottom: 1px solid var(--line); }
-  .tray li:first-child { border-top: 1px solid var(--line); }
-  .tray .mark { width: .85rem; height: .85rem; border-radius: 50%; border: 2px solid var(--muted); align-self: center; }
-  .tray .have .mark { background: var(--spruce); border-color: var(--spruce); }
-  .tray .name { font-weight: 700; }
-  .tray .what { grid-column: 2; font-size: .92rem; color: var(--muted); }
-  .tray .state { grid-row: 1; grid-column: 3; font-size: .92rem; color: var(--muted); text-align: right; }
-  .tray .have .state { color: var(--spruce); font-weight: 700; }
-
-  details.option { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: .6rem 0; margin: 1rem 0; }
-  details.option + details.option { border-top: 0; margin-top: -1rem; }
-  details.option > summary { cursor: pointer; font-weight: 700; }
-  details.option[open] > summary { margin-bottom: .6rem; }
-  label.field { display: block; font-weight: 700; margin-bottom: .35rem; }
-  input[type=month], input[type=text] { font: inherit; padding: .45rem .6rem; border: 2px solid var(--line);
-    border-radius: 8px; background: var(--paper); color: var(--ink); max-width: 100%; }
-
-  /* Results */
-  #results { border-top: 3px solid var(--ink); padding-top: 1.5rem; margin-top: 1rem; }
-  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-  th, td { text-align: left; padding: .5rem .5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-  th { color: var(--muted); font-weight: 700; font-size: .92rem; }
-  td.num { width: 2.5rem; color: var(--muted); }
-  #metrics td:last-child { font-weight: 700; }
-  .panel { border-radius: 10px; padding: .8rem 1rem; margin: 1rem 0; }
-  .warn { background: var(--amber-soft); color: var(--amber); }
-  .error { background: var(--brick-soft); color: var(--brick); }
-  .warn ul { margin: .25rem 0 0; padding-left: 1.25rem; }
-  .checks-ok { color: var(--spruce); font-weight: 700; }
-  details.checks { border-radius: 10px; padding: .8rem 1rem; margin: 0 0 1.25rem; }
-  details.checks summary { font-weight: 700; cursor: pointer; }
-  details.checks ul { padding-left: 1.1rem; margin: .5rem 0 0; }
-  .checks li { margin-bottom: .4rem; }
-  .checks .level { font-weight: 700; margin-right: .4rem; }
-  .checks .rows { color: var(--muted); font-size: .92rem; }
-  details.fell { border-bottom: 1px solid var(--line); padding: .5rem 0; }
-  details.fell summary { cursor: pointer; font-weight: 700; }
-  .ids { white-space: nowrap; font-variant-numeric: tabular-nums; }
-  @media (max-width: 34rem) {
-    h1 { font-size: 1.85rem; }
-    ol.steps > li { padding-left: 2.5rem; }
-    ol.steps > li::before { font-size: 1.6rem; }
-  }
-  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
-</style>
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/site.css">
+<link rel="stylesheet" href="styles/calculator.css">
 </head>
 <body>
-<main>
+__SITE_HEADER__
+<main id="main">
   <header>
     <h1>CoCM caseload calculator</h1>
     <p class="lede">Count the Collaborative Care caseload numbers New York's Office of Mental
@@ -223,7 +110,7 @@
     <li>
       <h2>Calculate</h2>
       <label class="field" for="month">Month to count</label>
-      <div class="actions" style="margin-top:0">
+      <div class="actions flush">
         <input type="month" id="month" required>
         <button id="calculate" disabled>Calculate</button>
       </div>

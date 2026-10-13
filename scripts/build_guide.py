@@ -9,7 +9,10 @@ each page at the same path with .html (docs/guide/start-here.md becomes
 web/docs/guide/start-here.html, and a README.md becomes index.html). A link to another
 published page points at its .html; a link to anything else in the repo (open questions,
 the calculator's code, the rules) points at GitHub. The build fails if a link between
-pages, or an #anchor, doesn't resolve.
+pages, or an #anchor, doesn't resolve, or if a page has no place in the site map
+(scripts/sitenav.py), which sets the header, the breadcrumbs and next and previous.
+
+The pages link the stylesheets in web/styles/ rather than carrying their own.
 
 The Markdown converter covers what the guide uses: headings, paragraphs, lists (nested,
 with continuation lines), block quotes, tables, fenced code, rules, links, bold, italics
@@ -23,21 +26,13 @@ import os
 import re
 import sys
 
+import sitenav
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(ROOT, "docs")
 OUTPUT = os.path.join(ROOT, "web", "docs")
 SECTIONS = ("guide", "collecting", "reference")
 REPO = "https://github.com/SPiER-Project/nys-omh-cocm-caseload-reporting"
-
-NAV = [  # (label, page under docs/)
-    ("Calculator", None),
-    ("Start here", "guide/start-here.md"),
-    ("The metrics", "guide/metrics/at-a-glance.md"),
-    ("Asking for the data", "collecting/requests.md"),
-    ("Site setup", "guide/site-setup.md"),
-    ("About the program", "guide/about-the-program.md"),
-]
-
 
 # ---------------------------------------------------------------------- pages and links
 
@@ -52,9 +47,7 @@ def published():
 
 def html_path(md):
     """docs-relative .md path -> web/docs-relative .html path."""
-    head, name = os.path.split(md)
-    name = "index.html" if name == "README.md" else name[:-3] + ".html"
-    return os.path.join(head, name) if head else name
+    return sitenav.html_name(md)
 
 
 def slug(heading):
@@ -253,60 +246,7 @@ class Page:
 
 # ---------------------------------------------------------------------------------- page
 
-STYLE = """
-  :root {
-    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --mist: #eef3f2; --line: #cfdad7;
-    --spruce: #1f6f5c; --spruce-soft: #dcebe6;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #121a1f; --ink: #e3ebee; --muted: #9db0b8; --mist: #1a252b; --line: #2e3d44;
-      --spruce: #6fc4ab; --spruce-soft: #18342c;
-    }
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--paper); color: var(--ink);
-         font: 17px/1.6 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif; }
-  .site { border-bottom: 1px solid var(--line); background: var(--mist); }
-  .site nav { max-width: 46rem; margin: 0 auto; padding: .6rem 1rem; display: flex; flex-wrap: wrap;
-              gap: .25rem 1.1rem; font-size: .95rem; }
-  .site a { color: var(--ink); text-decoration: none; }
-  .site a:hover, .site a[aria-current] { color: var(--spruce); text-decoration: underline; }
-  .site a.home { font-weight: 700; margin-right: auto; }
-  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem 4rem; }
-  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 1rem; }
-  h2 { font-size: 1.35rem; line-height: 1.3; margin: 2.2rem 0 .6rem; }
-  h3 { font-size: 1.1rem; margin: 1.6rem 0 .5rem; }
-  h4, h5, h6 { font-size: 1rem; margin: 1.2rem 0 .4rem; }
-  p, ul, ol, blockquote, pre, .table { margin: 0 0 1rem; }
-  li { margin: .2rem 0; }
-  li > ul, li > ol { margin: .2rem 0; }
-  a { color: var(--spruce); text-underline-offset: .15em; }
-  :focus-visible { outline: 3px solid var(--spruce); outline-offset: 2px; border-radius: 4px; }
-  code { font: .9em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--mist);
-         padding: .05em .3em; border-radius: 4px; overflow-wrap: anywhere; }
-  pre { background: var(--mist); padding: .8rem 1rem; border-radius: 8px; overflow-x: auto; }
-  pre code { background: none; padding: 0; overflow-wrap: normal; }
-  blockquote { border-left: 4px solid var(--spruce); background: var(--mist); padding: .6rem 1rem;
-               border-radius: 0 8px 8px 0; }
-  blockquote > :last-child { margin-bottom: 0; }
-  hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
-  .table { overflow-x: auto; }
-  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
-  th, td { text-align: left; vertical-align: top; padding: .45rem .5rem; border-bottom: 1px solid var(--line); }
-  th { color: var(--muted); font-size: .9rem; }
-  details.dev { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-                margin: 2.2rem 0 1rem; padding: .6rem 0; }
-  details.dev > summary { cursor: pointer; }
-  details.dev > summary h2 { display: inline; font-size: 1.1rem; margin: 0; }
-  details.dev > summary span { display: block; color: var(--muted); font-size: .9rem; margin: .2rem 0 0 1.1rem; }
-  details.dev[open] > summary { margin-bottom: .8rem; }
-  footer { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: 1px solid var(--line);
-           color: var(--muted); font-size: .9rem; }
-  footer a { color: var(--muted); }
-  @media (max-width: 34rem) { h1 { font-size: 1.6rem; } }
-"""
+STYLES = sitenav.STYLES + ("guide.css",)
 
 
 def collapse_automation(body):
@@ -323,48 +263,79 @@ def collapse_automation(body):
             + body[m.end():end] + "\n</details>" + body[end:])
 
 
-def render(page, links):
+def title_of(page):
+    """A page's title as plain text, from its first # heading."""
+    with open(os.path.join(DOCS, page)) as f:
+        lines = f.read().split("\n")
+    title = next((l[2:].strip() for l in lines if l.startswith("# ")), page)
+    return re.sub(r"<[^>]+>", "", inline(title, page, Links([])))
+
+
+def crumbs(page, here):
+    """The trail above the title: the header section, then the group, if any."""
+    order = {p: (s, g) for p, s, g in sitenav.reading_order()}
+    section, group = order[page]
+    trail = [(section, sitenav.landing(section))]
+    if group:
+        trail.append((group, sitenav.group_landing(section, group)))
+    if trail[0][1] == page:
+        return ""
+    items = "".join(
+        f"<li>{html.escape(label)}</li>" if target == page else
+        f'<li><a href="{os.path.relpath(html_path(target), here)}">{html.escape(label)}</a></li>'
+        for label, target in trail)
+    return f'<nav class="crumbs" aria-label="Breadcrumb"><ol>{items}</ol></nav>\n'
+
+
+def pager(page, here, titles):
+    """Previous and next, in the site map's reading order."""
+    order = [p for p, _, _ in sitenav.reading_order()]
+    i = order.index(page)
+    links = []
+    for j, rel, label in ((i - 1, "prev", "Previous"), (i + 1, "next", "Next")):
+        if 0 <= j < len(order):
+            href = os.path.relpath(html_path(order[j]), here)
+            links.append(f'<a class="{rel}" rel="{rel}" href="{href}"><small>{label}</small>'
+                         f"<strong>{html.escape(titles[order[j]])}</strong></a>")
+    return f'<nav class="pager" aria-label="Previous and next">\n{chr(10).join(links)}\n</nav>'
+
+
+def render(page, links, titles):
     with open(os.path.join(DOCS, page)) as f:
         text = f.read()
     text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
-    lines = text.split("\n")
-    title = next((l[2:].strip() for l in lines if l.startswith("# ")), page)
-    body = collapse_automation(Page(page, links).blocks(lines))
+    body = collapse_automation(Page(page, links).blocks(text.split("\n")))
     here = os.path.dirname(html_path(page)) or "."
-    up = os.path.relpath(OUTPUT, os.path.join(OUTPUT, here))
-    nav = []
-    for label, target in NAV:
-        if target is None:
-            href = os.path.join(up, "..", "index.html")
-            nav.append(f'<a class="home" href="{href}">CoCM caseload calculator</a>')
-            continue
-        href = os.path.relpath(html_path(target), here)
-        current = ' aria-current="page"' if target == page else ""
-        nav.append(f'<a href="{href}"{current}>{label}</a>')
-    plain_title = re.sub(r"<[^>]+>", "", inline(title, page, Links([])))
+    up = os.path.relpath(OUTPUT, os.path.join(OUTPUT, here))  # to web/docs/
+    web = os.path.join(up, "..")
+    section = next(s for p, s, _ in sitenav.reading_order() if p == page)
+    header = sitenav.header(
+        os.path.join(web, "index.html"),
+        lambda s: os.path.relpath(html_path(sitenav.landing(s)), here),
+        section, sitenav.landing(section) == page)
+    styles = "\n".join(f'<link rel="stylesheet" href="{web}/styles/{name}">' for name in STYLES)
     return f"""<!doctype html>
 <!-- Built from docs/{page} by scripts/build_guide.py. Edit the Markdown, then rebuild. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{plain_title} · CoCM caseload reporting</title>
+<title>{titles[page]} · CoCM caseload reporting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
-<style>{STYLE}</style>
+{styles}
 </head>
 <body>
-<header class="site"><nav aria-label="Site">
-{chr(10).join(nav)}
-</nav></header>
-<main>
-{body}
+{header}
+<main id="main">
+{crumbs(page, here)}{body}
+{pager(page, here, titles)}
 </main>
 <footer>
-<p>An opinionated guide to the NYS Office of Mental Health's Collaborative Care caseload
-metrics. An independent project, not an OMH product. Every call it makes is provisional
-until approved.</p>
+<p>This guide is an opinionated approach to the NYS Office of Mental Health's
+Collaborative Care caseload metrics. It's an independent project, not an OMH product, and
+every call it makes is provisional until approved.</p>
 <p><a href="{REPO}/blob/main/docs/{page}">This page on GitHub</a></p>
 </footer>
 </body>
@@ -374,8 +345,18 @@ until approved.</p>
 
 def build():
     pages = published()
+    mapped = [p for p, _, _ in sitenav.reading_order()]
+    missing = sorted(set(pages) - set(mapped))
+    gone = sorted(set(mapped) - set(pages))
+    doubled = sorted({p for p in mapped if mapped.count(p) > 1})
+    if missing or gone or doubled:
+        raise SystemExit("scripts/sitenav.py doesn't match docs/: "
+                         + "; ".join(f"{what}: {', '.join(ps)}" for what, ps in (
+                             ("not in the site map", missing), ("no such page", gone),
+                             ("listed twice", doubled)) if ps))
     links = Links(pages)
-    out = {html_path(p): render(p, links) for p in pages}
+    titles = {p: title_of(p) for p in pages}
+    out = {html_path(p): render(p, links, titles) for p in pages}
     ids = {}
     for p in pages:
         ids[p] = set(re.findall(r' id="([^"]+)"', out[html_path(p)]))

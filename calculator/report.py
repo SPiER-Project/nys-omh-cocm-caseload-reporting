@@ -98,24 +98,36 @@ def cells(m, r):
     return result, str(r["numerator"]), str(r["denominator"])
 
 
+# The summary is a standalone download, so it can't link web/styles/tokens.css: it carries
+# a copy of the light tokens it uses, which tests/test_styles.py keeps in step. Its font is
+# the system font, so it prints without fetching one.
 SUMMARY_STYLE = """
-  body { margin: 0; background: #fff; color: #1e2a33;
-         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
-  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1rem; }
-  h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
-  h2 { font-size: 1.05rem; margin: 1.4rem 0 .4rem; }
-  p, ul { margin: 0 0 .6rem; }
-  .meta { color: #56656f; }
-  .panel { border-left: 4px solid #8a5300; background: #fbf0dc; padding: .5rem .8rem; }
-  .panel.error { border-color: #9c3424; background: #f8e4e0; }
+  :root {
+    --paper: #ffffff; --ink: #1e2a33; --muted: #56656f; --line: #cfdad7; --spruce: #1f6f5c;
+    --amber: #8a5300; --amber-soft: #fbf0dc; --brick: #9c3424; --brick-soft: #f8e4e0;
+    --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem;
+    --space-6: 1.5rem; --space-7: 2rem; --border-thin: 1px; --border-accent: 4px;
+    --measure: 46rem;
+  }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 15px/1.5 var(--font-body); }
+  main { max-width: var(--measure); margin: 0 auto; padding: var(--space-7) var(--space-4); }
+  h1 { font-size: 1.6rem; margin: 0 0 var(--space-1); }
+  h2 { font-size: 1.05rem; margin: var(--space-6) 0 var(--space-2); }
+  p, ul { margin: 0 0 var(--space-2); }
+  .meta { color: var(--muted); }
+  .panel { border-left: var(--border-accent) solid var(--amber); background: var(--amber-soft);
+           padding: var(--space-2) var(--space-3); }
+  .panel.error { border-color: var(--brick); background: var(--brick-soft); }
   table { border-collapse: collapse; width: 100%; }
-  th, td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid #cfdad7;
-           vertical-align: top; }
-  th { font-size: .85rem; color: #56656f; }
+  th, td { text-align: left; padding: var(--space-1) var(--space-2);
+           border-bottom: var(--border-thin) solid var(--line); vertical-align: top; }
+  th { font-size: .85rem; color: var(--muted); }
   td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
   td.result { font-weight: 700; }
-  footer { margin-top: 1.5rem; font-size: .85rem; color: #56656f; }
-  a { color: #1f6f5c; }
+  footer { margin-top: var(--space-6); font-size: .85rem; color: var(--muted); }
+  a { color: var(--spruce); }
   @media print { main { padding: 0; } a { color: inherit; text-decoration: none; } }
 """
 
